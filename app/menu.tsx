@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const menuItems = [
   {
@@ -19,26 +19,26 @@ const menuItems = [
   },
   {
     number: "03",
-    title: "구축 인테리어",
-    english: "OLD HOUSE",
-    href: "/services/old-house",
+    title: "주거공간",
+    english: "LIVING SPACE",
+    href: "/services/apartment",
   },
   {
     number: "04",
-    title: "상가 인테리어",
-    english: "COMMERCIAL",
+    title: "상업공간",
+    english: "COMMERCIAL PLACE",
     href: "/services/commercial",
   },
   {
     number: "05",
-    title: "아파트 인테리어",
-    english: "APARTMENT",
-    href: "/services/apartment",
+    title: "교육기관",
+    english: "EDUCATION SPACE",
+    href: "/services/school",
   },
   {
     number: "06",
-    title: "학교 리모델링",
-    english: "SCHOOL",
+    title: "공공기관",
+    english: "PUBLIC SECTOR",
     href: "/services/school",
   },
   {
@@ -58,30 +58,28 @@ export default function Menu() {
   }, [pathname]);
 
   useEffect(() => {
-    const body = document.body;
-
     if (open) {
-      body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
     } else {
-      body.style.overflow = "";
+      document.body.style.overflow = "";
     }
 
     return () => {
-      body.style.overflow = "";
+      document.body.style.overflow = "";
     };
   }, [open]);
 
   useEffect(() => {
-    function handleEscape(event: KeyboardEvent) {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false);
       }
-    }
+    };
 
-    window.addEventListener("keydown", handleEscape);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -101,8 +99,8 @@ export default function Menu() {
 
       <button
         type="button"
-        className={`jg-menu-overlay ${open ? "show" : ""}`}
         aria-label="메뉴 닫기"
+        className={`jg-menu-overlay ${open ? "show" : ""}`}
         onClick={() => setOpen(false)}
       />
 
@@ -119,7 +117,7 @@ export default function Menu() {
           <nav className="jg-menu-list">
             {menuItems.map((item) => (
               <Link
-                key={item.number}
+                key={`${item.number}-${item.title}`}
                 href={item.href}
                 className="jg-menu-item"
                 onClick={() => setOpen(false)}
@@ -128,14 +126,12 @@ export default function Menu() {
                   {item.number}
                 </span>
 
-                <div className="jg-menu-title">
+                <span className="jg-menu-title">
                   <strong>{item.title}</strong>
                   <small>{item.english}</small>
-                </div>
-
-                <span className="jg-menu-arrow">
-                  ↗
                 </span>
+
+                <span className="jg-menu-arrow">↗</span>
               </Link>
             ))}
           </nav>
@@ -147,9 +143,7 @@ export default function Menu() {
               041-415-0410
             </a>
 
-            <p>
-              천안 인테리어 · 리모델링
-            </p>
+            <p>천안 · 아산 전 지역</p>
           </div>
         </div>
       </aside>
