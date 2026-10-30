@@ -1,101 +1,92 @@
-
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://jeonggamspace.vercel.app";
+  "https://gonggam.vercel.app";
 
 const PHONE = "041-415-0410";
 
-const services = {
+type ServiceData = {
+  slug: string;
+  title: string;
+  english: string;
+  description: string;
+  intro: string;
+  image: string;
+  features: string[];
+};
+
+const services: Record<string, ServiceData> = {
   "old-house": {
+    slug: "old-house",
     title: "구축 인테리어",
-    english: "RENOVATION",
-    image: "/old-house.jpg",
-    headline: "오래된 공간에 새로운 가치를 더하다.",
+    english: "OLD HOUSE RENOVATION",
     description:
-      "천안 구축 인테리어 및 노후 주거공간 리모델링. 정감공간은 기존 공간의 상태와 생활 동선을 고려한 인테리어를 제안합니다.",
+      "오래된 공간의 구조와 동선을 새롭게 정리해 더 편안하고 가치 있는 공간으로 완성합니다.",
     intro:
-      "구축 주거공간은 단순한 마감재 교체를 넘어 기존 구조와 설비, 생활 동선을 함께 살펴보는 것이 중요합니다. 정감공간은 공간의 현재 상태와 고객의 생활방식을 고려하여 적절한 리모델링 방향을 제안합니다.",
+      "기존 공간의 장점은 살리고 불편했던 구조와 마감은 새롭게 정리합니다. 현재 공간의 상태와 생활 동선을 꼼꼼하게 확인한 뒤 필요한 공사를 제안합니다.",
+    image: "/IMG_2041.jpeg",
     features: [
-      ["기존 공간 상태 검토", "노후 마감재와 설비 상태를 살펴보고 필요한 공사 범위를 검토합니다."],
-      ["생활 동선 개선", "가족 구성과 생활 습관에 맞는 공간 활용과 수납을 고려합니다."],
-      ["마감 및 디자인", "디자인과 유지관리 편의성을 함께 고려해 마감 방향을 제안합니다."],
-    ],
-    keywords: [
-      "천안 구축 인테리어",
-      "천안 구축 아파트 리모델링",
-      "천안 노후주택 리모델링",
+      "기존 공간 상태 및 구조 확인",
+      "생활 동선을 고려한 공간 재구성",
+      "주방·거실·방 등 공간별 마감 계획",
+      "설계부터 시공까지 체계적인 현장 관리",
     ],
   },
+
   commercial: {
+    slug: "commercial",
     title: "상가 인테리어",
-    english: "COMMERCIAL",
-    image: "/commercial.jpg",
-    headline: "브랜드의 가치를 공간에 담다.",
+    english: "COMMERCIAL INTERIOR",
     description:
-      "천안 상가 인테리어 정감공간. 매장, 사무실, 상업공간의 운영 동선과 브랜드 이미지를 고려한 인테리어를 제안합니다.",
+      "업종과 브랜드의 특성을 고려해 실용성과 디자인을 함께 갖춘 상업공간을 만듭니다.",
     intro:
-      "상업공간은 고객 경험과 운영 효율을 함께 고려해야 합니다. 정감공간은 업종의 특성과 공간의 목적을 이해하고, 브랜드의 분위기와 실용성이 조화를 이루는 인테리어를 제안합니다.",
+      "상업공간은 디자인뿐 아니라 고객 동선과 직원의 사용성까지 함께 고려해야 합니다. 업종과 공간의 목적을 파악해 효율적인 공간을 제안합니다.",
+    image: "/IMG_2040.jpeg",
     features: [
-      ["업종별 공간 구성", "매장과 사무실 등 업종에 적합한 공간 구성을 검토합니다."],
-      ["고객 및 운영 동선", "방문 고객의 이동과 직원의 업무 편의성을 고려합니다."],
-      ["브랜드 이미지", "브랜드의 성격과 공간의 디자인 방향을 조화롭게 구성합니다."],
-    ],
-    keywords: [
-      "천안 상가 인테리어",
-      "천안 매장 인테리어",
-      "천안 사무실 인테리어",
+      "업종과 브랜드에 맞는 공간 구성",
+      "고객 및 직원 동선을 고려한 설계",
+      "상업공간에 적합한 마감재 선정",
+      "오픈 일정에 맞춘 체계적인 시공 관리",
     ],
   },
+
   apartment: {
+    slug: "apartment",
     title: "아파트 인테리어",
-    english: "RESIDENTIAL",
-    image: "/apartment.jpg",
-    headline: "일상의 편안함을 디자인하다.",
+    english: "APARTMENT INTERIOR",
     description:
-      "천안 아파트 인테리어 및 리모델링. 정감공간은 가족의 생활방식과 공간 특성을 고려한 주거 인테리어를 제안합니다.",
+      "생활 동선과 공간 활용을 고려해 편안하고 완성도 높은 주거공간을 제안합니다.",
     intro:
-      "아파트 인테리어는 가족의 생활방식과 취향을 반영하는 과정입니다. 정감공간은 거실, 주방, 침실 등 공간별 사용 목적을 검토하고 실용성과 디자인의 균형을 고민합니다.",
+      "가족 구성과 생활 방식에 따라 필요한 공간은 달라집니다. 주방, 거실, 수납과 조명까지 실제 생활에 필요한 부분을 중심으로 계획합니다.",
+    image: "/IMG_2042.jpeg",
     features: [
-      ["전체 리모델링", "공간 전체의 디자인과 마감, 생활 동선을 종합적으로 검토합니다."],
-      ["부분 인테리어", "주방과 거실, 침실 등 필요한 공간의 개선 방향을 상담합니다."],
-      ["맞춤형 공간 계획", "가족 구성과 생활 습관에 맞는 공간 활용을 제안합니다."],
-    ],
-    keywords: [
-      "천안 아파트 인테리어",
-      "천안 아파트 리모델링",
-      "천안 인테리어 잘하는곳",
+      "생활방식에 맞춘 공간 계획",
+      "주방·거실·수납 동선 개선",
+      "공간에 맞는 조명과 마감 구성",
+      "실용성과 디자인을 함께 고려한 시공",
     ],
   },
+
   school: {
+    slug: "school",
     title: "학교 리모델링",
-    english: "EDUCATIONAL",
-    image: "/school.jpg",
-    headline: "배움의 공간을 새롭게 만들다.",
+    english: "SCHOOL REMODELING",
     description:
-      "천안 학교 리모델링 및 교육시설 인테리어. 정감공간은 교육공간의 안전성과 기능성, 유지관리 편의성을 고려합니다.",
+      "교육환경과 사용 목적을 고려해 안전하고 쾌적한 공간으로 개선합니다.",
     intro:
-      "학교와 교육시설은 다양한 사용자가 장시간 이용하는 공간입니다. 정감공간은 교실과 공용공간의 목적을 이해하고 안전성, 기능성, 유지관리 편의성을 고려한 공간 개선을 제안합니다.",
+      "교육공간은 많은 사람이 사용하는 만큼 안전성과 내구성이 중요합니다. 공간의 용도와 사용 인원을 고려해 쾌적하고 효율적인 교육환경을 만듭니다.",
+    image: "/IMG_2043.jpeg",
     features: [
-      ["교육공간 개선", "교실과 학습공간의 기능 및 사용 환경을 고려합니다."],
-      ["안전성과 편의성", "시설의 이용 특성과 적용되는 안전 기준을 검토합니다."],
-      ["유지관리 고려", "사용 빈도와 관리 편의성을 고려한 공간 구성을 제안합니다."],
-    ],
-    keywords: [
-      "천안 학교 리모델링",
-      "천안 학교 인테리어",
-      "천안 교육시설 리모델링",
+      "교육공간의 목적에 맞는 설계",
+      "안전성과 내구성을 고려한 마감",
+      "교실·공용공간·업무공간 개선",
+      "사용 일정에 맞춘 공정 관리",
     ],
   },
-} as const;
-
-type ServiceSlug = keyof typeof services;
-
-type Props = {
-  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
@@ -104,66 +95,70 @@ export function generateStaticParams() {
   }));
 }
 
-export const dynamicParams = false;
-
 export async function generateMetadata({
   params,
-}: Props): Promise<Metadata> {
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
+  const service = services[slug];
 
-  if (!(slug in services)) {
-    return {
-      title: "페이지를 찾을 수 없습니다",
-      robots: { index: false },
-    };
+  if (!service) {
+    return {};
   }
-
-  const service = services[slug as ServiceSlug];
 
   return {
     title: `천안 ${service.title}`,
-    description: service.description,
-    keywords: [...service.keywords],
+    description: `정감공간 천안 ${service.title}. ${service.description} 실내건축공사업 면허 보유. 상담 ${PHONE}.`,
     alternates: {
-      canonical: `${SITE_URL}/services/${slug}`,
+      canonical: `${SITE_URL}/services/${service.slug}`,
     },
     openGraph: {
       title: `천안 ${service.title} | 정감공간`,
       description: service.description,
-      url: `${SITE_URL}/services/${slug}`,
-      type: "website",
-      locale: "ko_KR",
+      url: `${SITE_URL}/services/${service.slug}`,
+      images: [
+        {
+          url: service.image,
+          alt: `천안 ${service.title} 정감공간`,
+        },
+      ],
     },
   };
 }
 
 export default async function ServicePage({
   params,
-}: Props) {
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
 
-  if (!(slug in services)) {
+  const service = services[slug];
+
+  if (!service) {
     notFound();
   }
 
-  const service = services[slug as ServiceSlug];
+  const otherServices = Object.values(services).filter(
+    (item) => item.slug !== slug
+  );
 
-  const jsonLd = {
+  const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
     name: `천안 ${service.title}`,
-    description: service.description,
-    serviceType: service.title,
-    areaServed: {
-      "@type": "City",
-      name: "천안시",
-    },
     provider: {
       "@type": "GeneralContractor",
       name: "정감공간",
       telephone: PHONE,
-      url: SITE_URL,
     },
+    areaServed: {
+      "@type": "City",
+      name: "천안시",
+    },
+    description: service.description,
+    url: `${SITE_URL}/services/${service.slug}`,
   };
 
   return (
@@ -171,162 +166,186 @@ export default async function ServicePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(
-            /</g,
-            "\\u003c"
-          ),
+          __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
         }}
       />
 
-      <section
-        className="hero"
-        style={{ minHeight: 480, height: "65vh" }}
-      >
-        <div
-          className="hero-background"
-          style={{
-            backgroundImage: `url("${service.image}")`,
-          }}
-        />
-        <div className="hero-overlay" />
+      <section className="service-detail-hero">
+        <div className="service-detail-container">
+          <div className="service-detail-kicker">
+            <span>JEONGGAM SPACE</span>
+            <span>{service.english}</span>
+          </div>
 
-        <div className="hero-content">
-          <span className="hero-label">
-            JEONGGAM SPACE / {service.english}
-          </span>
+          <div className="service-detail-title">
+            <p>천안 인테리어 · 리모델링</p>
 
-          <h1>{service.title}</h1>
+            <h1>{service.title}</h1>
 
-          <p>{service.headline}</p>
+            <p className="service-detail-description">
+              {service.description}
+            </p>
 
-          <a
-            href="tel:0414150410"
-            className="hero-button"
-          >
-            시공 상담하기 <span>↗</span>
-          </a>
-        </div>
-      </section>
+            <div className="service-detail-actions">
+              <a
+                href="tel:0414150410"
+                className="service-detail-button service-detail-button-black"
+              >
+                <span>전화 상담</span>
+                <strong>041-415-0410</strong>
+              </a>
 
-      <section className="home-about section-padding">
-        <div className="about-heading">
-          <span className="section-label">
-            SERVICE INTRODUCTION
-          </span>
-          <h2>
-            천안
-            <br />
-            {service.title}
-          </h2>
-        </div>
-
-        <div className="about-content">
-          <p className="about-lead">
-            {service.headline}
-          </p>
-          <p>{service.intro}</p>
-          <p>
-            정감공간은 실내건축공사업 면허를
-            보유한 청년창업기업으로,
-            천안 지역의 인테리어 상담을
-            진행하고 있습니다.
-          </p>
-        </div>
-      </section>
-
-      <section className="home-services section-padding">
-        <div className="section-heading">
-          <div>
-            <span className="section-label">
-              OUR APPROACH
-            </span>
-            <h2>
-              공간에 필요한
-              <br />
-              시공 방향
-            </h2>
+              <Link
+                href="/contact"
+                className="service-detail-button service-detail-button-white"
+              >
+                <span>견적 문의</span>
+                <strong>↗</strong>
+              </Link>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="trust-grid">
-          {service.features.map((feature, index) => (
-            <div
-              className="trust-item"
-              key={feature[0]}
-            >
-              <span className="trust-number">
-                0{index + 1}
-              </span>
-              <h3>{feature[0]}</h3>
-              <p>{feature[1]}</p>
-            </div>
-          ))}
+      <section className="service-detail-image-section">
+        <div className="service-detail-container">
+          <div className="service-detail-main-image">
+            <Image
+              src={service.image}
+              alt={`천안 ${service.title} 정감공간 시공 사례`}
+              fill
+              priority
+              sizes="100vw"
+            />
+          </div>
         </div>
       </section>
 
-      <section className="seo-intro section-padding">
-        <div className="seo-inner">
-          <span className="section-label">
-            CHEONAN INTERIOR
-          </span>
+      <section className="service-detail-intro">
+        <div className="service-detail-container">
+          <div className="service-detail-label">
+            <span>01</span>
+            <p>SERVICE INTRODUCTION</p>
+          </div>
+
+          <div className="service-detail-intro-grid">
+            <div>
+              <p className="service-detail-small">
+                CHEONAN · JEONGGAM SPACE
+              </p>
+
+              <h2>
+                천안
+                <br />
+                {service.title}
+              </h2>
+            </div>
+
+            <p>{service.intro}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="service-detail-features">
+        <div className="service-detail-container">
+          <div className="service-detail-label service-detail-label-light">
+            <span>02</span>
+            <p>WORK PROCESS</p>
+          </div>
+
+          <div className="service-detail-feature-grid">
+            <div className="service-detail-feature-heading">
+              <h2>
+                공간에 필요한
+                <br />
+                기본을 지킵니다.
+              </h2>
+
+              <p>
+                디자인만을 위한 시공이 아니라
+                실제 사용성과 완성도를 함께 고려합니다.
+              </p>
+            </div>
+
+            <div className="service-detail-feature-list">
+              {service.features.map((feature, index) => (
+                <div
+                  className="service-detail-feature-row"
+                  key={feature}
+                >
+                  <span>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <strong>{feature}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="service-detail-other">
+        <div className="service-detail-container">
+          <div className="service-detail-label">
+            <span>03</span>
+            <p>OTHER SERVICES</p>
+          </div>
+
+          <h2>다른 시공 분야</h2>
+
+          <div className="service-detail-other-grid">
+            {otherServices.map((item) => (
+              <Link
+                href={`/services/${item.slug}`}
+                key={item.slug}
+                className="service-detail-other-card"
+              >
+                <div className="service-detail-other-image">
+                  <Image
+                    src={item.image}
+                    alt={`천안 ${item.title} 정감공간`}
+                    fill
+                    sizes="(max-width: 800px) 100vw, 33vw"
+                  />
+                </div>
+
+                <div className="service-detail-other-title">
+                  <div>
+                    <span>{item.english}</span>
+                    <strong>{item.title}</strong>
+                  </div>
+
+                  <span>↗</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="service-detail-contact">
+        <div className="service-detail-container">
+          <p>CONTACT</p>
 
           <h2>
-            천안 {service.title},
+            공간에 대한 이야기를
             <br />
-            정감공간과 상담하세요.
+            시작해보세요.
           </h2>
 
-          <p>
-            천안에서 {service.title} 업체를
-            찾고 계신다면 공간의 현재 상태와
-            사용 목적, 희망하는 디자인,
-            예산과 공사 일정을 함께 검토하는
-            것이 중요합니다.
-          </p>
+          <div className="service-detail-contact-actions">
+            <a href="tel:0414150410">
+              <span>전화 상담</span>
+              <strong>041-415-0410</strong>
+            </a>
 
-          <p>
-            정감공간은 고객의 요청과 현장
-            조건을 바탕으로 적합한 공사
-            방향을 상담합니다.
-          </p>
-
-          <Link
-            href="/#services"
-            className="more-link"
-          >
-            다른 시공 분야 보기 ↗
-          </Link>
+            <Link href="/contact">
+              <span>견적 문의</span>
+              <strong>↗</strong>
+            </Link>
+          </div>
         </div>
-      </section>
-
-      <section className="home-contact">
-        <span className="section-label">
-          PROJECT INQUIRY
-        </span>
-
-        <h2>
-          {service.title}
-          <br />
-          견적 상담
-        </h2>
-
-        <p>
-          대표 정경훈 · 정감공간
-        </p>
-
-        <a
-          href="tel:0414150410"
-          className="contact-phone"
-        >
-          {PHONE} ↗
-        </a>
-
-        <Link
-          href="/contact"
-          className="contact-more"
-        >
-          견적문의 안내
-        </Link>
       </section>
     </>
   );
