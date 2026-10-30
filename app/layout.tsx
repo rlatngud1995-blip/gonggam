@@ -20,11 +20,16 @@ export const metadata: Metadata = {
     template: "%s | 정감공간",
   },
 
+  /*
+   * 네이버 권장 길이를 고려해
+   * 핵심 내용만 80자 이내로 정리
+   */
   description:
-    "천안 인테리어 전문기업 정감공간. 아파트 인테리어, 구축 인테리어, 상가 인테리어, 학교 리모델링. 실내건축공사업 면허 보유 청년창업기업으로 천안 전 지역 상담을 진행합니다.",
+    "천안 인테리어 전문 정감공간. 아파트·구축·상가 인테리어와 학교 리모델링을 진행합니다.",
 
   keywords: [
     "정감공간",
+
     "천안 인테리어",
     "천안 인테리어 업체",
     "천안 인테리어업체",
@@ -58,19 +63,23 @@ export const metadata: Metadata = {
 
   authors: [
     {
-      name: "정감공간",
+      name: BRAND,
       url: SITE_URL,
     },
   ],
 
-  creator: "정감공간",
+  creator: BRAND,
 
-  publisher: "정감공간",
+  publisher: BRAND,
 
-  applicationName: "정감공간",
+  applicationName: BRAND,
 
   category: "인테리어 · 리모델링",
 
+  /*
+   * 네이버 서치어드바이저
+   * 사이트 소유확인
+   */
   verification: {
     other: {
       "naver-site-verification":
@@ -98,12 +107,12 @@ export const metadata: Metadata = {
 
     url: SITE_URL,
 
-    siteName: "정감공간",
+    siteName: BRAND,
 
     title: "정감공간 | 천안 인테리어·리모델링 전문",
 
     description:
-      "천안 아파트·구축·상가 인테리어 및 학교 리모델링 전문 정감공간. 실내건축공사업 면허 보유 청년창업기업.",
+      "천안 아파트·구축·상가 인테리어와 학교 리모델링 전문 정감공간.",
 
     images: [
       {
@@ -121,7 +130,7 @@ export const metadata: Metadata = {
     title: "정감공간 | 천안 인테리어·리모델링 전문",
 
     description:
-      "천안 아파트·구축·상가 인테리어 및 학교 리모델링 전문 정감공간.",
+      "천안 아파트·구축·상가 인테리어와 학교 리모델링 전문 정감공간.",
 
     images: ["/IMG_2042.jpeg"],
   },
@@ -195,7 +204,7 @@ export default function RootLayout({
         ],
 
         description:
-          "천안을 중심으로 아파트 인테리어, 구축 인테리어, 상가 인테리어, 학교 리모델링을 진행하는 실내건축공사업 면허 보유 청년창업기업 정감공간입니다.",
+          "천안 아파트·구축·상가 인테리어와 학교 리모델링을 진행하는 정감공간.",
 
         areaServed: [
           {
@@ -216,10 +225,10 @@ export default function RootLayout({
 
         knowsAbout: [
           "천안 인테리어",
-          "아파트 인테리어",
-          "구축 인테리어",
-          "상가 인테리어",
-          "학교 리모델링",
+          "천안 아파트 인테리어",
+          "천안 구축 인테리어",
+          "천안 상가 인테리어",
+          "천안 학교 리모델링",
           "실내건축공사",
           "주거공간 리모델링",
           "상업공간 인테리어",
@@ -258,7 +267,7 @@ export default function RootLayout({
         },
 
         description:
-          "실내건축공사업 면허를 보유한 천안 청년창업기업 정감공간.",
+          "천안 실내건축공사업 면허 보유 청년창업기업 정감공간.",
       },
 
       {
