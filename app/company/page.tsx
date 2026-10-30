@@ -1,24 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://gonggam.vercel.app";
+const SITE_URL = "https://jeonggaminterior.com";
 
 export const metadata: Metadata = {
-  title: "정감공간 회사소개 | 천안 실내건축공사업 면허 인테리어 업체",
+  title: "정감공간 회사소개 | 천안·아산 인테리어 전문기업",
+
   description:
-    "천안 인테리어 전문기업 정감공간. 실내건축공사업 면허 보유, 청년창업기업. 아파트 인테리어, 구축 인테리어, 상가 인테리어, 학교 리모델링 상담.",
-  keywords: [
-    "정감공간",
-    "천안 인테리어 업체",
-    "천안 실내건축공사업",
-    "천안 실내건축면허",
-    "천안 실내건축공사업 면허",
-    "천안 인테리어 면허업체",
-    "천안 청년창업기업",
-    "천안 청년 창업기업",
-  ],
+    "천안·아산 인테리어 전문 정감공간. 주거·상업·교육·공공공간 인테리어와 리모델링을 진행합니다.",
+
   alternates: {
     canonical: `${SITE_URL}/company`,
   },
@@ -35,7 +25,7 @@ export default function CompanyPage() {
           </div>
 
           <div className="company-hero-content">
-            <p>천안 인테리어 · 리모델링 전문기업</p>
+            <p>천안·아산 인테리어 전문기업</p>
 
             <h1>
               공간에 정감을 더하는
@@ -44,8 +34,8 @@ export default function CompanyPage() {
             </h1>
 
             <p className="company-description">
-              정감공간은 천안을 중심으로 주거공간, 상업공간,
-              교육시설의 인테리어와 리모델링을 진행합니다.
+              정감공간은 천안과 아산을 중심으로 다양한 공간의
+              인테리어와 리모델링을 진행합니다.
             </p>
           </div>
         </div>
@@ -74,8 +64,8 @@ export default function CompanyPage() {
               </p>
 
               <p>
-                정감공간은 공간의 구조와 목적, 동선과 사용 환경을 확인하고
-                필요한 시공 방향을 함께 고민합니다.
+                정감공간은 공간의 구조와 목적, 동선과 사용 환경을
+                확인하고 필요한 시공 방향을 함께 고민합니다.
               </p>
             </div>
           </div>
@@ -102,18 +92,25 @@ export default function CompanyPage() {
 
             <div>
               <span>대표번호</span>
-              <a href="tel:0414150410">041-415-0410</a>
+
+              <a href="tel:0414150410">
+                041-415-0410
+              </a>
             </div>
 
             <div>
               <span>주요 시공지역</span>
-              <strong>천안 전 지역</strong>
+
+              <strong>
+                천안 / 아산 전 지역
+              </strong>
             </div>
 
             <div>
               <span>전문분야</span>
+
               <strong>
-                구축 · 상가 · 아파트 인테리어 · 학교 리모델링
+                아파트 · 빌라 · 상가 · 학교 · 복지시설 · 공공기관
               </strong>
             </div>
           </div>
@@ -133,7 +130,11 @@ export default function CompanyPage() {
 
               <div>
                 <small>INTERIOR CONSTRUCTION LICENSE</small>
-                <h2>실내건축공사업 면허</h2>
+
+                <h2>
+                  실내건축공사업 면허
+                </h2>
+
                 <p>
                   정감공간의 실내건축공사업 면허 관련 안내를
                   확인할 수 있습니다.
@@ -148,7 +149,11 @@ export default function CompanyPage() {
 
               <div>
                 <small>YOUTH STARTUP COMPANY</small>
-                <h2>청년창업기업</h2>
+
+                <h2>
+                  청년창업기업
+                </h2>
+
                 <p>
                   정감공간의 청년창업기업 관련 안내를
                   확인할 수 있습니다.
@@ -166,7 +171,7 @@ export default function CompanyPage() {
           <p>CONTACT</p>
 
           <h2>
-            천안 인테리어 상담이
+            천안·아산 인테리어 상담이
             <br />
             필요하신가요?
           </h2>
