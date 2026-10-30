@@ -6,7 +6,8 @@ const services = [
     number: "01",
     title: "구축 인테리어",
     english: "OLD HOUSE",
-    description: "오래된 공간을 새로운 생활공간으로 완성합니다.",
+    description:
+      "오래된 공간의 구조와 생활 동선을 다시 정리해 새로운 생활공간으로 완성합니다.",
     href: "/services/old-house",
     image: "/IMG_2041.jpeg",
   },
@@ -14,7 +15,8 @@ const services = [
     number: "02",
     title: "상가 인테리어",
     english: "COMMERCIAL",
-    description: "브랜드와 업종에 맞는 실용적인 공간을 설계합니다.",
+    description:
+      "업종과 브랜드의 특성을 고려해 실용성과 디자인을 함께 갖춘 공간을 만듭니다.",
     href: "/services/commercial",
     image: "/IMG_2040.jpeg",
   },
@@ -22,7 +24,8 @@ const services = [
     number: "03",
     title: "아파트 인테리어",
     english: "APARTMENT",
-    description: "생활 동선과 공간 활용을 고려한 주거공간을 만듭니다.",
+    description:
+      "생활 동선과 공간 활용을 고려해 편안하고 완성도 높은 주거공간을 제안합니다.",
     href: "/services/apartment",
     image: "/IMG_2042.jpeg",
   },
@@ -30,7 +33,8 @@ const services = [
     number: "04",
     title: "학교 리모델링",
     english: "SCHOOL",
-    description: "안전성과 활용성을 고려한 교육공간을 조성합니다.",
+    description:
+      "교육환경과 사용 목적을 고려해 안전하고 쾌적한 공간으로 개선합니다.",
     href: "/services/school",
     image: "/IMG_2043.jpeg",
   },
@@ -250,7 +254,9 @@ function ScrollReveal() {
                 }
               );
 
-              elements.forEach((element) => observer.observe(element));
+              elements.forEach((element) => {
+                observer.observe(element);
+              });
             };
 
             if (document.readyState === "loading") {
