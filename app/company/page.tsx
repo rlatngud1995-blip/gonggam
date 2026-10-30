@@ -1,415 +1,188 @@
-
 import type { Metadata } from "next";
 import Link from "next/link";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://jeonggamspace.vercel.app";
-
-const PHONE = "041-415-0410";
+  "https://gonggam.vercel.app";
 
 export const metadata: Metadata = {
-  title: "회사소개 | 천안 인테리어 전문기업",
+  title: "정감공간 회사소개 | 천안 실내건축공사업 면허 인테리어 업체",
   description:
-    "정감공간은 대표 정경훈이 운영하는 천안 인테리어 전문기업입니다. 실내건축공사업 면허 보유 청년창업기업으로 구축·상가·아파트 인테리어 및 학교 리모델링을 상담합니다.",
+    "천안 인테리어 전문기업 정감공간. 실내건축공사업 면허 보유, 청년창업기업. 아파트 인테리어, 구축 인테리어, 상가 인테리어, 학교 리모델링 상담.",
   keywords: [
     "정감공간",
-    "정감공간 정경훈",
     "천안 인테리어 업체",
-    "천안 인테리어 잘하는곳",
     "천안 실내건축공사업",
-    "천안 실내건축면허 업체",
+    "천안 실내건축면허",
+    "천안 실내건축공사업 면허",
+    "천안 인테리어 면허업체",
     "천안 청년창업기업",
+    "천안 청년 창업기업",
   ],
   alternates: {
     canonical: `${SITE_URL}/company`,
   },
-  openGraph: {
-    title: "회사소개 | 정감공간",
-    description:
-      "실내건축공사업 면허를 보유한 천안 청년창업 인테리어 기업 정감공간",
-    url: `${SITE_URL}/company`,
-    siteName: "정감공간",
-    locale: "ko_KR",
-    type: "website",
-  },
 };
 
-const strengths = [
-  {
-    number: "01",
-    title: "실내건축공사업 면허 보유",
-    description:
-      "실내건축공사업 등록을 기반으로 공간의 목적과 현장 조건에 맞는 인테리어 시공을 진행합니다.",
-  },
-  {
-    number: "02",
-    title: "청년창업기업",
-    description:
-      "새로운 관점과 책임감으로 고객의 요구를 이해하고 공간의 가치를 높이는 방향을 고민합니다.",
-  },
-  {
-    number: "03",
-    title: "공간별 맞춤 제안",
-    description:
-      "주거공간과 상업공간, 교육시설의 특성을 고려하여 디자인과 기능의 균형을 추구합니다.",
-  },
-];
-
-const services = [
-  {
-    name: "구축 인테리어",
-    english: "RENOVATION",
-    href: "/services/old-house",
-  },
-  {
-    name: "상가 인테리어",
-    english: "COMMERCIAL",
-    href: "/services/commercial",
-  },
-  {
-    name: "아파트 인테리어",
-    english: "RESIDENTIAL",
-    href: "/services/apartment",
-  },
-  {
-    name: "학교 리모델링",
-    english: "EDUCATIONAL",
-    href: "/services/school",
-  },
-];
-
 export default function CompanyPage() {
-  const companyJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    name: "정감공간 회사소개",
-    url: `${SITE_URL}/company`,
-    mainEntity: {
-      "@type": "Organization",
-      name: "정감공간",
-      url: SITE_URL,
-      telephone: PHONE,
-      description:
-        "천안 인테리어 전문기업. 실내건축공사업 면허 보유 청년창업기업.",
-      founder: {
-        "@type": "Person",
-        name: "정경훈",
-      },
-    },
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(companyJsonLd).replace(
-            /</g,
-            "\\u003c"
-          ),
-        }}
-      />
+      <section className="company-hero">
+        <div className="company-container">
+          <div className="company-kicker">
+            <span>JEONGGAM SPACE</span>
+            <span>ABOUT COMPANY</span>
+          </div>
 
-      {/* 회사소개 메인 */}
-      <section
-        style={{
-          background: "#111",
-          color: "#fff",
-          padding: "125px 7% 115px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1250,
-            margin: "auto",
-          }}
-        >
-          <span className="section-label">
-            ABOUT JEONGGAM SPACE
-          </span>
+          <div className="company-hero-content">
+            <p>천안 인테리어 · 리모델링 전문기업</p>
 
-          <h1
-            style={{
-              fontSize: "clamp(44px, 7vw, 90px)",
-              lineHeight: 1.2,
-              letterSpacing: "-0.07em",
-              fontWeight: 600,
-              margin: "30px 0",
-            }}
-          >
-            공간을 이해하고,
-            <br />
-            가치를 완성하다.
-          </h1>
-
-          <p
-            style={{
-              color: "#bbb",
-              fontSize: 16,
-              lineHeight: 2,
-            }}
-          >
-            JEONGGAM SPACE
-            <br />
-            천안 인테리어 전문기업 정감공간
-          </p>
-        </div>
-      </section>
-
-      {/* 브랜드 소개 */}
-      <section className="home-about section-padding">
-        <div className="about-heading">
-          <span className="section-label">
-            OUR PHILOSOPHY
-          </span>
-
-          <h2>
-            공간의 본질을
-            <br />
-            생각합니다.
-          </h2>
-        </div>
-
-        <div className="about-content">
-          <p className="about-lead">
-            좋은 공간은
-            <br />
-            사람을 이해하는 것에서
-            시작됩니다.
-          </p>
-
-          <p>
-            정감공간은 천안을 중심으로
-            주거공간, 상업공간, 교육시설의
-            인테리어와 리모델링을 진행하는
-            전문기업입니다.
-          </p>
-
-          <p>
-            공간의 외형뿐 아니라 실제 사용하는
-            사람의 생활방식과 공간의 목적,
-            기능성 및 유지관리 편의성까지
-            함께 고민합니다.
-          </p>
-
-          <p>
-            고객과 충분히 소통하며
-            현장 조건에 적합한 시공 방향을
-            제안하는 것을 중요하게 생각합니다.
-          </p>
-        </div>
-      </section>
-
-      {/* 전문성과 신뢰 */}
-      <section className="home-services section-padding">
-        <div className="section-heading">
-          <div>
-            <span className="section-label">
-              OUR STRENGTHS
-            </span>
-
-            <h2>
-              신뢰할 수 있는
+            <h1>
+              공간에 정감을 더하는
               <br />
-              인테리어 파트너
+              정감공간
+            </h1>
+
+            <p className="company-description">
+              정감공간은 천안을 중심으로 주거공간, 상업공간,
+              교육시설의 인테리어와 리모델링을 진행합니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="company-black">
+        <div className="company-container">
+          <div className="company-label">
+            <span>01</span>
+            <p>JEONGGAM SPACE</p>
+          </div>
+
+          <div className="company-intro-grid">
+            <h2>
+              디자인뿐 아니라
+              <br />
+              시공의 기본을
+              <br />
+              중요하게 생각합니다.
             </h2>
-          </div>
 
-          <p>
-            전문성과 책임감을 바탕으로
-            <br />
-            공간의 가치를 고민합니다.
-          </p>
-        </div>
+            <div>
+              <p>
+                공간은 단순히 보기 좋아야 하는 것이 아니라
+                실제 사용하는 사람에게 편안하고 실용적이어야 합니다.
+              </p>
 
-        <div className="trust-grid">
-          {strengths.map((item) => (
-            <div
-              className="trust-item"
-              key={item.number}
-            >
-              <span className="trust-number">
-                {item.number}
-              </span>
-
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
+              <p>
+                정감공간은 공간의 구조와 목적, 동선과 사용 환경을 확인하고
+                필요한 시공 방향을 함께 고민합니다.
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 시공 분야 */}
-      <section className="section-padding">
-        <div
-          style={{
-            maxWidth: 1250,
-            margin: "auto",
-          }}
-        >
-          <span className="section-label">
-            BUSINESS AREAS
-          </span>
-
-          <h2
-            style={{
-              fontSize: "clamp(34px, 5vw, 58px)",
-              letterSpacing: "-0.06em",
-              lineHeight: 1.35,
-              marginBottom: 50,
-            }}
-          >
-            정감공간의
-            <br />
-            전문 시공 분야
-          </h2>
-
-          <div
-            style={{
-              borderTop: "1px solid #111",
-            }}
-          >
-            {services.map((service, index) => (
-              <Link
-                key={service.href}
-                href={service.href}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: 20,
-                  padding: "27px 5px",
-                  borderBottom: "1px solid #ddd",
-                }}
-              >
-                <div>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      color: "#999",
-                      marginRight: 18,
-                    }}
-                  >
-                    0{index + 1}
-                  </span>
-
-                  <strong
-                    style={{
-                      fontSize: "clamp(19px, 3vw, 29px)",
-                      letterSpacing: "-0.04em",
-                    }}
-                  >
-                    {service.name}
-                  </strong>
-
-                  <span
-                    style={{
-                      display: "block",
-                      marginTop: 9,
-                      marginLeft: 36,
-                      color: "#999",
-                      fontSize: 11,
-                      letterSpacing: 2,
-                    }}
-                  >
-                    {service.english}
-                  </span>
-                </div>
-
-                <span style={{ fontSize: 25 }}>
-                  ↗
-                </span>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* 회사 정보 */}
-      <section className="seo-intro section-padding">
-        <div className="seo-inner">
-          <span className="section-label">
-            COMPANY INFORMATION
-          </span>
+      <section className="company-info-section">
+        <div className="company-container">
+          <div className="company-label">
+            <span>02</span>
+            <p>COMPANY INFORMATION</p>
+          </div>
+
+          <div className="company-info-list">
+            <div>
+              <span>상호</span>
+              <strong>정감공간</strong>
+            </div>
+
+            <div>
+              <span>대표</span>
+              <strong>정경훈</strong>
+            </div>
+
+            <div>
+              <span>대표번호</span>
+              <a href="tel:0414150410">041-415-0410</a>
+            </div>
+
+            <div>
+              <span>주요 시공지역</span>
+              <strong>천안 전 지역</strong>
+            </div>
+
+            <div>
+              <span>전문분야</span>
+              <strong>
+                구축 · 상가 · 아파트 인테리어 · 학교 리모델링
+              </strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="company-cert-section">
+        <div className="company-container">
+          <div className="company-label">
+            <span>03</span>
+            <p>LICENSE & COMPANY</p>
+          </div>
+
+          <div className="company-cert-grid">
+            <Link href="/company/license">
+              <span>01</span>
+
+              <div>
+                <small>INTERIOR CONSTRUCTION LICENSE</small>
+                <h2>실내건축공사업 면허</h2>
+                <p>
+                  정감공간의 실내건축공사업 면허 관련 안내를
+                  확인할 수 있습니다.
+                </p>
+              </div>
+
+              <strong>↗</strong>
+            </Link>
+
+            <Link href="/company/youth">
+              <span>02</span>
+
+              <div>
+                <small>YOUTH STARTUP COMPANY</small>
+                <h2>청년창업기업</h2>
+                <p>
+                  정감공간의 청년창업기업 관련 안내를
+                  확인할 수 있습니다.
+                </p>
+              </div>
+
+              <strong>↗</strong>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="company-contact-section">
+        <div className="company-container">
+          <p>CONTACT</p>
 
           <h2>
-            정감공간
+            천안 인테리어 상담이
             <br />
-            기업 안내
+            필요하신가요?
           </h2>
 
-          <div
-            style={{
-              borderTop: "1px solid #111",
-              marginTop: 35,
-            }}
-          >
-            {[
-              ["상호명", "정감공간"],
-              ["대표자", "정경훈"],
-              ["대표번호", PHONE],
-              ["전문 분야", "실내 인테리어 및 리모델링"],
-              ["면허", "실내건축공사업 면허 보유"],
-              ["기업 유형", "청년창업기업"],
-              ["주요 상담 지역", "충청남도 천안시"],
-            ].map(([label, value]) => (
-              <div
-                key={label}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "110px 1fr",
-                  gap: 15,
-                  padding: "19px 0",
-                  borderBottom: "1px solid #ddd",
-                  fontSize: 14,
-                }}
-              >
-                <strong>{label}</strong>
-                <span style={{ color: "#666" }}>
-                  {value}
-                </span>
-              </div>
-            ))}
+          <div className="company-contact-actions">
+            <a href="tel:0414150410">
+              <span>전화 상담</span>
+              <strong>041-415-0410</strong>
+            </a>
+
+            <Link href="/contact">
+              <span>견적 문의</span>
+              <strong>↗</strong>
+            </Link>
           </div>
-
-          <p style={{ marginTop: 30 }}>
-            실내건축공사업 등록번호와
-            사업자등록번호 등 추가 기업정보는
-            확인 후 홈페이지에 반영할 예정입니다.
-          </p>
         </div>
-      </section>
-
-      {/* 상담 */}
-      <section className="home-contact">
-        <span className="section-label">
-          CONTACT JEONGGAM
-        </span>
-
-        <h2>
-          새로운 공간을 위한
-          <br />
-          첫 번째 상담
-        </h2>
-
-        <p>
-          정감공간 · 대표 정경훈
-        </p>
-
-        <a
-          href="tel:0414150410"
-          className="contact-phone"
-        >
-          {PHONE} ↗
-        </a>
-
-        <Link
-          href="/contact"
-          className="contact-more"
-        >
-          견적문의 안내
-        </Link>
       </section>
     </>
   );
