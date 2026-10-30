@@ -7,7 +7,7 @@ const services = [
     title: "구축 인테리어",
     english: "OLD HOUSE",
     description:
-      "오래된 공간의 구조와 생활 동선을 다시 정리해 새로운 생활공간으로 완성합니다.",
+      "오래된 공간의 구조와 동선을 새롭게 정리해 더 편안하고 가치 있는 공간으로 완성합니다.",
     href: "/services/old-house",
     image: "/IMG_2041.jpeg",
   },
@@ -16,7 +16,7 @@ const services = [
     title: "상가 인테리어",
     english: "COMMERCIAL",
     description:
-      "업종과 브랜드의 특성을 고려해 실용성과 디자인을 함께 갖춘 공간을 만듭니다.",
+      "업종과 브랜드의 특성을 고려해 실용성과 디자인을 함께 갖춘 상업공간을 만듭니다.",
     href: "/services/commercial",
     image: "/IMG_2040.jpeg",
   },
@@ -43,32 +43,45 @@ const services = [
 export default function Home() {
   return (
     <>
-      <section className="new-hero">
-        <div className="new-container">
-          <div className="new-hero-top reveal">
+      <section className="bw-hero">
+        <div className="bw-container">
+          <div className="bw-hero-top reveal">
             <span>JEONGGAM SPACE</span>
             <span>CHEONAN INTERIOR</span>
           </div>
 
-          <div className="new-hero-main">
-            <div>
-              <p className="hero-small reveal">
-                천안 인테리어 · 리모델링 전문
-              </p>
+          <div className="bw-hero-main">
+            <p className="bw-eyebrow reveal">
+              천안 인테리어 · 리모델링 전문
+            </p>
 
-              <h1 className="reveal">
-                공간에 정감을 더하다.
-              </h1>
-            </div>
+            <h1 className="reveal">
+              공간에 정감을 더하다.
+            </h1>
 
-            <p className="hero-description reveal">
+            <p className="bw-hero-description reveal">
               공간의 목적과 사용하는 사람을 먼저 생각합니다.
               <br />
               설계부터 시공까지 꼼꼼하게 진행합니다.
             </p>
+
+            <div className="bw-hero-actions reveal">
+              <a href="tel:0414150410" className="bw-button bw-button-black">
+                <span>전화 상담</span>
+                <strong>041-415-0410</strong>
+              </a>
+
+              <Link
+                href="/contact"
+                className="bw-button bw-button-white"
+              >
+                <span>견적 문의</span>
+                <strong>↗</strong>
+              </Link>
+            </div>
           </div>
 
-          <div className="hero-bottom-line reveal">
+          <div className="bw-hero-meta reveal">
             <span>실내건축공사업 면허 보유</span>
             <span>청년창업기업</span>
             <span>대표 정경훈</span>
@@ -76,14 +89,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="new-about">
-        <div className="new-container">
-          <div className="section-head reveal">
+      <section className="bw-about">
+        <div className="bw-container">
+          <div className="bw-section-label reveal">
             <span>01</span>
             <p>ABOUT JEONGGAM SPACE</p>
           </div>
 
-          <div className="about-layout">
+          <div className="bw-about-grid">
             <h2 className="reveal">
               좋은 공간은
               <br />
@@ -92,7 +105,7 @@ export default function Home() {
               시작됩니다.
             </h2>
 
-            <div className="about-text reveal">
+            <div className="bw-about-copy reveal">
               <p>
                 정감공간은 단순히 보기 좋은 공간만을 만드는 것이 아니라
                 사용하는 사람의 동선과 목적, 생활방식을 함께 고민합니다.
@@ -107,14 +120,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="new-services" id="services">
-        <div className="new-container">
-          <div className="section-head reveal">
+      <section className="bw-services" id="services">
+        <div className="bw-container">
+          <div className="bw-section-label reveal">
             <span>02</span>
             <p>SERVICES</p>
           </div>
 
-          <div className="services-intro">
+          <div className="bw-services-title">
             <h2 className="reveal">
               시공 분야
             </h2>
@@ -124,14 +137,14 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="new-service-grid">
+          <div className="bw-service-grid">
             {services.map((service) => (
               <Link
-                key={service.number}
                 href={service.href}
-                className="new-service-card reveal"
+                key={service.number}
+                className="bw-service-card reveal"
               >
-                <div className="new-service-image">
+                <div className="bw-service-image">
                   <Image
                     src={service.image}
                     alt={`천안 ${service.title} 정감공간`}
@@ -139,17 +152,17 @@ export default function Home() {
                     sizes="(max-width: 800px) 100vw, 50vw"
                   />
 
-                  <span className="service-number">
+                  <span className="bw-service-number">
                     {service.number}
                   </span>
                 </div>
 
-                <div className="new-service-content">
-                  <span className="service-english">
+                <div className="bw-service-body">
+                  <span className="bw-service-english">
                     {service.english}
                   </span>
 
-                  <div className="service-title-row">
+                  <div className="bw-service-heading">
                     <h3>{service.title}</h3>
                     <span>↗</span>
                   </div>
@@ -162,66 +175,61 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="new-trust">
-        <div className="new-container">
-          <div className="section-head reveal">
+      <section className="bw-trust">
+        <div className="bw-container">
+          <div className="bw-section-label reveal">
             <span>03</span>
             <p>WHY JEONGGAM</p>
           </div>
 
-          <div className="trust-layout">
+          <div className="bw-trust-grid">
             <h2 className="reveal">
               기본을 지키는
               <br />
               인테리어 시공
             </h2>
 
-            <div className="trust-list">
-              <div className="trust-row reveal">
+            <div className="bw-trust-list">
+              <div className="bw-trust-row reveal">
                 <span>01</span>
                 <strong>실내건축공사업 면허 보유</strong>
               </div>
 
-              <div className="trust-row reveal">
+              <div className="bw-trust-row reveal">
                 <span>02</span>
                 <strong>청년창업기업</strong>
               </div>
 
-              <div className="trust-row reveal">
+              <div className="bw-trust-row reveal">
                 <span>03</span>
                 <strong>천안 중심 시공</strong>
               </div>
 
-              <div className="trust-row reveal">
+              <div className="bw-trust-row reveal">
                 <span>04</span>
-                <strong>설계부터 시공까지 직접 관리</strong>
+                <strong>설계부터 시공까지 꼼꼼한 관리</strong>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="new-contact">
-        <div className="new-container">
-          <p className="contact-label reveal">
-            CONTACT
+      <section className="bw-bottom-contact">
+        <div className="bw-container">
+          <p className="reveal">
+            공간에 대한 이야기를 시작해보세요.
           </p>
 
-          <h2 className="reveal">
-            공간에 대한 이야기를
-            <br />
-            시작해보세요.
-          </h2>
+          <div className="bw-bottom-actions reveal">
+            <a href="tel:0414150410">
+              전화 상담
+              <span>041-415-0410</span>
+            </a>
 
-          <div className="new-contact-buttons reveal">
             <Link href="/contact">
               견적 문의
               <span>↗</span>
             </Link>
-
-            <a href="tel:0414150410">
-              041-415-0410
-            </a>
           </div>
         </div>
       </section>
