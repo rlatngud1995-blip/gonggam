@@ -7,7 +7,7 @@ const services = [
     title: "구축 인테리어",
     english: "OLD HOUSE RENOVATION",
     description:
-      "오래된 공간의 구조와 동선을 다시 정리해 새로운 생활공간으로 완성합니다.",
+      "오래된 공간의 구조와 생활 동선을 다시 설계해 새로운 공간으로 완성합니다.",
     href: "/services/old-house",
     image: "/IMG_2041.jpeg",
   },
@@ -16,7 +16,7 @@ const services = [
     title: "상가 인테리어",
     english: "COMMERCIAL INTERIOR",
     description:
-      "업종과 브랜드의 특성을 고려해 실용성과 디자인을 함께 갖춘 상업공간을 만듭니다.",
+      "업종과 브랜드의 특성을 고려해 실용성과 디자인을 갖춘 상업공간을 만듭니다.",
     href: "/services/commercial",
     image: "/IMG_2040.jpeg",
   },
@@ -43,56 +43,54 @@ const services = [
 export default function Home() {
   return (
     <>
-      <section className="main-intro">
-        <div className="main-intro-inner">
-          <div className="main-intro-top">
-            <p className="intro-brand reveal-item">
-              JEONGGAM SPACE
-            </p>
-
-            <p className="intro-location reveal-item">
-              CHEONAN · INTERIOR · REMODELING
-            </p>
+      {/* =========================
+          첫 화면 - 사진 없음
+      ========================== */}
+      <section className="jg-hero">
+        <div className="jg-hero-inner">
+          <div className="jg-hero-top reveal">
+            <span>JEONGGAM SPACE</span>
+            <span>CHEONAN · INTERIOR</span>
           </div>
 
-          <div className="main-intro-title">
+          <div className="jg-hero-title">
             <h1>
-              <span className="intro-line reveal-item">
-                공간에
-              </span>
-              <span className="intro-line reveal-item">
-                정감을 더하다.
-              </span>
+              <span className="reveal">공간에</span>
+              <span className="reveal">정감을 더하다.</span>
             </h1>
           </div>
 
-          <div className="main-intro-bottom reveal-item">
+          <div className="jg-hero-bottom reveal">
             <p>
-              정감공간은 공간의 목적과
+              공간을 이해하고
               <br />
-              사용하는 사람을 먼저 생각합니다.
+              가치를 완성합니다.
             </p>
 
-            <div>
-              <span>천안 인테리어 · 리모델링</span>
-              <span>실내건축공사업 면허 보유</span>
-            </div>
+            <p>
+              천안 인테리어 · 리모델링
+              <br />
+              실내건축공사업 면허 보유
+            </p>
           </div>
 
-          <div className="scroll-guide reveal-item">
+          <div className="jg-scroll reveal">
             <span>SCROLL</span>
             <i />
           </div>
         </div>
       </section>
 
-      <section className="home-philosophy">
-        <div className="home-philosophy-inner">
-          <p className="section-small reveal-item">
+      {/* =========================
+          소개
+      ========================== */}
+      <section className="jg-intro">
+        <div className="jg-container">
+          <span className="jg-label reveal">
             01 / PHILOSOPHY
-          </p>
+          </span>
 
-          <h2 className="reveal-item">
+          <h2 className="reveal">
             좋은 공간은
             <br />
             사람을 이해하는 것에서
@@ -100,152 +98,150 @@ export default function Home() {
             시작됩니다.
           </h2>
 
-          <div className="philosophy-description reveal-item">
+          <div className="jg-intro-text reveal">
             <p>
-              단순히 보기 좋은 공간을 만드는 것을 넘어
-              생활 방식과 공간의 목적, 동선과 사용성을 함께 고민합니다.
+              정감공간은 단순히 보기 좋은 공간을 만드는 것에
+              그치지 않습니다.
             </p>
 
             <p>
-              정감공간은 설계부터 시공까지 꼼꼼하게 진행하며
-              오래 머물고 싶은 공간을 완성합니다.
+              사용하는 사람의 생활과 목적, 동선과 공간의
+              특성을 고려해 오래 머물고 싶은 공간을 만듭니다.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="home-services" id="services">
-        <div className="home-services-header">
-          <p className="section-small reveal-item">
+      {/* =========================
+          카테고리
+      ========================== */}
+      <section className="jg-services" id="services">
+        <div className="jg-container">
+          <span className="jg-label reveal">
             02 / SERVICES
-          </p>
+          </span>
 
-          <div className="services-title-row">
-            <h2 className="reveal-item">
-              공간에 맞는
+          <div className="jg-service-heading">
+            <h2 className="reveal">
+              정감공간의
               <br />
-              시공을 제안합니다.
+              시공 분야
             </h2>
 
-            <p className="reveal-item">
-              카테고리를 선택하면
+            <p className="reveal">
+              원하는 시공 분야를 선택하면
               <br />
-              상세 시공 안내를 확인할 수 있습니다.
+              자세한 내용을 확인할 수 있습니다.
             </p>
           </div>
-        </div>
 
-        <div className="category-list">
-          {services.map((service) => (
-            <Link
-              key={service.number}
-              href={service.href}
-              className="category-card reveal-item"
-            >
-              <div className="category-photo">
-                <Image
-                  src={service.image}
-                  alt={`천안 ${service.title} 정감공간`}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 55vw"
-                  className="category-photo-image"
-                />
+          <div className="jg-category-list">
+            {services.map((service) => (
+              <Link
+                href={service.href}
+                key={service.number}
+                className="jg-category reveal"
+              >
+                <div className="jg-category-image">
+                  <Image
+                    src={service.image}
+                    alt={`천안 ${service.title} 정감공간 시공 사례`}
+                    fill
+                    sizes="(max-width: 800px) 100vw, 55vw"
+                  />
 
-                <div className="category-photo-overlay" />
-
-                <span className="category-photo-number">
-                  {service.number}
-                </span>
-              </div>
-
-              <div className="category-content">
-                <div>
-                  <p className="category-english">
-                    {service.english}
-                  </p>
-
-                  <h3>{service.title}</h3>
-
-                  <p className="category-description">
-                    {service.description}
-                  </p>
+                  <span className="jg-category-number">
+                    {service.number}
+                  </span>
                 </div>
 
-                <div className="category-link-text">
-                  <span>VIEW DETAIL</span>
-                  <strong>↗</strong>
+                <div className="jg-category-info">
+                  <div>
+                    <span className="jg-category-english">
+                      {service.english}
+                    </span>
+
+                    <h3>{service.title}</h3>
+
+                    <p>{service.description}</p>
+                  </div>
+
+                  <div className="jg-view">
+                    <span>VIEW DETAIL</span>
+                    <strong>↗</strong>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="home-trust">
-        <div className="home-trust-inner">
-          <p className="section-small reveal-item">
-            03 / JEONGGAM SPACE
-          </p>
+      {/* =========================
+          신뢰
+      ========================== */}
+      <section className="jg-trust">
+        <div className="jg-container">
+          <span className="jg-label reveal">
+            03 / ABOUT
+          </span>
 
-          <h2 className="reveal-item">
+          <h2 className="reveal">
             디자인뿐 아니라
             <br />
             시공의 기본까지.
           </h2>
 
-          <div className="trust-items">
-            <div className="trust-box reveal-item">
+          <div className="jg-trust-grid">
+            <div className="jg-trust-card reveal">
               <span>01</span>
               <h3>실내건축공사업</h3>
               <p>
-                정식 면허를 바탕으로
-                체계적인 시공을 진행합니다.
+                정식 면허를 바탕으로 체계적인 시공을 진행합니다.
               </p>
             </div>
 
-            <div className="trust-box reveal-item">
+            <div className="jg-trust-card reveal">
               <span>02</span>
               <h3>청년창업기업</h3>
               <p>
-                새로운 감각과 책임감 있는
-                현장 운영을 추구합니다.
+                새로운 감각과 책임감 있는 현장 운영을 추구합니다.
               </p>
             </div>
 
-            <div className="trust-box reveal-item">
+            <div className="jg-trust-card reveal">
               <span>03</span>
               <h3>천안 중심 시공</h3>
               <p>
-                주거·상업·교육 공간을
-                천안 전 지역에서 상담합니다.
+                천안 전 지역의 주거·상업·교육공간을 상담합니다.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="home-contact">
-        <div className="home-contact-inner">
-          <p className="section-small reveal-item">
+      {/* =========================
+          문의
+      ========================== */}
+      <section className="jg-contact">
+        <div className="jg-container">
+          <span className="jg-label reveal">
             04 / CONTACT
-          </p>
+          </span>
 
-          <h2 className="reveal-item">
+          <h2 className="reveal">
             새로운 공간을
             <br />
             준비하고 계신가요?
           </h2>
 
-          <div className="home-contact-buttons reveal-item">
-            <Link href="/contact" className="estimate-button">
-              <span>견적 문의하기</span>
-              <strong>↗</strong>
+          <div className="jg-contact-buttons reveal">
+            <Link href="/contact">
+              견적 문의하기
+              <span>↗</span>
             </Link>
 
-            <a
-              href="tel:0414150410"
-              className="home-phone"
-            >
+            <a href="tel:0414150410">
               041-415-0410
             </a>
           </div>
@@ -262,27 +258,35 @@ function ScrollAnimation() {
     <script
       dangerouslySetInnerHTML={{
         __html: `
-          document.addEventListener("DOMContentLoaded", function () {
-            const elements = document.querySelectorAll(".reveal-item");
+          (() => {
+            const start = () => {
+              const elements = document.querySelectorAll(".reveal");
 
-            const observer = new IntersectionObserver(
-              function (entries) {
-                entries.forEach(function (entry) {
-                  if (entry.isIntersecting) {
-                    entry.target.classList.add("show");
-                  }
-                });
-              },
-              {
-                threshold: 0.12,
-                rootMargin: "0px 0px -8% 0px"
-              }
-            );
+              const observer = new IntersectionObserver(
+                (entries) => {
+                  entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                      entry.target.classList.add("visible");
+                    }
+                  });
+                },
+                {
+                  threshold: 0.1,
+                  rootMargin: "0px 0px -5% 0px"
+                }
+              );
 
-            elements.forEach(function (element) {
-              observer.observe(element);
-            });
-          });
+              elements.forEach((element) => {
+                observer.observe(element);
+              });
+            };
+
+            if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", start);
+            } else {
+              start();
+            }
+          })();
         `,
       }}
     />
