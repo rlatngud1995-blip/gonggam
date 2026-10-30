@@ -1,347 +1,369 @@
-
-import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "천안 인테리어 전문업체 정감공간",
-  description:
-    "천안 인테리어 전문업체 정감공간. 실내건축공사업 면허 보유 청년창업기업. 구축 인테리어, 상가 인테리어, 아파트 인테리어, 학교 리모델링 상담 041-415-0410.",
-};
 
 const services = [
   {
     number: "01",
     title: "구축 인테리어",
-    english: "RENOVATION",
+    english: "OLD HOUSE RENOVATION",
     description:
-      "오래된 공간에 새로운 가치를 더하는 주거공간 리모델링",
-    image: "/old-house.jpg",
+      "오래된 공간의 구조와 생활 동선을 다시 설계해 새로운 가치로 완성합니다.",
     href: "/services/old-house",
+    image: "/IMG_2041.jpeg",
   },
   {
     number: "02",
     title: "상가 인테리어",
-    english: "COMMERCIAL",
+    english: "COMMERCIAL INTERIOR",
     description:
-      "브랜드의 개성과 운영 효율을 고려한 상업공간 인테리어",
-    image: "/commercial.jpg",
+      "브랜드와 업종의 특성을 공간에 담아 효율적이고 인상적인 상업공간을 만듭니다.",
     href: "/services/commercial",
+    image: "/IMG_2040.jpeg",
   },
   {
     number: "03",
     title: "아파트 인테리어",
-    english: "RESIDENTIAL",
+    english: "APARTMENT INTERIOR",
     description:
-      "생활의 편안함과 디자인을 조화롭게 담아낸 공간",
-    image: "/apartment.jpg",
+      "일상의 편안함과 디자인의 완성도를 함께 고려한 주거공간을 제안합니다.",
     href: "/services/apartment",
+    image: "/IMG_2042.jpeg",
   },
   {
     number: "04",
     title: "학교 리모델링",
-    english: "EDUCATIONAL",
+    english: "SCHOOL REMODELING",
     description:
-      "학생과 교직원을 위한 실용적인 교육공간 개선",
-    image: "/school.jpg",
+      "교육환경과 사용 목적을 고려해 안전하고 쾌적한 공간으로 개선합니다.",
     href: "/services/school",
+    image: "/IMG_2043.jpeg",
   },
 ];
 
 export default function Home() {
   return (
     <>
-      {/* 메인 비주얼 */}
-      <section className="hero">
-        <div className="hero-background" />
-        <div className="hero-overlay" />
+      <section className="home-hero">
+        <div className="home-hero-media">
+          <Image
+            src="/IMG_2042.jpeg"
+            alt="천안 인테리어 전문기업 정감공간 아파트 인테리어 시공 사례"
+            fill
+            priority
+            sizes="100vw"
+            className="home-hero-image"
+          />
+          <div className="home-hero-overlay" />
+        </div>
 
-        <div className="hero-content">
-          <span className="hero-label">
-            JEONGGAM SPACE · INTERIOR DESIGN
-          </span>
+        <div className="home-hero-content">
+          <p className="hero-eyebrow reveal-up">
+            JEONGGAM SPACE · CHEONAN
+          </p>
 
-          <h1>
-            공간의 가치를
-            <br />
-            디자인하다.
+          <h1 className="hero-title">
+            <span className="reveal-up delay-1">공간에</span>
+            <span className="reveal-up delay-2">정감을 더하다.</span>
           </h1>
 
-          <p>
-            공간을 이해하는 시선,
-            <br />
-            완성도 높은 인테리어의 시작.
-            <br />
-            정감공간이 함께합니다.
-          </p>
+          <div className="hero-bottom reveal-up delay-3">
+            <p>
+              천안 인테리어 · 리모델링
+              <br />
+              실내건축공사업 면허 보유
+            </p>
 
-          <Link
-            href="/contact"
-            className="hero-button"
-          >
-            프로젝트 문의하기 <span>↗</span>
-          </Link>
-        </div>
-
-        <div className="hero-bottom">
-          <span>JEONGGAM SPACE</span>
-          <span>SCROLL TO EXPLORE ↓</span>
+            <span className="hero-scroll">
+              SCROLL
+              <i />
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* 회사 소개 */}
-      <section className="home-about section-padding">
-        <div className="about-heading">
-          <span className="section-label">
-            ABOUT JEONGGAM
-          </span>
+      <section className="intro-section">
+        <div className="intro-inner">
+          <p className="section-label scroll-reveal">
+            01 / PHILOSOPHY
+          </p>
 
-          <h2>
-            좋은 공간에는
+          <div className="intro-copy">
+            <h2 className="scroll-reveal">
+              좋은 공간은
+              <br />
+              사람을 이해하는 것에서
+              <br />
+              시작됩니다.
+            </h2>
+
+            <p className="scroll-reveal intro-description">
+              정감공간은 단순히 보기 좋은 공간을 만드는 것에 그치지 않습니다.
+              사용하는 사람의 생활과 목적, 동선과 공간의 본질을 이해하고
+              오래 머물고 싶은 공간을 완성합니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="statement-section">
+        <div className="statement-media">
+          <Image
+            src="/IMG_2041.jpeg"
+            alt="정감공간 구축 인테리어 시공 사례"
+            fill
+            sizes="100vw"
+            className="statement-image"
+          />
+          <div className="statement-overlay" />
+        </div>
+
+        <div className="statement-content">
+          <p className="scroll-reveal">
+            SPACE · DETAIL · VALUE
+          </p>
+
+          <h2 className="scroll-reveal">
+            공간의 가치를
             <br />
-            이유가 있습니다.
+            완성합니다.
           </h2>
         </div>
-
-        <div className="about-content">
-          <p className="about-lead">
-            공간의 본질을 이해하고,
-            <br />
-            사람을 위한 디자인을 고민합니다.
-          </p>
-
-          <p>
-            정감공간은 천안을 중심으로
-            구축 인테리어, 상가 인테리어,
-            아파트 인테리어, 학교 리모델링을
-            진행하는 인테리어 전문기업입니다.
-          </p>
-
-          <p>
-            공간의 용도와 사용자의 생활방식을
-            고려하여 디자인과 실용성의
-            균형을 추구합니다.
-          </p>
-
-          <Link
-            href="/company"
-            className="more-link"
-          >
-            정감공간 소개 <span>↗</span>
-          </Link>
-        </div>
       </section>
 
-      {/* 시공 카테고리 */}
-      <section
-        id="services"
-        className="home-services section-padding"
-      >
-        <div className="section-heading">
-          <div>
-            <span className="section-label">
-              OUR SERVICES
-            </span>
-
-            <h2>
-              공간에 맞는
-              <br />
-              전문적인 솔루션
-            </h2>
-          </div>
-
-          <p>
-            주거공간부터 상업시설과 교육시설까지
-            <br />
-            공간의 목적에 맞게 제안합니다.
+      <section className="services-section" id="services">
+        <div className="services-heading">
+          <p className="section-label scroll-reveal">
+            02 / SERVICES
           </p>
+
+          <div className="services-heading-row">
+            <h2 className="scroll-reveal">
+              정감공간의
+              <br />
+              시공 분야
+            </h2>
+
+            <p className="scroll-reveal">
+              공간의 목적과 사용 환경에 맞춰
+              <br />
+              설계부터 시공까지 꼼꼼하게 진행합니다.
+            </p>
+          </div>
         </div>
 
-        <div className="services-grid">
+        <div className="service-scenes">
           {services.map((service) => (
-            <Link
-              href={service.href}
-              className="service-card"
+            <article
+              className="service-scene"
               key={service.number}
             >
-              <div className="service-image-wrap">
-                <div
-                  className="service-image"
-                  style={{
-                    backgroundImage:
-                      `url("${service.image}")`,
-                  }}
-                />
-              </div>
-
-              <div className="service-information">
-                <div>
-                  <span className="service-index">
-                    {service.number} / {service.english}
-                  </span>
-
-                  <h3>{service.title}</h3>
-
-                  <p>{service.description}</p>
+              <Link href={service.href} className="service-scene-link">
+                <div className="service-image-wrap scroll-reveal">
+                  <Image
+                    src={service.image}
+                    alt={`천안 ${service.title} 정감공간 시공 사례`}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 70vw"
+                    className="service-image"
+                  />
                 </div>
 
-                <span className="service-arrow">
-                  ↗
-                </span>
-              </div>
-            </Link>
+                <div className="service-info">
+                  <span className="service-number scroll-reveal">
+                    {service.number}
+                  </span>
+
+                  <div>
+                    <p className="service-english scroll-reveal">
+                      {service.english}
+                    </p>
+
+                    <h3 className="scroll-reveal">
+                      {service.title}
+                    </h3>
+
+                    <p className="service-description scroll-reveal">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  <span className="service-arrow scroll-reveal">
+                    ↗
+                  </span>
+                </div>
+              </Link>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* 시공 사례 */}
-      <section
-        id="portfolio"
-        className="home-portfolio"
-      >
-        <div className="portfolio-content">
-          <span className="section-label">
-            OUR PROJECTS
-          </span>
+      <section className="portfolio-section" id="portfolio">
+        <div className="portfolio-top">
+          <p className="section-label scroll-reveal">
+            03 / PROJECTS
+          </p>
 
-          <h2>
-            완성된 공간이
+          <h2 className="scroll-reveal">
+            우리가 만든
             <br />
-            우리의 이야기가 됩니다.
+            공간들
+          </h2>
+        </div>
+
+        <div className="portfolio-grid">
+          <figure className="portfolio-item portfolio-large scroll-reveal">
+            <div className="portfolio-image-wrap">
+              <Image
+                src="/IMG_2042.jpeg"
+                alt="정감공간 아파트 인테리어 시공 사진"
+                fill
+                sizes="(max-width: 900px) 100vw, 65vw"
+                className="portfolio-image"
+              />
+            </div>
+
+            <figcaption>
+              <span>APARTMENT</span>
+              <strong>주거공간 인테리어</strong>
+            </figcaption>
+          </figure>
+
+          <figure className="portfolio-item scroll-reveal">
+            <div className="portfolio-image-wrap">
+              <Image
+                src="/IMG_2040.jpeg"
+                alt="정감공간 상가 인테리어 시공 사진"
+                fill
+                sizes="(max-width: 900px) 100vw, 35vw"
+                className="portfolio-image"
+              />
+            </div>
+
+            <figcaption>
+              <span>COMMERCIAL</span>
+              <strong>상업공간 인테리어</strong>
+            </figcaption>
+          </figure>
+
+          <figure className="portfolio-item scroll-reveal">
+            <div className="portfolio-image-wrap">
+              <Image
+                src="/IMG_2043.jpeg"
+                alt="정감공간 교육시설 리모델링 시공 사진"
+                fill
+                sizes="(max-width: 900px) 100vw, 35vw"
+                className="portfolio-image"
+              />
+            </div>
+
+            <figcaption>
+              <span>REMODELING</span>
+              <strong>교육·업무공간 리모델링</strong>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="trust-section">
+        <div className="trust-inner">
+          <p className="section-label scroll-reveal">
+            04 / TRUST
+          </p>
+
+          <h2 className="scroll-reveal">
+            디자인뿐 아니라
+            <br />
+            시공의 기본까지 지킵니다.
           </h2>
 
-          <p>
-            정감공간의 실제 시공 사례를
-            소개합니다.
+          <div className="trust-grid">
+            <div className="trust-item scroll-reveal">
+              <span>01</span>
+              <strong>실내건축공사업</strong>
+              <p>
+                정식 면허를 바탕으로 체계적인 시공을 진행합니다.
+              </p>
+            </div>
+
+            <div className="trust-item scroll-reveal">
+              <span>02</span>
+              <strong>청년창업기업</strong>
+              <p>
+                새로운 감각과 책임감 있는 현장 운영을 추구합니다.
+              </p>
+            </div>
+
+            <div className="trust-item scroll-reveal">
+              <span>03</span>
+              <strong>천안 중심 시공</strong>
+              <p>
+                천안 전 지역의 주거·상업·교육공간 시공을 상담합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="contact-cta">
+        <div className="contact-cta-inner">
+          <p className="section-label scroll-reveal">
+            05 / CONTACT
           </p>
 
-          <span className="portfolio-coming">
-            PROJECT ARCHIVE · COMING SOON
-          </span>
-        </div>
-
-        <div className="portfolio-decoration">
-          JEONGGAM
-          <br />
-          SPACE
-        </div>
-      </section>
-
-      {/* 기업 경쟁력 */}
-      <section className="home-trust section-padding">
-        <div className="section-heading">
-          <div>
-            <span className="section-label">
-              WHY JEONGGAM
-            </span>
-
-            <h2>
-              신뢰를 바탕으로
-              <br />
-              공간을 만듭니다.
-            </h2>
-          </div>
-        </div>
-
-        <div className="trust-grid">
-          <div className="trust-item">
-            <span className="trust-number">01</span>
-
-            <h3>실내건축공사업 면허 보유</h3>
-
-            <p>
-              실내건축공사업 등록을 기반으로
-              전문적인 인테리어 시공을
-              진행합니다.
-            </p>
-          </div>
-
-          <div className="trust-item">
-            <span className="trust-number">02</span>
-
-            <h3>청년창업기업</h3>
-
-            <p>
-              새로운 시각과 책임감으로
-              공간의 가치를 고민하는
-              청년창업기업입니다.
-            </p>
-          </div>
-
-          <div className="trust-item">
-            <span className="trust-number">03</span>
-
-            <h3>공간별 맞춤 설계</h3>
-
-            <p>
-              공간의 목적과 사용 환경을
-              고려하여 맞춤형 인테리어
-              솔루션을 제안합니다.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 검색 유입용 소개 */}
-      <section className="seo-intro section-padding">
-        <div className="seo-inner">
-          <span className="section-label">
-            CHEONAN INTERIOR
-          </span>
-
-          <h2>
-            천안 인테리어,
+          <h2 className="scroll-reveal">
+            새로운 공간을
             <br />
-            정감공간과 함께하세요.
+            준비하고 계신가요?
           </h2>
 
-          <p>
-            천안에서 인테리어 업체를 찾고
-            계신다면 공간의 특성과 시공 목적을
-            충분히 고려하는 것이 중요합니다.
-            정감공간은 구축 주거공간 리모델링,
-            상가 인테리어, 아파트 인테리어,
-            학교 리모델링 등 다양한 공간의
-            인테리어를 상담하고 있습니다.
-          </p>
+          <div className="contact-actions scroll-reveal">
+            <Link href="/contact" className="contact-main-button">
+              견적 문의하기
+              <span>↗</span>
+            </Link>
 
-          <p>
-            실내건축공사업 면허를 보유한
-            청년창업기업으로서 공간의 기능과
-            디자인을 함께 고민합니다.
-          </p>
+            <a href="tel:0414150410" className="contact-phone">
+              041-415-0410
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* 견적 상담 */}
-      <section className="home-contact">
-        <span className="section-label">
-          START YOUR PROJECT
-        </span>
-
-        <h2>
-          새로운 공간의 시작,
-          <br />
-          정감공간과 함께하세요.
-        </h2>
-
-        <p>
-          구축 · 상가 · 아파트 · 학교 리모델링
-        </p>
-
-        <a
-          href="tel:0414150410"
-          className="contact-phone"
-        >
-          041-415-0410 <span>↗</span>
-        </a>
-
-        <Link
-          href="/contact"
-          className="contact-more"
-        >
-          견적 상담 안내
-        </Link>
-      </section>
+      <ScrollRevealScript />
     </>
+  );
+}
+
+function ScrollRevealScript() {
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          document.addEventListener("DOMContentLoaded", function () {
+            const targets = document.querySelectorAll(".scroll-reveal");
+
+            const observer = new IntersectionObserver(
+              function (entries) {
+                entries.forEach(function (entry) {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                  } else {
+                    entry.target.classList.remove("is-visible");
+                  }
+                });
+              },
+              {
+                threshold: 0.12,
+                rootMargin: "0px 0px -8% 0px"
+              }
+            );
+
+            targets.forEach(function (target) {
+              observer.observe(target);
+            });
+          });
+        `,
+      }}
+    />
   );
 }
