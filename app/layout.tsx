@@ -7,7 +7,7 @@ const SITE_URL = "https://jeonggaminterior.com";
 const BRAND = "정감공간";
 const PHONE = "041-415-0410";
 
-const FAVICON =
+const LOGO_IMAGE =
   "/6A9A856E-A3D2-40CD-BC08-474E745F7456.png";
 
 export const metadata: Metadata = {
@@ -31,37 +31,49 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: FAVICON,
+        url: LOGO_IMAGE,
         type: "image/png",
       },
     ],
 
-    shortcut: FAVICON,
-    apple: FAVICON,
+    shortcut: LOGO_IMAGE,
+
+    apple: LOGO_IMAGE,
   },
 
   openGraph: {
     type: "website",
+
     locale: "ko_KR",
 
     url: SITE_URL,
 
     siteName: BRAND,
 
-    title:
-      "정감공간 | 천안·아산 인테리어·리모델링",
+    title: "정감공간 | 천안·아산 인테리어·리모델링",
 
     description:
       "천안·아산 주거·상업·교육·공공공간 인테리어 전문 정감공간.",
 
     images: [
       {
-        url: "/IMG_2042.jpeg",
+        url: LOGO_IMAGE,
         width: 1200,
         height: 630,
-        alt: "정감공간 인테리어",
+        alt: "정감공간 JEONGGAM SPACE",
       },
     ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "정감공간 | 천안·아산 인테리어·리모델링",
+
+    description:
+      "천안·아산 주거·상업·교육·공공공간 인테리어 전문 정감공간.",
+
+    images: [LOGO_IMAGE],
   },
 
   robots: {
@@ -77,17 +89,17 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+
+  alternates: {
+    canonical: SITE_URL,
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
-
   initialScale: 1,
-
   maximumScale: 5,
-
   themeColor: "#ffffff",
-
   colorScheme: "light",
 };
 
@@ -113,7 +125,14 @@ export default function RootLayout({
 
         telephone: PHONE,
 
-        logo: `${SITE_URL}${FAVICON}`,
+        logo: `${SITE_URL}${LOGO_IMAGE}`,
+
+        image: [
+          `${SITE_URL}/IMG_2040.jpeg`,
+          `${SITE_URL}/IMG_2041.jpeg`,
+          `${SITE_URL}/IMG_2042.jpeg`,
+          `${SITE_URL}/IMG_2043.jpeg`,
+        ],
 
         description:
           "천안과 아산을 중심으로 주거공간, 상업공간, 교육기관, 공공기관 인테리어와 리모델링을 진행하는 정감공간.",
@@ -130,6 +149,8 @@ export default function RootLayout({
         ],
 
         knowsAbout: [
+          "천안 인테리어",
+          "아산 인테리어",
           "주거공간 인테리어",
           "아파트 인테리어",
           "빌라 인테리어",
@@ -165,7 +186,7 @@ export default function RootLayout({
 
         logo: {
           "@type": "ImageObject",
-          url: `${SITE_URL}${FAVICON}`,
+          url: `${SITE_URL}${LOGO_IMAGE}`,
         },
 
         founder: {
@@ -203,9 +224,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(
-              structuredData
-            ).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(structuredData).replace(
+              /</g,
+              "\\u003c"
+            ),
           }}
         />
 
@@ -217,10 +239,7 @@ export default function RootLayout({
               aria-label="정감공간 메인페이지"
             >
               <strong>정감공간</strong>
-
-              <span>
-                JEONGGAM SPACE
-              </span>
+              <span>JEONGGAM SPACE</span>
             </Link>
 
             <Menu />
