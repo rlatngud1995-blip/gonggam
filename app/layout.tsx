@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import "./globals.css";
 import Menu from "./menu";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://gonggam.vercel.app";
+const SITE_URL = "https://jeonggaminterior.com";
+
+const BRAND = "정감공간";
 
 const PHONE = "041-415-0410";
 
@@ -16,49 +16,151 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "정감공간 | 천안 인테리어·리모델링",
+    default: "정감공간 | 천안 인테리어·리모델링 전문",
     template: "%s | 정감공간",
   },
 
   description:
-    "천안 인테리어 전문기업 정감공간. 구축 인테리어, 상가 인테리어, 아파트 인테리어, 학교 리모델링. 실내건축공사업 면허 보유, 청년창업기업.",
+    "천안 인테리어 전문기업 정감공간. 아파트 인테리어, 구축 인테리어, 상가 인테리어, 학교 리모델링. 실내건축공사업 면허 보유 청년창업기업으로 천안 전 지역 상담을 진행합니다.",
 
   keywords: [
     "정감공간",
     "천안 인테리어",
     "천안 인테리어 업체",
-    "천안 인테리어 잘하는곳",
+    "천안 인테리어업체",
     "천안 리모델링",
-    "천안 구축 인테리어",
-    "천안 상가 인테리어",
+    "천안 리모델링 업체",
+
     "천안 아파트 인테리어",
+    "천안 아파트 리모델링",
+
+    "천안 구축 인테리어",
+    "천안 구축 아파트 인테리어",
+    "천안 구축 리모델링",
+
+    "천안 상가 인테리어",
+    "천안 상업공간 인테리어",
+    "천안 매장 인테리어",
+
     "천안 학교 리모델링",
+    "천안 학교 인테리어",
+    "천안 교육시설 인테리어",
+
+    "천안 실내건축공사업",
+    "천안 실내건축공사업 면허",
+    "천안 실내건축면허",
+    "천안 인테리어 면허업체",
+
+    "천안 청년창업기업",
+    "천안 청년 창업기업",
+    "천안 청년기업",
   ],
 
+  authors: [
+    {
+      name: "정감공간",
+      url: SITE_URL,
+    },
+  ],
+
+  creator: "정감공간",
+
+  publisher: "정감공간",
+
+  applicationName: "정감공간",
+
+  category: "인테리어 · 리모델링",
+
+  verification: {
+    other: {
+      "naver-site-verification":
+        "0a370484ba94148225f7dd44f2917f346fbc4a74",
+    },
+  },
+
   icons: {
-    icon: FAVICON,
+    icon: [
+      {
+        url: FAVICON,
+        type: "image/png",
+      },
+    ],
+
     shortcut: FAVICON,
+
     apple: FAVICON,
   },
 
   openGraph: {
     type: "website",
+
     locale: "ko_KR",
-    siteName: "정감공간",
-    title: "정감공간 | 천안 인테리어·리모델링",
-    description:
-      "공간에 정감을 더하다. 천안 인테리어·리모델링 전문기업 정감공간.",
+
     url: SITE_URL,
+
+    siteName: "정감공간",
+
+    title: "정감공간 | 천안 인테리어·리모델링 전문",
+
+    description:
+      "천안 아파트·구축·상가 인테리어 및 학교 리모델링 전문 정감공간. 실내건축공사업 면허 보유 청년창업기업.",
+
+    images: [
+      {
+        url: "/IMG_2042.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "천안 인테리어 전문 정감공간",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "정감공간 | 천안 인테리어·리모델링 전문",
+
+    description:
+      "천안 아파트·구축·상가 인테리어 및 학교 리모델링 전문 정감공간.",
+
+    images: ["/IMG_2042.jpeg"],
   },
 
   robots: {
     index: true,
     follow: true,
+
+    nocache: false,
+
     googleBot: {
       index: true,
       follow: true,
+
+      noimageindex: false,
+
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
+
+  formatDetection: {
+    telephone: true,
+    email: false,
+    address: false,
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+
+  initialScale: 1,
+
+  maximumScale: 5,
+
+  themeColor: "#ffffff",
+
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -66,22 +168,117 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const schema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "GeneralContractor",
-    name: "정감공간",
-    url: SITE_URL,
-    telephone: PHONE,
-    description:
-      "천안 구축 인테리어, 상가 인테리어, 아파트 인테리어, 학교 리모델링 전문기업",
-    founder: {
-      "@type": "Person",
-      name: "정경훈",
-    },
-    areaServed: {
-      "@type": "City",
-      name: "천안시",
-    },
+
+    "@graph": [
+      {
+        "@type": "GeneralContractor",
+
+        "@id": `${SITE_URL}/#business`,
+
+        name: BRAND,
+
+        alternateName: "JEONGGAM SPACE",
+
+        url: SITE_URL,
+
+        telephone: PHONE,
+
+        logo: `${SITE_URL}${FAVICON}`,
+
+        image: [
+          `${SITE_URL}/IMG_2040.jpeg`,
+          `${SITE_URL}/IMG_2041.jpeg`,
+          `${SITE_URL}/IMG_2042.jpeg`,
+          `${SITE_URL}/IMG_2043.jpeg`,
+        ],
+
+        description:
+          "천안을 중심으로 아파트 인테리어, 구축 인테리어, 상가 인테리어, 학교 리모델링을 진행하는 실내건축공사업 면허 보유 청년창업기업 정감공간입니다.",
+
+        areaServed: [
+          {
+            "@type": "City",
+            name: "천안시",
+          },
+
+          {
+            "@type": "AdministrativeArea",
+            name: "천안시 서북구",
+          },
+
+          {
+            "@type": "AdministrativeArea",
+            name: "천안시 동남구",
+          },
+        ],
+
+        knowsAbout: [
+          "천안 인테리어",
+          "아파트 인테리어",
+          "구축 인테리어",
+          "상가 인테리어",
+          "학교 리모델링",
+          "실내건축공사",
+          "주거공간 리모델링",
+          "상업공간 인테리어",
+          "교육시설 리모델링",
+        ],
+
+        founder: {
+          "@type": "Person",
+          name: "정경훈",
+        },
+
+        slogan: "공간에 정감을 더하다.",
+      },
+
+      {
+        "@type": "Organization",
+
+        "@id": `${SITE_URL}/#organization`,
+
+        name: BRAND,
+
+        alternateName: "JEONGGAM SPACE",
+
+        url: SITE_URL,
+
+        logo: {
+          "@type": "ImageObject",
+          url: `${SITE_URL}${FAVICON}`,
+        },
+
+        telephone: PHONE,
+
+        founder: {
+          "@type": "Person",
+          name: "정경훈",
+        },
+
+        description:
+          "실내건축공사업 면허를 보유한 천안 청년창업기업 정감공간.",
+      },
+
+      {
+        "@type": "WebSite",
+
+        "@id": `${SITE_URL}/#website`,
+
+        url: SITE_URL,
+
+        name: BRAND,
+
+        alternateName: "JEONGGAM SPACE",
+
+        inLanguage: "ko-KR",
+
+        publisher: {
+          "@id": `${SITE_URL}/#organization`,
+        },
+      },
+    ],
   };
 
   return (
@@ -90,7 +287,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schema).replace(
+            __html: JSON.stringify(structuredData).replace(
               /</g,
               "\\u003c"
             ),
@@ -98,24 +295,29 @@ export default function RootLayout({
         />
 
         {/* HEADER */}
+
         <header className="jg-header">
           <div className="jg-header-inner">
-            <Link href="/" className="jg-logo">
+            <Link
+              href="/"
+              className="jg-logo"
+              aria-label="정감공간 메인페이지"
+            >
               <strong>정감공간</strong>
 
-              <span>
-                JEONGGAM SPACE
-              </span>
+              <span>JEONGGAM SPACE</span>
             </Link>
 
             <Menu />
           </div>
         </header>
 
-        {/* PAGE */}
+        {/* MAIN */}
+
         <main>{children}</main>
 
         {/* FOOTER */}
+
         <footer className="jg-footer">
           <div className="jg-footer-inner">
             <div className="jg-footer-top">
@@ -140,50 +342,93 @@ export default function RootLayout({
                   회사소개
                 </Link>
 
-                <Link href="/#services">
-                  시공 분야
+                <Link href="/services/apartment">
+                  아파트
+                </Link>
+
+                <Link href="/services/old-house">
+                  구축
+                </Link>
+
+                <Link href="/services/commercial">
+                  상가
+                </Link>
+
+                <Link href="/services/school">
+                  학교
                 </Link>
 
                 <Link href="/contact">
-                  견적 문의
+                  견적문의
                 </Link>
               </nav>
             </div>
 
             <div className="jg-footer-info">
               <div>
-                <span>대표</span>
-                <strong>정경훈</strong>
+                <span>COMPANY</span>
+
+                <strong>
+                  정감공간
+                </strong>
               </div>
 
               <div>
-                <span>대표번호</span>
+                <span>CEO</span>
+
+                <strong>
+                  정경훈
+                </strong>
+              </div>
+
+              <div>
+                <span>CONTACT</span>
+
                 <a href="tel:0414150410">
-                  {PHONE}
+                  041-415-0410
                 </a>
               </div>
 
               <div>
-                <span>시공지역</span>
-                <strong>천안 전 지역</strong>
+                <span>AREA</span>
+
+                <strong>
+                  천안 전 지역
+                </strong>
+              </div>
+
+              <div>
+                <span>LICENSE</span>
+
+                <Link href="/company/license">
+                  실내건축공사업 면허 보유
+                </Link>
+              </div>
+
+              <div>
+                <span>COMPANY TYPE</span>
+
+                <Link href="/company/youth">
+                  청년창업기업
+                </Link>
               </div>
             </div>
 
             <div className="jg-footer-bottom">
               <span>
-                실내건축공사업 면허 보유 ·
-                청년창업기업
+                © {new Date().getFullYear()} JEONGGAM SPACE.
+                ALL RIGHTS RESERVED.
               </span>
 
               <span>
-                © {new Date().getFullYear()} JEONGGAM
-                SPACE
+                CHEONAN · INTERIOR · REMODELING
               </span>
             </div>
           </div>
         </footer>
 
-        {/* 모바일 전화 */}
+        {/* MOBILE CALL */}
+
         <a
           href="tel:0414150410"
           className="jg-mobile-call"
