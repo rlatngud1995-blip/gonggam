@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "천안 청년창업기업 인테리어 업체 | 정감공간",
 
   description:
-    "천안·아산 청년창업기업 정감공간. 실내건축공사업 등록과 창업기업 확인을 갖춘 인테리어 전문기업.",
+    "천안·아산 청년창업기업 정감공간. 주거·상업·교육·공공공간 인테리어 전문기업.",
 
   alternates: {
     canonical: `${SITE_URL}/company/youth`,
@@ -19,15 +19,11 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/company/youth`,
     title: "천안 청년창업기업 인테리어 업체 | 정감공간",
     description:
-      "천안·아산 청년창업기업 정감공간. 실내건축공사업 등록과 창업기업 확인을 갖춘 인테리어 전문기업.",
+      "천안·아산 청년창업기업 정감공간. 인테리어와 리모델링을 진행합니다.",
     images: [
       {
         url: "/IMG_2065.jpeg",
         alt: "정감공간 창업기업 확인서",
-      },
-      {
-        url: "/IMG_2060.png",
-        alt: "정감공간 실내건축공사업 건설업등록증",
       },
     ],
   },
@@ -92,8 +88,8 @@ export default function YouthCompanyPage() {
             </h1>
 
             <p>
-              정감공간은 창업기업 확인과 실내건축공사업 등록을
-              바탕으로 천안과 아산을 중심으로 다양한 공간의
+              정감공간은 창업기업 확인을 받은 기업으로
+              천안과 아산을 중심으로 다양한 공간의
               인테리어와 리모델링을 진행합니다.
             </p>
           </div>
@@ -137,7 +133,7 @@ export default function YouthCompanyPage() {
         </div>
       </section>
 
-      {/* CERTIFICATES */}
+      {/* STARTUP CERTIFICATE */}
 
       <section
         className="company-info-section"
@@ -150,87 +146,41 @@ export default function YouthCompanyPage() {
             <span>02</span>
 
             <p>
-              CERTIFICATES
+              CERTIFICATE
             </p>
           </div>
 
-          <div className="youth-certificate-grid">
-            {/* 창업기업 확인서 */}
+          <div className="youth-certificate-wrap">
+            <div className="youth-certificate-image">
+              <img
+                src="/IMG_2065.jpeg"
+                alt="정감공간 창업기업 확인서"
+              />
+            </div>
 
-            <article className="youth-certificate-card">
-              <div className="youth-certificate-image">
-                <img
-                  src="/IMG_2065.jpeg"
-                  alt="정감공간 창업기업 확인서"
-                />
-              </div>
-
-              <div className="youth-certificate-content">
-                <p className="youth-certificate-english">
-                  STARTUP COMPANY
-                </p>
-
-                <h2>
-                  창업기업 확인서
-                </h2>
-
-                <p>
-                  정감공간의 창업기업 확인 정보를
-                  확인할 수 있습니다.
-                </p>
-              </div>
-            </article>
-
-            {/* 실내건축공사업 등록증 */}
-
-            <article className="youth-certificate-card">
-              <div className="youth-certificate-image">
-                <img
-                  src="/IMG_2060.png"
-                  alt="정감공간 실내건축공사업 건설업등록증"
-                />
-              </div>
-
-              <div className="youth-certificate-content">
-                <p className="youth-certificate-english">
-                  INTERIOR CONSTRUCTION LICENSE
-                </p>
-
-                <h2>
-                  실내건축공사업
-                  <br />
-                  건설업등록증
-                </h2>
-
-                <p>
-                  정감공간의 실내건축공사업 등록 및
-                  실내건축공사 주력분야를 확인할 수 있습니다.
-                </p>
-              </div>
-            </article>
-          </div>
-
-          <div className="youth-certificate-link">
-            <Link href="/company/license">
+            <div className="youth-certificate-info">
               <div>
                 <span>
-                  MORE INFORMATION
+                  STARTUP COMPANY
                 </span>
 
-                <strong>
-                  실내건축공사업 상세 안내
-                </strong>
+                <h2>
+                  창업기업
+                  <br />
+                  확인서
+                </h2>
               </div>
 
-              <span>
-                ↗
-              </span>
-            </Link>
+              <p>
+                정감공간의 창업기업 확인 정보를
+                확인하실 수 있습니다.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* COMPANY INFORMATION */}
+      {/* COMPANY INFO */}
 
       <section
         className="company-info-section"
@@ -249,9 +199,7 @@ export default function YouthCompanyPage() {
 
           <div className="company-info-list">
             <div>
-              <span>
-                상호
-              </span>
+              <span>상호</span>
 
               <strong>
                 정감공간
@@ -259,9 +207,7 @@ export default function YouthCompanyPage() {
             </div>
 
             <div>
-              <span>
-                대표
-              </span>
+              <span>대표</span>
 
               <strong>
                 정경훈
@@ -269,9 +215,7 @@ export default function YouthCompanyPage() {
             </div>
 
             <div>
-              <span>
-                시공지역
-              </span>
+              <span>시공지역</span>
 
               <strong>
                 천안 / 아산 전 지역
@@ -279,9 +223,7 @@ export default function YouthCompanyPage() {
             </div>
 
             <div>
-              <span>
-                전문분야
-              </span>
+              <span>전문분야</span>
 
               <strong>
                 아파트 · 빌라 · 상가 · 학교 · 복지시설 · 공공기관
@@ -289,19 +231,7 @@ export default function YouthCompanyPage() {
             </div>
 
             <div>
-              <span>
-                면허 / 등록
-              </span>
-
-              <strong>
-                실내건축공사업
-              </strong>
-            </div>
-
-            <div>
-              <span>
-                기업 확인
-              </span>
+              <span>기업 확인</span>
 
               <strong>
                 창업기업 확인
@@ -309,46 +239,12 @@ export default function YouthCompanyPage() {
             </div>
 
             <div>
-              <span>
-                대표번호
-              </span>
+              <span>대표번호</span>
 
               <a href="tel:0414150410">
                 041-415-0410
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* RELATED */}
-
-      <section className="company-cert-section">
-        <div className="company-container">
-          <div className="company-label">
-            <span>04</span>
-
-            <p>
-              RELATED INFORMATION
-            </p>
-          </div>
-
-          <div className="youth-related">
-            <Link href="/company/license">
-              <div>
-                <span>
-                  LICENSE
-                </span>
-
-                <strong>
-                  실내건축공사업 면허 확인
-                </strong>
-              </div>
-
-              <span>
-                ↗
-              </span>
-            </Link>
           </div>
         </div>
       </section>
@@ -391,199 +287,101 @@ export default function YouthCompanyPage() {
         </div>
       </section>
 
-      {/* 이 페이지 전용 스타일 */}
+      {/* PAGE STYLE */}
 
       <style>{`
-        .youth-certificate-grid {
+        .youth-certificate-wrap {
           margin-top: 55px;
-
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-
-          gap: 28px;
-        }
-
-        .youth-certificate-card {
-          min-width: 0;
+          max-width: 920px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         .youth-certificate-image {
           width: 100%;
-
-          padding: 14px;
+          padding: 18px;
 
           background: #fff;
 
-          border: 1px solid #d8d8d8;
+          border: 1px solid #d6d6d6;
         }
 
         .youth-certificate-image img {
+          display: block;
+
           width: 100%;
           height: auto;
-
-          display: block;
 
           object-fit: contain;
         }
 
-        .youth-certificate-content {
-          margin-top: 20px;
-          padding-top: 18px;
+        .youth-certificate-info {
+          margin-top: 25px;
+          padding-top: 22px;
 
           border-top: 1px solid #111;
+
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+
+          gap: 40px;
+
+          align-items: end;
         }
 
-        .youth-certificate-english {
-          margin: 0 0 8px;
+        .youth-certificate-info span {
+          display: block;
+
+          margin-bottom: 10px;
 
           color: #888;
 
           font-size: 9px;
 
-          letter-spacing: 0.14em;
+          letter-spacing: 0.15em;
         }
 
-        .youth-certificate-content h2 {
+        .youth-certificate-info h2 {
           margin: 0;
 
-          color: #000;
-
-          font-size: 24px;
-          line-height: 1.25;
+          font-size: 28px;
+          line-height: 1.2;
 
           font-weight: 650;
 
           letter-spacing: -0.04em;
         }
 
-        .youth-certificate-content > p:last-child {
-          margin: 15px 0 0;
+        .youth-certificate-info > p {
+          margin: 0;
 
           color: #666;
 
-          font-size: 13px;
-          line-height: 1.8;
-        }
-
-        .youth-certificate-link {
-          margin-top: 40px;
-
-          border-top: 1px solid #ccc;
-        }
-
-        .youth-certificate-link > a {
-          min-height: 85px;
-
-          padding: 0 5px;
-
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-
-          gap: 20px;
-
-          color: #000;
-
-          text-decoration: none;
-        }
-
-        .youth-certificate-link > a > div {
-          display: flex;
-          flex-direction: column;
-
-          gap: 7px;
-        }
-
-        .youth-certificate-link > a > div > span {
-          color: #999;
-
-          font-size: 9px;
-
-          letter-spacing: 0.14em;
-        }
-
-        .youth-certificate-link strong {
-          font-size: 18px;
-
-          font-weight: 600;
-        }
-
-        .youth-related {
-          margin-top: 55px;
-
-          border-top: 1px solid #111;
-        }
-
-        .youth-related > a {
-          min-height: 90px;
-
-          padding: 0 5px;
-
-          border-bottom: 1px solid #bbb;
-
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-
-          gap: 20px;
-
-          color: #000;
-
-          text-decoration: none;
-        }
-
-        .youth-related > a > div {
-          display: flex;
-          flex-direction: column;
-
-          gap: 7px;
-        }
-
-        .youth-related > a > div > span {
-          color: #999;
-
-          font-size: 9px;
-
-          letter-spacing: 0.14em;
-        }
-
-        .youth-related strong {
-          font-size: 18px;
-
-          font-weight: 600;
+          font-size: 14px;
+          line-height: 1.9;
         }
 
         @media (max-width: 800px) {
-          .youth-certificate-grid {
+          .youth-certificate-wrap {
             margin-top: 45px;
-
-            grid-template-columns: 1fr;
-
-            gap: 55px;
           }
 
           .youth-certificate-image {
             padding: 8px;
           }
 
-          .youth-certificate-content h2 {
-            font-size: 21px;
+          .youth-certificate-info {
+            grid-template-columns: 1fr;
+
+            gap: 22px;
           }
 
-          .youth-certificate-link {
-            margin-top: 35px;
+          .youth-certificate-info h2 {
+            font-size: 23px;
           }
 
-          .youth-certificate-link > a {
-            min-height: 75px;
-          }
-
-          .youth-related {
-            margin-top: 45px;
-          }
-
-          .youth-related > a {
-            min-height: 80px;
+          .youth-certificate-info > p {
+            font-size: 13px;
           }
         }
       `}</style>
