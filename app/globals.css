@@ -1,12 +1,18 @@
 /* =========================================================
    JEONGGAM SPACE
-   GLOBAL CSS - COMPLETE
-   BLACK & WHITE
+   GLOBAL CSS COMPLETE
+   BLACK / WHITE
 ========================================================= */
 
-/* RESET */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
-* {
+/* =========================================================
+   RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -14,23 +20,37 @@ html {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   padding: 0;
+
   overflow-x: hidden;
+
   background: #ffffff;
   color: #000000;
+
   font-family:
+    "Pretendard",
     -apple-system,
     BlinkMacSystemFont,
-    "Pretendard",
-    "Noto Sans KR",
     "Apple SD Gothic Neo",
-    Arial,
+    "Noto Sans KR",
+    "Malgun Gothic",
     sans-serif;
+
+  font-weight: 400;
+  letter-spacing: -0.02em;
   word-break: keep-all;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  display: block;
 }
 
 a {
@@ -43,8 +63,28 @@ img {
 
 button,
 input,
-textarea {
+textarea,
+select {
   font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  word-break: keep-all;
+}
+
+::selection {
+  background: #000;
+  color: #fff;
 }
 
 /* =========================================================
@@ -55,13 +95,16 @@ textarea {
   position: absolute;
   top: 0;
   left: 0;
+
   z-index: 900;
+
   width: 100%;
 }
 
 .jg-header-inner {
   width: min(calc(100% - 44px), 1380px);
   height: 88px;
+
   margin: 0 auto;
 
   display: flex;
@@ -75,6 +118,7 @@ textarea {
 
   display: flex;
   flex-direction: column;
+
   gap: 4px;
 
   color: #000;
@@ -84,15 +128,18 @@ textarea {
 .jg-logo strong {
   font-size: 19px;
   line-height: 1;
+
   font-weight: 700;
   letter-spacing: -0.04em;
 }
 
 .jg-logo span {
+  color: #777;
+
   font-size: 7px;
   line-height: 1;
+
   letter-spacing: 0.2em;
-  color: #666;
 }
 
 /* =========================================================
@@ -106,14 +153,17 @@ textarea {
   width: 46px;
   height: 46px;
 
+  margin: 0;
   padding: 0;
+
   border: 0;
+
   background: transparent;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   gap: 6px;
 
@@ -152,12 +202,15 @@ textarea {
 .jg-menu-overlay {
   position: fixed;
   inset: 0;
+
   z-index: 1000;
 
   width: 100%;
   height: 100%;
 
+  margin: 0;
   padding: 0;
+
   border: 0;
 
   background: rgba(0, 0, 0, 0.55);
@@ -211,6 +264,7 @@ textarea {
 
 .jg-menu-panel-inner {
   min-height: 100%;
+
   padding: 105px 38px 35px;
 
   display: flex;
@@ -218,13 +272,15 @@ textarea {
 }
 
 .jg-menu-heading {
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #bbb;
+
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   gap: 20px;
-
-  padding-bottom: 20px;
-  border-bottom: 1px solid #bbb;
 
   color: #777;
 
@@ -243,6 +299,7 @@ textarea {
   display: grid;
   grid-template-columns: 35px 1fr auto;
   align-items: center;
+
   gap: 12px;
 
   border-bottom: 1px solid #ddd;
@@ -252,19 +309,22 @@ textarea {
 }
 
 .jg-menu-number {
-  font-size: 9px;
   color: #999;
+
+  font-size: 9px;
 }
 
 .jg-menu-title {
   display: flex;
   flex-direction: column;
+
   gap: 3px;
 }
 
 .jg-menu-title strong {
   font-size: 19px;
   font-weight: 600;
+
   letter-spacing: -0.03em;
 }
 
@@ -272,6 +332,7 @@ textarea {
   color: #999;
 
   font-size: 7px;
+
   letter-spacing: 0.15em;
 }
 
@@ -285,6 +346,7 @@ textarea {
 
   display: flex;
   flex-direction: column;
+
   gap: 9px;
 }
 
@@ -297,6 +359,7 @@ textarea {
 
 .jg-menu-contact a {
   color: #000;
+
   text-decoration: none;
 
   font-size: 21px;
@@ -312,15 +375,21 @@ textarea {
 }
 
 /* =========================================================
-   MAIN HOME
+   COMMON CONTAINERS
 ========================================================= */
 
-.bw-container {
+.bw-container,
+.service-detail-container,
+.region-container,
+.local-service-container,
+.company-container {
   width: min(calc(100% - 44px), 1380px);
   margin: 0 auto;
 }
 
-/* HERO */
+/* =========================================================
+   HOME HERO
+========================================================= */
 
 .bw-hero {
   min-height: 100svh;
@@ -332,13 +401,14 @@ textarea {
 }
 
 .bw-hero-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-
   padding-bottom: 17px;
 
   border-bottom: 1px solid #111;
+
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
 
   font-size: 9px;
   letter-spacing: 0.17em;
@@ -356,13 +426,14 @@ textarea {
   margin: 0 0 18px;
 
   color: #666;
+
   font-size: 12px;
 }
 
 .bw-hero h1 {
-  margin: 0;
-
   max-width: 850px;
+
+  margin: 0;
 
   font-size: clamp(42px, 6vw, 74px);
   line-height: 1.08;
@@ -384,9 +455,9 @@ textarea {
   margin-top: 36px;
 
   display: flex;
-  gap: 10px;
-
   flex-wrap: wrap;
+
+  gap: 10px;
 }
 
 .bw-button {
@@ -433,6 +504,7 @@ textarea {
   border-top: 1px solid #111;
 
   display: flex;
+
   gap: 28px;
 
   color: #555;
@@ -440,7 +512,9 @@ textarea {
   font-size: 11px;
 }
 
-/* ABOUT */
+/* =========================================================
+   HOME ABOUT
+========================================================= */
 
 .bw-about {
   padding: 115px 0;
@@ -451,6 +525,7 @@ textarea {
 
 .bw-section-label {
   display: flex;
+
   gap: 16px;
 
   color: #777;
@@ -495,7 +570,9 @@ textarea {
   margin: 0 0 16px;
 }
 
-/* SERVICES */
+/* =========================================================
+   HOME SERVICES
+========================================================= */
 
 .bw-services {
   padding: 115px 0;
@@ -544,6 +621,7 @@ textarea {
   display: block;
 
   color: #000;
+
   text-decoration: none;
 }
 
@@ -561,8 +639,7 @@ textarea {
 .bw-service-image img {
   object-fit: cover;
 
-  transition:
-    transform 0.6s ease;
+  transition: transform 0.6s ease;
 }
 
 .bw-service-card:hover .bw-service-image img {
@@ -571,7 +648,6 @@ textarea {
 
 .bw-service-number {
   position: absolute;
-
   top: 14px;
   left: 14px;
 
@@ -610,8 +686,8 @@ textarea {
   margin: 0;
 
   font-size: 24px;
-  font-weight: 650;
 
+  font-weight: 650;
   letter-spacing: -0.035em;
 }
 
@@ -630,7 +706,9 @@ textarea {
   line-height: 1.75;
 }
 
-/* TRUST */
+/* =========================================================
+   HOME TRUST
+========================================================= */
 
 .bw-trust {
   padding: 115px 0;
@@ -673,6 +751,7 @@ textarea {
 
 .bw-trust-row span {
   color: #888;
+
   font-size: 10px;
 }
 
@@ -681,7 +760,9 @@ textarea {
   font-weight: 550;
 }
 
-/* BOTTOM CONTACT */
+/* =========================================================
+   HOME BOTTOM CONTACT
+========================================================= */
 
 .bw-bottom-contact {
   padding: 90px 0;
@@ -720,13 +801,8 @@ textarea {
 }
 
 /* =========================================================
-   SERVICE DETAIL
+   SERVICE DETAIL HERO
 ========================================================= */
-
-.service-detail-container {
-  width: min(calc(100% - 44px), 1380px);
-  margin: 0 auto;
-}
 
 .service-detail-hero {
   padding: 125px 0 70px;
@@ -736,13 +812,14 @@ textarea {
 }
 
 .service-detail-kicker {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-
   padding-bottom: 17px;
 
   border-bottom: 1px solid #111;
+
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
 
   font-size: 9px;
   letter-spacing: 0.16em;
@@ -824,6 +901,10 @@ textarea {
   border: 1px solid #000;
 }
 
+/* =========================================================
+   SERVICE MAIN IMAGE
+========================================================= */
+
 .service-detail-image-section {
   padding-bottom: 100px;
 
@@ -844,6 +925,10 @@ textarea {
   object-fit: cover;
 }
 
+/* =========================================================
+   SERVICE INTRO
+========================================================= */
+
 .service-detail-intro {
   padding: 100px 0 120px;
 
@@ -855,6 +940,8 @@ textarea {
 
 .service-detail-label {
   display: flex;
+  align-items: center;
+
   gap: 16px;
 
   color: #888;
@@ -863,8 +950,16 @@ textarea {
   letter-spacing: 0.16em;
 }
 
+.service-detail-label span {
+  display: inline-block;
+}
+
 .service-detail-label p {
   margin: 0;
+}
+
+.service-detail-label-light {
+  color: #777;
 }
 
 .service-detail-intro-grid {
@@ -906,18 +1001,18 @@ textarea {
   line-height: 1.95;
 }
 
-.service-detail-features {
+/* =========================================================
+   SERVICE WORK SCOPE
+========================================================= */
+
+.service-scope-section {
   padding: 110px 0;
 
-  background: #000;
-  color: #fff;
+  background: #f5f5f5;
+  color: #000;
 }
 
-.service-detail-label-light {
-  color: #777;
-}
-
-.service-detail-feature-grid {
+.service-scope-layout {
   margin-top: 55px;
 
   display: grid;
@@ -926,20 +1021,130 @@ textarea {
   gap: 90px;
 }
 
-.service-detail-feature-heading h2 {
+.service-scope-layout h2 {
   margin: 0;
 
   font-size: clamp(34px, 4vw, 54px);
   line-height: 1.1;
 
-  font-weight: 550;
+  font-weight: 650;
   letter-spacing: -0.04em;
 }
 
-.service-detail-feature-heading p {
-  max-width: 400px;
+.service-scope-layout > div:first-child > p {
+  max-width: 380px;
 
   margin: 22px 0 0;
+
+  color: #666;
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.service-scope-list {
+  border-top: 1px solid #111;
+}
+
+.service-scope-list > div {
+  min-height: 68px;
+
+  display: grid;
+  grid-template-columns: 55px 1fr;
+  align-items: center;
+
+  column-gap: 10px;
+
+  border-bottom: 1px solid #bbb;
+}
+
+.service-scope-list span {
+  display: block;
+
+  color: #888;
+
+  font-size: 10px;
+  font-weight: 400;
+
+  letter-spacing: 0.04em;
+}
+
+.service-scope-list strong {
+  display: block;
+
+  font-size: 16px;
+  line-height: 1.5;
+
+  font-weight: 550;
+  letter-spacing: -0.025em;
+}
+
+/* =========================================================
+   SERVICE PROCESS
+========================================================= */
+
+.service-process-section {
+  padding: 110px 0;
+
+  background: #000;
+  color: #fff;
+}
+
+.service-process-heading {
+  margin-top: 55px;
+}
+
+.service-process-heading h2 {
+  margin: 0;
+
+  font-size: clamp(35px, 4.5vw, 58px);
+  line-height: 1.08;
+
+  font-weight: 550;
+  letter-spacing: -0.045em;
+}
+
+.service-process-grid {
+  margin-top: 65px;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  border-top: 1px solid #444;
+  border-left: 1px solid #444;
+}
+
+.service-process-card {
+  min-height: 270px;
+
+  padding: 25px;
+
+  border-right: 1px solid #444;
+  border-bottom: 1px solid #444;
+}
+
+.service-process-card > span {
+  display: block;
+
+  margin-bottom: 70px;
+
+  color: #777;
+
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.service-process-card h3 {
+  margin: 0;
+
+  font-size: 21px;
+
+  font-weight: 550;
+  letter-spacing: -0.03em;
+}
+
+.service-process-card p {
+  margin: 18px 0 0;
 
   color: #999;
 
@@ -947,29 +1152,233 @@ textarea {
   line-height: 1.8;
 }
 
-.service-detail-feature-list {
-  border-top: 1px solid #555;
+/* =========================================================
+   SERVICE REGION LINKS
+========================================================= */
+
+.service-region-section {
+  padding: 110px 0;
+
+  background: #fff;
+  color: #000;
 }
 
-.service-detail-feature-row {
-  padding: 23px 0;
+.service-region-heading {
+  margin-top: 50px;
+}
+
+.service-region-heading h2 {
+  margin: 0;
+
+  font-size: clamp(35px, 5vw, 58px);
+  line-height: 1.08;
+
+  font-weight: 650;
+  letter-spacing: -0.045em;
+}
+
+.service-region-heading p {
+  max-width: 500px;
+
+  margin: 20px 0 0;
+
+  color: #666;
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.service-region-links {
+  margin-top: 55px;
 
   display: grid;
-  grid-template-columns: 50px 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
-  border-bottom: 1px solid #444;
+  border-top: 1px solid #111;
+  border-left: 1px solid #ccc;
 }
 
-.service-detail-feature-row span {
-  color: #777;
+.service-region-links a {
+  min-height: 68px;
+
+  padding: 0 18px;
+
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+
+  color: #000;
+
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.service-region-links a:hover {
+  background: #000;
+  color: #fff;
+}
+
+.service-region-links a span:first-child {
+  display: block;
+
+  font-weight: 500;
+}
+
+.service-region-links a span:last-child {
+  flex: 0 0 auto;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   SERVICE FAQ
+========================================================= */
+
+.service-faq-section {
+  padding: 110px 0;
+
+  background: #f5f5f5;
+  color: #000;
+}
+
+.service-faq-heading {
+  margin-top: 50px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 50px;
+}
+
+.service-faq-heading h2 {
+  margin: 0;
+
+  font-size: clamp(35px, 5vw, 56px);
+
+  font-weight: 650;
+  letter-spacing: -0.04em;
+}
+
+.service-faq-heading p {
+  max-width: 400px;
+
+  margin: 0;
+
+  color: #666;
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.service-faq-list {
+  margin-top: 55px;
+
+  border-top: 1px solid #111;
+}
+
+.service-faq-item {
+  margin: 0;
+
+  border-bottom: 1px solid #bbb;
+}
+
+.service-faq-item summary {
+  position: relative;
+
+  min-height: 78px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  cursor: pointer;
+
+  display: grid;
+  grid-template-columns: 55px 1fr 30px;
+  align-items: center;
+
+  column-gap: 14px;
+}
+
+.service-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.service-faq-item summary::marker {
+  display: none;
+  content: "";
+}
+
+.service-faq-item summary > span {
+  display: block;
+
+  color: #888;
 
   font-size: 10px;
+  font-weight: 400;
+
+  letter-spacing: 0.06em;
 }
 
-.service-detail-feature-row strong {
+.service-faq-item summary strong {
+  display: block;
+
   font-size: 16px;
-  font-weight: 450;
+  line-height: 1.55;
+
+  font-weight: 550;
+  letter-spacing: -0.025em;
 }
+
+.service-faq-item summary i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  font-style: normal;
+
+  font-size: 22px;
+  line-height: 1;
+
+  font-weight: 300;
+
+  transition: transform 0.25s ease;
+}
+
+.service-faq-item[open] summary i {
+  transform: rotate(45deg);
+}
+
+.service-faq-item > p {
+  max-width: 760px;
+
+  margin: -4px 40px 28px 69px;
+
+  color: #666;
+
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* =========================================================
+   SERVICE OTHER
+========================================================= */
 
 .service-detail-other {
   padding: 110px 0;
@@ -989,7 +1398,6 @@ textarea {
 
 .service-detail-other-grid {
   display: grid;
-
   grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 20px;
@@ -997,6 +1405,7 @@ textarea {
 
 .service-detail-other-card {
   color: #000;
+
   text-decoration: none;
 }
 
@@ -1012,6 +1421,12 @@ textarea {
 
 .service-detail-other-image img {
   object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.service-detail-other-card:hover img {
+  transform: scale(1.02);
 }
 
 .service-detail-other-title {
@@ -1034,13 +1449,20 @@ textarea {
   color: #999;
 
   font-size: 8px;
+
   letter-spacing: 0.15em;
 }
 
 .service-detail-other-title strong {
   font-size: 19px;
+
   font-weight: 650;
+  letter-spacing: -0.03em;
 }
+
+/* =========================================================
+   SERVICE CONTACT
+========================================================= */
 
 .service-detail-contact {
   padding: 95px 0;
@@ -1070,7 +1492,6 @@ textarea {
 
 .service-detail-contact-actions {
   display: grid;
-
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -1082,6 +1503,7 @@ textarea {
   border: 1px solid #444;
 
   color: #fff;
+
   text-decoration: none;
 
   display: flex;
@@ -1093,11 +1515,6 @@ textarea {
    REGION PAGE
 ========================================================= */
 
-.region-container {
-  width: min(calc(100% - 44px), 1380px);
-  margin: 0 auto;
-}
-
 .region-hero {
   padding: 125px 0 90px;
 
@@ -1106,13 +1523,14 @@ textarea {
 }
 
 .region-kicker {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-
   padding-bottom: 17px;
 
   border-bottom: 1px solid #111;
+
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
 
   font-size: 9px;
   letter-spacing: 0.17em;
@@ -1155,9 +1573,9 @@ textarea {
   margin-top: 38px;
 
   display: flex;
-  gap: 10px;
-
   flex-wrap: wrap;
+
+  gap: 10px;
 }
 
 .region-button {
@@ -1203,6 +1621,7 @@ textarea {
 
 .region-label {
   display: flex;
+
   gap: 16px;
 
   color: #777;
@@ -1265,7 +1684,6 @@ textarea {
 
 .region-service-grid {
   display: grid;
-
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 50px 25px;
@@ -1273,6 +1691,7 @@ textarea {
 
 .region-service-card {
   color: #000;
+
   text-decoration: none;
 }
 
@@ -1289,11 +1708,11 @@ textarea {
 .region-service-image img {
   object-fit: cover;
 
-  transition: transform 0.6s ease;
+  transition: transform 0.5s ease;
 }
 
 .region-service-card:hover img {
-  transform: scale(1.025);
+  transform: scale(1.02);
 }
 
 .region-service-title {
@@ -1322,6 +1741,7 @@ textarea {
   margin: 0;
 
   font-size: 23px;
+
   font-weight: 650;
 }
 
@@ -1336,7 +1756,6 @@ textarea {
   margin-top: 55px;
 
   display: grid;
-
   grid-template-columns: 0.8fr 1.2fr;
 
   gap: 90px;
@@ -1357,11 +1776,11 @@ textarea {
 }
 
 .region-trust-list > div {
-  padding: 23px 0;
+  min-height: 68px;
 
   display: grid;
-
   grid-template-columns: 50px 1fr;
+  align-items: center;
 
   border-bottom: 1px solid #bbb;
 }
@@ -1374,6 +1793,7 @@ textarea {
 
 .region-trust-list strong {
   font-size: 16px;
+
   font-weight: 550;
 }
 
@@ -1405,7 +1825,6 @@ textarea {
 
 .region-contact-buttons {
   display: grid;
-
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -1417,21 +1836,17 @@ textarea {
   border: 1px solid #444;
 
   color: #fff;
+
   text-decoration: none;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 /* =========================================================
-   LOCAL REGION + SERVICE PAGE
+   LOCAL REGION + SERVICE
 ========================================================= */
-
-.local-service-container {
-  width: min(calc(100% - 44px), 1380px);
-  margin: 0 auto;
-}
 
 .local-service-hero {
   padding: 125px 0 75px;
@@ -1441,13 +1856,14 @@ textarea {
 }
 
 .local-service-kicker {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-
   padding-bottom: 17px;
 
   border-bottom: 1px solid #111;
+
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
 
   font-size: 9px;
   letter-spacing: 0.16em;
@@ -1461,6 +1877,7 @@ textarea {
   margin: 0 0 15px;
 
   color: #777;
+
   font-size: 12px;
 }
 
@@ -1487,9 +1904,9 @@ textarea {
   margin-top: 35px;
 
   display: flex;
-  gap: 10px;
-
   flex-wrap: wrap;
+
+  gap: 10px;
 }
 
 .local-service-button {
@@ -1557,6 +1974,8 @@ textarea {
 
 .local-service-label {
   display: flex;
+  align-items: center;
+
   gap: 16px;
 
   color: #888;
@@ -1656,10 +2075,11 @@ textarea {
 }
 
 .local-service-point-list > div {
-  padding: 23px 0;
+  min-height: 68px;
 
   display: grid;
   grid-template-columns: 50px 1fr;
+  align-items: center;
 
   border-bottom: 1px solid #444;
 }
@@ -1672,6 +2092,7 @@ textarea {
 
 .local-service-point-list strong {
   font-size: 16px;
+
   font-weight: 450;
 }
 
@@ -1693,7 +2114,6 @@ textarea {
 
 .local-service-other-grid {
   display: grid;
-
   grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 20px;
@@ -1701,6 +2121,7 @@ textarea {
 
 .local-service-other-card {
   color: #000;
+
   text-decoration: none;
 }
 
@@ -1721,7 +2142,7 @@ textarea {
 }
 
 .local-service-other-card:hover img {
-  transform: scale(1.025);
+  transform: scale(1.02);
 }
 
 .local-service-other-title {
@@ -1748,6 +2169,7 @@ textarea {
 
 .local-service-other-title strong {
   font-size: 19px;
+
   font-weight: 650;
 }
 
@@ -1827,7 +2249,6 @@ textarea {
 
 .local-service-contact-actions {
   display: grid;
-
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -1839,6 +2260,7 @@ textarea {
   border: 1px solid #444;
 
   color: #fff;
+
   text-decoration: none;
 
   display: flex;
@@ -1849,11 +2271,6 @@ textarea {
 /* =========================================================
    COMPANY / LICENSE / YOUTH
 ========================================================= */
-
-.company-container {
-  width: min(calc(100% - 44px), 1380px);
-  margin: 0 auto;
-}
 
 .company-hero,
 .company-sub-hero {
@@ -1898,9 +2315,8 @@ textarea {
   font-size: clamp(42px, 6vw, 78px);
   line-height: 1.03;
 
-  letter-spacing: -0.055em;
-
   font-weight: 650;
+  letter-spacing: -0.055em;
 }
 
 .company-description,
@@ -1924,6 +2340,7 @@ textarea {
 
 .company-label {
   display: flex;
+
   gap: 16px;
 
   color: #888;
@@ -1986,10 +2403,11 @@ textarea {
 }
 
 .company-info-list > div {
-  padding: 23px 0;
+  min-height: 70px;
 
   display: grid;
   grid-template-columns: minmax(120px, 0.35fr) 1fr;
+  align-items: center;
 
   border-bottom: 1px solid #ccc;
 }
@@ -2038,6 +2456,7 @@ textarea {
   border-bottom: 1px solid #aaa;
 
   color: #000;
+
   text-decoration: none;
 }
 
@@ -2055,6 +2474,7 @@ textarea {
   color: #999;
 
   font-size: 8px;
+
   letter-spacing: 0.15em;
 }
 
@@ -2062,6 +2482,7 @@ textarea {
   margin: 18px 0 0;
 
   font-size: 28px;
+
   letter-spacing: -0.04em;
 }
 
@@ -2104,7 +2525,6 @@ textarea {
 
 .company-contact-actions {
   display: grid;
-
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -2116,6 +2536,7 @@ textarea {
   border: 1px solid #444;
 
   color: #fff;
+
   text-decoration: none;
 
   display: flex;
@@ -2124,7 +2545,7 @@ textarea {
 }
 
 /* =========================================================
-   SCROLL
+   SCROLL REVEAL
 ========================================================= */
 
 .reveal {
@@ -2139,6 +2560,7 @@ textarea {
 
 .reveal.active {
   opacity: 1;
+
   transform: translateY(0);
 }
 
@@ -2248,7 +2670,7 @@ textarea {
 }
 
 /* =========================================================
-   MOBILE CALL
+   MOBILE FIXED CALL
 ========================================================= */
 
 .jg-mobile-call {
@@ -2273,6 +2695,8 @@ textarea {
   .jg-footer-inner {
     width: calc(100% - 36px);
   }
+
+  /* HEADER */
 
   .jg-header-inner {
     height: 76px;
@@ -2308,7 +2732,6 @@ textarea {
 
   .bw-hero-actions {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
   }
 
@@ -2407,7 +2830,7 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  /* SERVICE DETAIL */
+  /* SERVICE */
 
   .service-detail-hero {
     padding: 100px 0 55px;
@@ -2427,7 +2850,6 @@ textarea {
 
   .service-detail-actions {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
   }
 
@@ -2450,20 +2872,211 @@ textarea {
     height: 260px;
   }
 
+  .service-detail-image-section {
+    padding-bottom: 70px;
+  }
+
+  .service-detail-intro {
+    padding: 75px 0;
+  }
+
   .service-detail-intro-grid {
+    margin-top: 45px;
+
     grid-template-columns: 1fr;
 
     gap: 30px;
   }
 
   .service-detail-intro-grid h2 {
-    font-size: 32px;
+    font-size: 31px;
   }
 
-  .service-detail-feature-grid {
+  /* WORK SCOPE */
+
+  .service-scope-section {
+    padding: 75px 0;
+  }
+
+  .service-scope-layout {
+    margin-top: 45px;
+
     grid-template-columns: 1fr;
 
-    gap: 35px;
+    gap: 38px;
+  }
+
+  .service-scope-layout h2 {
+    font-size: 31px;
+  }
+
+  .service-scope-layout > div:first-child > p {
+    font-size: 13px;
+  }
+
+  .service-scope-list > div {
+    min-height: 64px;
+
+    grid-template-columns: 42px 1fr;
+
+    column-gap: 10px;
+  }
+
+  .service-scope-list span {
+    font-size: 9px;
+  }
+
+  .service-scope-list strong {
+    font-size: 14px;
+    line-height: 1.5;
+
+    font-weight: 550;
+  }
+
+  /* PROCESS */
+
+  .service-process-section {
+    padding: 75px 0;
+  }
+
+  .service-process-heading {
+    margin-top: 45px;
+  }
+
+  .service-process-heading h2 {
+    font-size: 31px;
+  }
+
+  .service-process-grid {
+    margin-top: 45px;
+
+    grid-template-columns: 1fr;
+  }
+
+  .service-process-card {
+    min-height: auto;
+
+    padding: 24px 20px;
+  }
+
+  .service-process-card > span {
+    margin-bottom: 34px;
+  }
+
+  .service-process-card h3 {
+    font-size: 19px;
+  }
+
+  .service-process-card p {
+    font-size: 13px;
+  }
+
+  /* REGION LINKS */
+
+  .service-region-section {
+    padding: 75px 0;
+  }
+
+  .service-region-heading {
+    margin-top: 45px;
+  }
+
+  .service-region-heading h2 {
+    font-size: 31px;
+  }
+
+  .service-region-links {
+    margin-top: 40px;
+
+    grid-template-columns: 1fr;
+
+    border-left: 0;
+  }
+
+  .service-region-links a {
+    min-height: 62px;
+
+    padding: 0 4px;
+
+    border-right: 0;
+    border-bottom: 1px solid #ccc;
+
+    font-size: 14px;
+  }
+
+  .service-region-links a:first-child {
+    border-top: 1px solid #111;
+  }
+
+  /* FAQ */
+
+  .service-faq-section {
+    padding: 75px 0;
+  }
+
+  .service-faq-heading {
+    margin-top: 45px;
+
+    display: block;
+  }
+
+  .service-faq-heading h2 {
+    font-size: 31px;
+  }
+
+  .service-faq-heading p {
+    margin-top: 18px;
+
+    font-size: 13px;
+  }
+
+  .service-faq-list {
+    margin-top: 40px;
+  }
+
+  .service-faq-item summary {
+    min-height: 74px;
+
+    grid-template-columns: 34px 1fr 26px;
+
+    column-gap: 10px;
+  }
+
+  .service-faq-item summary > span {
+    font-size: 9px;
+  }
+
+  .service-faq-item summary strong {
+    font-size: 14px;
+    line-height: 1.5;
+
+    font-weight: 550;
+  }
+
+  .service-faq-item summary i {
+    width: 26px;
+    height: 26px;
+
+    font-size: 20px;
+  }
+
+  .service-faq-item > p {
+    margin: 0 25px 24px 44px;
+
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* OTHER SERVICES */
+
+  .service-detail-other {
+    padding: 75px 0;
+  }
+
+  .service-detail-other > .service-detail-container > h2 {
+    margin: 40px 0;
+
+    font-size: 31px;
   }
 
   .service-detail-other-grid {
@@ -2474,6 +3087,14 @@ textarea {
 
   .service-detail-other-image {
     height: 235px;
+  }
+
+  .service-detail-contact {
+    padding: 70px 0;
+  }
+
+  .service-detail-contact h2 {
+    font-size: 31px;
   }
 
   .service-detail-contact-actions {
@@ -2494,9 +3115,12 @@ textarea {
     font-size: 39px;
   }
 
+  .region-hero-description {
+    font-size: 13px;
+  }
+
   .region-actions {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
   }
 
@@ -2522,12 +3146,18 @@ textarea {
   }
 
   .region-intro-grid {
+    margin-top: 45px;
+
     grid-template-columns: 1fr;
 
     gap: 30px;
   }
 
   .region-intro-grid h2 {
+    font-size: 31px;
+  }
+
+  .region-services > .region-container > h2 {
     font-size: 31px;
   }
 
@@ -2551,7 +3181,7 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  /* LOCAL REGION SERVICE */
+  /* LOCAL REGION */
 
   .local-service-hero {
     padding: 100px 0 55px;
@@ -2565,9 +3195,12 @@ textarea {
     font-size: 37px;
   }
 
+  .local-service-description {
+    font-size: 13px;
+  }
+
   .local-service-actions {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
   }
 
@@ -2586,11 +3219,21 @@ textarea {
     font-size: 10px;
   }
 
+  .local-service-photo {
+    padding-bottom: 70px;
+  }
+
   .local-service-photo-wrap {
     height: 245px;
   }
 
+  .local-service-about {
+    padding: 70px 0;
+  }
+
   .local-service-about-grid {
+    margin-top: 45px;
+
     grid-template-columns: 1fr;
 
     gap: 30px;
@@ -2600,10 +3243,28 @@ textarea {
     font-size: 31px;
   }
 
+  .local-service-points {
+    padding: 75px 0;
+  }
+
   .local-service-point-grid {
+    margin-top: 45px;
+
     grid-template-columns: 1fr;
 
     gap: 35px;
+  }
+
+  .local-service-point-grid > div:first-child h2 {
+    font-size: 30px;
+  }
+
+  .local-service-other {
+    padding: 75px 0;
+  }
+
+  .local-service-other > .local-service-container > h2 {
+    font-size: 31px;
   }
 
   .local-service-other-grid {
@@ -2616,10 +3277,26 @@ textarea {
     height: 235px;
   }
 
+  .local-service-area {
+    padding: 75px 0;
+  }
+
   .local-service-area-grid {
     grid-template-columns: 1fr;
 
     gap: 30px;
+  }
+
+  .local-service-area-grid h2 {
+    font-size: 30px;
+  }
+
+  .local-service-contact {
+    padding: 70px 0;
+  }
+
+  .local-service-contact h2 {
+    font-size: 31px;
   }
 
   .local-service-contact-actions {
@@ -2650,6 +3327,8 @@ textarea {
   }
 
   .company-intro-grid {
+    margin-top: 45px;
+
     grid-template-columns: 1fr;
 
     gap: 30px;
@@ -2679,6 +3358,14 @@ textarea {
 
   .company-cert-grid h2 {
     font-size: 24px;
+  }
+
+  .company-contact-section {
+    padding: 70px 0;
+  }
+
+  .company-contact-section h2 {
+    font-size: 31px;
   }
 
   .company-contact-actions {
@@ -2717,9 +3404,10 @@ textarea {
     gap: 7px;
   }
 
+  /* FIXED CALL */
+
   .jg-mobile-call {
     position: fixed;
-
     bottom: 0;
     left: 0;
 
@@ -2729,8 +3417,8 @@ textarea {
     height: 64px;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     background: #000;
     color: #fff;
@@ -2741,8 +3429,14 @@ textarea {
 
     font-size: 14px;
     font-weight: 600;
+
+    letter-spacing: -0.02em;
   }
 }
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
 @media (max-width: 480px) {
   .bw-hero h1 {
@@ -2771,10 +3465,22 @@ textarea {
   .local-service-photo-wrap {
     height: 230px;
   }
+
+  .service-scope-list strong {
+    font-size: 14px;
+  }
+
+  .service-region-links a {
+    font-size: 13px;
+  }
+
+  .service-faq-item summary strong {
+    font-size: 14px;
+  }
 }
 
 /* =========================================================
-   ACCESSIBILITY
+   REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2784,7 +3490,9 @@ textarea {
 
   .reveal {
     opacity: 1 !important;
+
     transform: none !important;
+
     transition: none !important;
   }
 
@@ -2793,7 +3501,8 @@ textarea {
   .jg-menu-button span,
   .bw-service-image img,
   .region-service-image img,
-  .local-service-other-image img {
+  .local-service-other-image img,
+  .service-detail-other-image img {
     transition: none !important;
   }
 }
