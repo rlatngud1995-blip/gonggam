@@ -1,84 +1,93 @@
-
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  regions,
-  getRegion,
-} from "../../../../lib/regions";
+import { getRegion, regions } from "@/lib/regions";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://jeonggamspace.vercel.app";
+  "https://gonggam.vercel.app";
 
 const PHONE = "041-415-0410";
 
-const services = {
+type Service = {
+  slug: string;
+  name: string;
+  english: string;
+  image: string;
+  description: string;
+  intro: string;
+  points: string[];
+};
+
+const services: Record<string, Service> = {
   "old-house": {
+    slug: "old-house",
     name: "구축 인테리어",
-    english: "RENOVATION",
-    image: "/old-house.jpg",
+    english: "OLD HOUSE RENOVATION",
+    image: "/IMG_2041.jpeg",
     description:
-      "노후 주거공간의 상태와 구조, 생활 동선을 고려한 구축 인테리어",
+      "오래된 공간의 구조와 생활 동선을 다시 정리해 편안하고 가치 있는 공간으로 완성합니다.",
     intro:
-      "구축 인테리어는 기존 마감재와 설비의 상태, 공간 활용, 생활 동선을 함께 살펴보는 것이 중요합니다.",
-    checks: [
-      ["현장 상태", "기존 마감재와 설비, 공사 범위 확인"],
-      ["공간 계획", "생활 동선과 수납, 공간 활용 검토"],
-      ["시공 계획", "마감 방향과 예산, 공사 일정 협의"],
+      "구축 인테리어는 단순히 마감재를 교체하는 것보다 기존 공간의 구조와 불편한 동선을 먼저 확인하는 과정이 중요합니다.",
+    points: [
+      "기존 구조와 공간 상태 확인",
+      "생활 동선을 고려한 공간 재구성",
+      "주방·거실·방 등 공간별 마감 계획",
+      "설계부터 시공까지 꼼꼼한 현장 관리",
     ],
   },
+
   commercial: {
+    slug: "commercial",
     name: "상가 인테리어",
-    english: "COMMERCIAL",
-    image: "/commercial.jpg",
+    english: "COMMERCIAL INTERIOR",
+    image: "/IMG_2040.jpeg",
     description:
-      "매장과 사무실 등 상업공간의 기능과 운영 동선을 고려한 인테리어",
+      "업종과 브랜드의 특성을 고려해 실용성과 디자인을 갖춘 상업공간을 만듭니다.",
     intro:
-      "상가 인테리어는 업종의 특성, 고객 동선, 운영 방식과 브랜드 이미지를 함께 고려해야 합니다.",
-    checks: [
-      ["업종과 용도", "매장 및 사무실의 사용 목적 확인"],
-      ["운영 동선", "고객 이동과 직원 업무 동선 검토"],
-      ["공사 조건", "건물 관리규정과 공사 일정 협의"],
+      "상가 인테리어는 고객이 이용하는 동선과 직원의 업무 동선, 업종의 특성을 함께 고려해야 합니다.",
+    points: [
+      "업종과 브랜드 특성에 맞는 공간 구성",
+      "고객·직원 동선을 고려한 설계",
+      "상업공간에 적합한 마감재 계획",
+      "오픈 일정에 맞춘 공정 관리",
     ],
   },
+
   apartment: {
+    slug: "apartment",
     name: "아파트 인테리어",
-    english: "RESIDENTIAL",
-    image: "/apartment.jpg",
+    english: "APARTMENT INTERIOR",
+    image: "/IMG_2042.jpeg",
     description:
-      "가족의 생활방식과 취향을 고려한 아파트 전체 및 부분 리모델링",
+      "생활 동선과 공간 활용을 고려해 편안하고 완성도 높은 주거공간을 제안합니다.",
     intro:
-      "아파트 인테리어는 가족 구성, 수납, 생활 동선과 기존 공간의 상태에 따라 공사 방향이 달라집니다.",
-    checks: [
-      ["공사 범위", "전체 또는 부분 리모델링 범위 확인"],
-      ["생활 방식", "가족 구성과 공간별 사용 목적 검토"],
-      ["현장 조건", "관리사무소 규정과 공사 일정 확인"],
+      "아파트 인테리어는 가족 구성과 생활방식에 따라 공간 구성과 필요한 수납, 조명, 주방 동선이 달라집니다.",
+    points: [
+      "가족 구성과 생활방식에 맞춘 공간 계획",
+      "주방·거실·수납 동선 개선",
+      "공간에 맞는 조명과 마감 구성",
+      "실용성과 디자인을 고려한 시공",
     ],
   },
+
   school: {
+    slug: "school",
     name: "학교 리모델링",
-    english: "EDUCATIONAL",
-    image: "/school.jpg",
+    english: "SCHOOL REMODELING",
+    image: "/IMG_2043.jpeg",
     description:
-      "교실과 교육시설의 기능, 안전성, 유지관리 편의성을 고려한 리모델링",
+      "교육환경과 사용 목적을 고려해 안전하고 쾌적한 공간으로 개선합니다.",
     intro:
-      "학교 리모델링은 학생과 교직원의 이용 환경, 시설의 안전성, 공사 가능 일정과 유지관리 조건을 함께 검토해야 합니다.",
-    checks: [
-      ["공간 목적", "교실 및 교육시설의 사용 목적 확인"],
-      ["안전 기준", "관련 시설 기준과 마감 조건 검토"],
-      ["공사 일정", "학사 일정과 현장 운영 조건 협의"],
+      "학교와 교육시설은 많은 사람이 사용하는 공간인 만큼 안전성과 내구성, 사용 목적을 함께 고려해야 합니다.",
+    points: [
+      "교육공간 목적에 맞는 공간 설계",
+      "안전성과 내구성을 고려한 마감",
+      "교실·공용공간·업무공간 개선",
+      "사용 일정에 맞춘 공정 관리",
     ],
   },
-} as const;
-
-type ServiceSlug = keyof typeof services;
-
-type Props = {
-  params: Promise<{
-    slug: string;
-    service: string;
-  }>;
 };
 
 export function generateStaticParams() {
@@ -90,301 +99,329 @@ export function generateStaticParams() {
   );
 }
 
-export const dynamicParams = false;
-
 export async function generateMetadata({
   params,
-}: Props): Promise<Metadata> {
-  const { slug, service } = await params;
-  const region = getRegion(slug);
+}: {
+  params: Promise<{
+    slug: string;
+    service: string;
+  }>;
+}): Promise<Metadata> {
+  const { slug, service: serviceSlug } = await params;
 
-  if (!region || !(service in services)) {
-    return {
-      title: "페이지를 찾을 수 없습니다",
-      robots: {
-        index: false,
-        follow: false,
-      },
-    };
+  const region = getRegion(slug);
+  const service = services[serviceSlug];
+
+  if (!region || !service) {
+    return {};
   }
 
-  const item = services[service as ServiceSlug];
-
-  const title = `${region.name} ${item.name}`;
+  const title = `${region.name} ${service.name} | 정감공간`;
 
   const description =
-    `천안 ${region.district} ${region.name} ` +
-    `${item.name} 상담. ${item.description}. ` +
-    `정감공간은 실내건축공사업 면허 보유 ` +
-    `청년창업기업입니다. 상담 ${PHONE}.`;
+    `천안 ${region.name} ${service.name} 정감공간. ` +
+    `${service.description} 실내건축공사업 면허 보유. 상담 ${PHONE}.`;
 
   return {
     title,
     description,
+
     alternates: {
-      canonical:
-        `${SITE_URL}/regions/${slug}/${service}`,
+      canonical: `${SITE_URL}/regions/${region.slug}/${service.slug}`,
     },
+
     openGraph: {
-      title: `${title} | 정감공간`,
-      description,
-      url:
-        `${SITE_URL}/regions/${slug}/${service}`,
-      siteName: "정감공간",
-      locale: "ko_KR",
       type: "website",
-    },
-    robots: {
-      index: false,
-      follow: true,
+      title,
+      description,
+      url: `${SITE_URL}/regions/${region.slug}/${service.slug}`,
+      images: [
+        {
+          url: service.image,
+          alt: `${region.name} ${service.name} 정감공간`,
+        },
+      ],
     },
   };
 }
 
 export default async function RegionServicePage({
   params,
-}: Props) {
-  const { slug, service } = await params;
-  const region = getRegion(slug);
+}: {
+  params: Promise<{
+    slug: string;
+    service: string;
+  }>;
+}) {
+  const { slug, service: serviceSlug } = await params;
 
-  if (!region || !(service in services)) {
+  const region = getRegion(slug);
+  const service = services[serviceSlug];
+
+  if (!region || !service) {
     notFound();
   }
 
-  const item = services[service as ServiceSlug];
+  const otherServices = Object.values(services).filter(
+    (item) => item.slug !== service.slug
+  );
 
-  const otherServices = Object.entries(services)
-    .filter(([key]) => key !== service);
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `${region.name} ${service.name}`,
+    description: `${region.name} 지역 ${service.description}`,
+    provider: {
+      "@type": "GeneralContractor",
+      name: "정감공간",
+      telephone: PHONE,
+    },
+    areaServed: {
+      "@type": "Place",
+      name: `천안시 ${region.district} ${region.name}`,
+    },
+    url: `${SITE_URL}/regions/${region.slug}/${service.slug}`,
+  };
 
   return (
     <>
-      <section
-        style={{
-          background: "#111",
-          color: "#fff",
-          padding: "110px 7% 100px",
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
         }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "auto",
-          }}
-        >
-          <span className="section-label">
-            JEONGGAM SPACE / {item.english}
-          </span>
+      />
 
-          <h1
-            style={{
-              fontSize: "clamp(36px, 6vw, 70px)",
-              lineHeight: 1.3,
-              letterSpacing: "-0.06em",
-              marginBottom: 24,
-            }}
-          >
-            {region.name}
-            <br />
-            {item.name}
-          </h1>
+      <section className="local-service-hero">
+        <div className="local-service-container">
+          <div className="local-service-kicker">
+            <span>JEONGGAM SPACE</span>
 
-          <p
-            style={{
-              color: "#ccc",
-              lineHeight: 2,
-              fontSize: 16,
-            }}
-          >
-            천안 {region.district} {region.name}
-            <br />
-            정감공간 인테리어 상담
-          </p>
-
-          <a
-            href="tel:0414150410"
-            className="hero-button"
-            style={{ marginTop: 25 }}
-          >
-            시공 상담하기 ↗
-          </a>
-        </div>
-      </section>
-
-      <section className="home-about section-padding">
-        <div className="about-heading">
-          <span className="section-label">
-            SERVICE INFORMATION
-          </span>
-
-          <h2>
-            {region.name}
-            <br />
-            {item.name}
-          </h2>
-        </div>
-
-        <div className="about-content">
-          <p className="about-lead">
-            공간의 목적과 현장 조건을
-            함께 고려합니다.
-          </p>
-
-          <p>
-            정감공간은 천안 {region.district}{" "}
-            {region.name} 지역의 {item.name}
-            상담을 진행합니다.
-          </p>
-
-          <p>{item.intro}</p>
-
-          <p>
-            상담 시 공간의 현재 상태와
-            희망하는 공사 범위, 예산 및
-            공사 가능 일정을 확인하고
-            적합한 방향을 안내합니다.
-          </p>
-        </div>
-      </section>
-
-      <section className="home-services section-padding">
-        <div className="section-heading">
-          <div>
-            <span className="section-label">
-              PROJECT CHECKLIST
+            <span>
+              {region.name.toUpperCase()} · {service.english}
             </span>
+          </div>
 
-            <h2>
-              시공 전
+          <div className="local-service-title">
+            <p>
+              천안 {region.district} {region.name}
+            </p>
+
+            <h1>
+              {region.name}
               <br />
-              확인할 사항
-            </h2>
+              {service.name}
+            </h1>
+
+            <p className="local-service-description">
+              {region.name}의 공간 특성과 사용 목적을 고려해
+              <br />
+              정감공간이 {service.name}을 진행합니다.
+            </p>
+
+            <div className="local-service-actions">
+              <a
+                href="tel:0414150410"
+                className="local-service-button local-service-button-black"
+              >
+                <span>전화 상담</span>
+                <strong>{PHONE}</strong>
+              </a>
+
+              <Link
+                href="/contact"
+                className="local-service-button local-service-button-white"
+              >
+                <span>견적 문의</span>
+                <strong>↗</strong>
+              </Link>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="trust-grid">
-          {item.checks.map((check, index) => (
-            <div
-              className="trust-item"
-              key={check[0]}
-            >
-              <span className="trust-number">
-                0{index + 1}
-              </span>
-              <h3>{check[0]}</h3>
-              <p>{check[1]}</p>
-            </div>
-          ))}
+      <section className="local-service-photo">
+        <div className="local-service-container">
+          <div className="local-service-photo-wrap">
+            <Image
+              src={service.image}
+              alt={`${region.name} ${service.name} 정감공간 시공 사례`}
+              fill
+              priority
+              sizes="100vw"
+            />
+          </div>
         </div>
       </section>
 
-      <section className="seo-intro section-padding">
-        <div className="seo-inner">
-          <span className="section-label">
-            INTERIOR CONSULTING
-          </span>
+      <section className="local-service-about">
+        <div className="local-service-container">
+          <div className="local-service-label">
+            <span>01</span>
+            <p>LOCAL SERVICE</p>
+          </div>
+
+          <div className="local-service-about-grid">
+            <div>
+              <p className="local-service-small">
+                CHEONAN · {region.district}
+              </p>
+
+              <h2>
+                {region.name}
+                <br />
+                {service.name}
+              </h2>
+            </div>
+
+            <div className="local-service-copy">
+              <p>
+                {region.description}
+              </p>
+
+              <p>
+                {service.intro}
+              </p>
+
+              <p>
+                현장마다 구조와 상태가 다르기 때문에 상담 후
+                필요한 범위와 시공 방향을 안내합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="local-service-points">
+        <div className="local-service-container">
+          <div className="local-service-label local-service-label-light">
+            <span>02</span>
+            <p>WORK POINT</p>
+          </div>
+
+          <div className="local-service-point-grid">
+            <div>
+              <h2>
+                공간에 필요한
+                <br />
+                기본부터 꼼꼼하게.
+              </h2>
+
+              <p>
+                공간의 디자인뿐 아니라 실제 사용성과
+                시공 완성도를 함께 고려합니다.
+              </p>
+            </div>
+
+            <div className="local-service-point-list">
+              {service.points.map((point, index) => (
+                <div key={point}>
+                  <span>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <strong>{point}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="local-service-other">
+        <div className="local-service-container">
+          <div className="local-service-label">
+            <span>03</span>
+            <p>OTHER SERVICES</p>
+          </div>
 
           <h2>
-            {region.name} {item.name}
-            <br />
-            정감공간과 상담하세요.
-          </h2>
-
-          <p>{item.description}</p>
-
-          <p>
-            실내건축공사업 면허를 보유한
-            청년창업기업 정감공간은
-            고객의 요청과 현장 조건을
-            바탕으로 시공 방향을 상담합니다.
-          </p>
-
-          <Link
-            href={`/services/${service}`}
-            className="more-link"
-          >
-            {item.name} 자세히 보기 ↗
-          </Link>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "auto",
-          }}
-        >
-          <span className="section-label">
-            MORE SERVICES
-          </span>
-
-          <h2
-            style={{
-              fontSize: "clamp(28px, 4vw, 46px)",
-              letterSpacing: "-0.05em",
-              marginBottom: 35,
-            }}
-          >
             {region.name} 다른 시공 분야
           </h2>
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 12,
-            }}
-          >
-            {otherServices.map(([key, value]) => (
+          <div className="local-service-other-grid">
+            {otherServices.map((item) => (
               <Link
-                key={key}
-                href={`/regions/${slug}/${key}`}
-                style={{
-                  padding: "14px 20px",
-                  border: "1px solid #ddd",
-                  fontSize: 14,
-                }}
+                key={item.slug}
+                href={`/regions/${region.slug}/${item.slug}`}
+                className="local-service-other-card"
               >
-                {value.name} ↗
+                <div className="local-service-other-image">
+                  <Image
+                    src={item.image}
+                    alt={`${region.name} ${item.name} 정감공간`}
+                    fill
+                    sizes="(max-width: 800px) 100vw, 33vw"
+                  />
+                </div>
+
+                <div className="local-service-other-title">
+                  <div>
+                    <span>{region.name}</span>
+                    <strong>{item.name}</strong>
+                  </div>
+
+                  <span>↗</span>
+                </div>
               </Link>
             ))}
           </div>
-
-          <Link
-            href={`/regions/${slug}`}
-            className="more-link"
-          >
-            {region.name} 전체 시공 분야 보기 ↗
-          </Link>
         </div>
       </section>
 
-      <section className="home-contact">
-        <span className="section-label">
-          PROJECT INQUIRY
-        </span>
+      <section className="local-service-area">
+        <div className="local-service-container">
+          <div className="local-service-label">
+            <span>04</span>
+            <p>AREA</p>
+          </div>
 
-        <h2>
-          {region.name} {item.name}
-          <br />
-          견적 상담
-        </h2>
+          <div className="local-service-area-grid">
+            <h2>
+              천안 전 지역
+              <br />
+              상담 가능합니다.
+            </h2>
 
-        <p>정감공간 · 대표 정경훈</p>
+            <div>
+              <p>
+                정감공간은 {region.name}뿐 아니라
+                천안 서북구·동남구 전 지역의
+                인테리어와 리모델링 상담을 진행합니다.
+              </p>
 
-        <a
-          href="tel:0414150410"
-          className="contact-phone"
-        >
-          {PHONE} ↗
-        </a>
+              <Link href={`/regions/${region.slug}`}>
+                {region.name} 인테리어 전체 보기 ↗
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <Link
-          href="/contact"
-          className="contact-more"
-        >
-          견적문의 안내
-        </Link>
+      <section className="local-service-contact">
+        <div className="local-service-container">
+          <p>
+            {region.name} {service.name} 상담
+          </p>
+
+          <h2>
+            공간에 대한 이야기를
+            <br />
+            시작해보세요.
+          </h2>
+
+          <div className="local-service-contact-actions">
+            <a href="tel:0414150410">
+              <span>전화 상담</span>
+              <strong>{PHONE}</strong>
+            </a>
+
+            <Link href="/contact">
+              <span>견적 문의</span>
+              <strong>↗</strong>
+            </Link>
+          </div>
+        </div>
       </section>
     </>
   );
