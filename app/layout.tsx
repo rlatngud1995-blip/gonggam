@@ -4,9 +4,7 @@ import "./globals.css";
 import Menu from "./menu";
 
 const SITE_URL = "https://jeonggaminterior.com";
-
 const BRAND = "정감공간";
-
 const PHONE = "041-415-0410";
 
 const FAVICON =
@@ -16,70 +14,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "정감공간 | 천안 인테리어·리모델링 전문",
+    default: "정감공간 | 천안·아산 인테리어·리모델링",
     template: "%s | 정감공간",
   },
 
-  /*
-   * 네이버 권장 길이를 고려해
-   * 핵심 내용만 80자 이내로 정리
-   */
   description:
-    "천안 인테리어 전문 정감공간. 아파트·구축·상가 인테리어와 학교 리모델링을 진행합니다.",
+    "천안·아산 인테리어 전문 정감공간. 주거·상업·교육·공공공간 인테리어와 리모델링을 진행합니다.",
 
-  keywords: [
-    "정감공간",
-
-    "천안 인테리어",
-    "천안 인테리어 업체",
-    "천안 인테리어업체",
-    "천안 리모델링",
-    "천안 리모델링 업체",
-
-    "천안 아파트 인테리어",
-    "천안 아파트 리모델링",
-
-    "천안 구축 인테리어",
-    "천안 구축 아파트 인테리어",
-    "천안 구축 리모델링",
-
-    "천안 상가 인테리어",
-    "천안 상업공간 인테리어",
-    "천안 매장 인테리어",
-
-    "천안 학교 리모델링",
-    "천안 학교 인테리어",
-    "천안 교육시설 인테리어",
-
-    "천안 실내건축공사업",
-    "천안 실내건축공사업 면허",
-    "천안 실내건축면허",
-    "천안 인테리어 면허업체",
-
-    "천안 청년창업기업",
-    "천안 청년 창업기업",
-    "천안 청년기업",
-  ],
-
-  authors: [
-    {
-      name: BRAND,
-      url: SITE_URL,
-    },
-  ],
-
-  creator: BRAND,
-
-  publisher: BRAND,
-
-  applicationName: BRAND,
-
-  category: "인테리어 · 리모델링",
-
-  /*
-   * 네이버 서치어드바이저
-   * 사이트 소유확인
-   */
   verification: {
     other: {
       "naver-site-verification":
@@ -96,67 +37,45 @@ export const metadata: Metadata = {
     ],
 
     shortcut: FAVICON,
-
     apple: FAVICON,
   },
 
   openGraph: {
     type: "website",
-
     locale: "ko_KR",
 
     url: SITE_URL,
 
     siteName: BRAND,
 
-    title: "정감공간 | 천안 인테리어·리모델링 전문",
+    title:
+      "정감공간 | 천안·아산 인테리어·리모델링",
 
     description:
-      "천안 아파트·구축·상가 인테리어와 학교 리모델링 전문 정감공간.",
+      "천안·아산 주거·상업·교육·공공공간 인테리어 전문 정감공간.",
 
     images: [
       {
         url: "/IMG_2042.jpeg",
         width: 1200,
         height: 630,
-        alt: "천안 인테리어 전문 정감공간",
+        alt: "정감공간 인테리어",
       },
     ],
-  },
-
-  twitter: {
-    card: "summary_large_image",
-
-    title: "정감공간 | 천안 인테리어·리모델링 전문",
-
-    description:
-      "천안 아파트·구축·상가 인테리어와 학교 리모델링 전문 정감공간.",
-
-    images: ["/IMG_2042.jpeg"],
   },
 
   robots: {
     index: true,
     follow: true,
 
-    nocache: false,
-
     googleBot: {
       index: true,
       follow: true,
-
-      noimageindex: false,
 
       "max-image-preview": "large",
       "max-snippet": -1,
       "max-video-preview": -1,
     },
-  },
-
-  formatDetection: {
-    telephone: true,
-    email: false,
-    address: false,
   },
 };
 
@@ -196,43 +115,31 @@ export default function RootLayout({
 
         logo: `${SITE_URL}${FAVICON}`,
 
-        image: [
-          `${SITE_URL}/IMG_2040.jpeg`,
-          `${SITE_URL}/IMG_2041.jpeg`,
-          `${SITE_URL}/IMG_2042.jpeg`,
-          `${SITE_URL}/IMG_2043.jpeg`,
-        ],
-
         description:
-          "천안 아파트·구축·상가 인테리어와 학교 리모델링을 진행하는 정감공간.",
+          "천안과 아산을 중심으로 주거공간, 상업공간, 교육기관, 공공기관 인테리어와 리모델링을 진행하는 정감공간.",
 
         areaServed: [
           {
             "@type": "City",
             name: "천안시",
           },
-
           {
-            "@type": "AdministrativeArea",
-            name: "천안시 서북구",
-          },
-
-          {
-            "@type": "AdministrativeArea",
-            name: "천안시 동남구",
+            "@type": "City",
+            name: "아산시",
           },
         ],
 
         knowsAbout: [
-          "천안 인테리어",
-          "천안 아파트 인테리어",
-          "천안 구축 인테리어",
-          "천안 상가 인테리어",
-          "천안 학교 리모델링",
-          "실내건축공사",
-          "주거공간 리모델링",
+          "주거공간 인테리어",
+          "아파트 인테리어",
+          "빌라 인테리어",
+          "상가 인테리어",
           "상업공간 인테리어",
-          "교육시설 리모델링",
+          "학교 리모델링",
+          "교육시설 인테리어",
+          "복지시설 인테리어",
+          "공공기관 인테리어",
+          "실내건축공사",
         ],
 
         founder: {
@@ -254,12 +161,12 @@ export default function RootLayout({
 
         url: SITE_URL,
 
+        telephone: PHONE,
+
         logo: {
           "@type": "ImageObject",
           url: `${SITE_URL}${FAVICON}`,
         },
-
-        telephone: PHONE,
 
         founder: {
           "@type": "Person",
@@ -267,7 +174,7 @@ export default function RootLayout({
         },
 
         description:
-          "천안 실내건축공사업 면허 보유 청년창업기업 정감공간.",
+          "실내건축공사업 면허를 보유한 천안·아산 인테리어 전문기업 정감공간.",
       },
 
       {
@@ -296,14 +203,11 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData).replace(
-              /</g,
-              "\\u003c"
-            ),
+            __html: JSON.stringify(
+              structuredData
+            ).replace(/</g, "\\u003c"),
           }}
         />
-
-        {/* HEADER */}
 
         <header className="jg-header">
           <div className="jg-header-inner">
@@ -314,18 +218,16 @@ export default function RootLayout({
             >
               <strong>정감공간</strong>
 
-              <span>JEONGGAM SPACE</span>
+              <span>
+                JEONGGAM SPACE
+              </span>
             </Link>
 
             <Menu />
           </div>
         </header>
 
-        {/* MAIN */}
-
         <main>{children}</main>
-
-        {/* FOOTER */}
 
         <footer className="jg-footer">
           <div className="jg-footer-inner">
@@ -352,19 +254,15 @@ export default function RootLayout({
                 </Link>
 
                 <Link href="/services/apartment">
-                  아파트
-                </Link>
-
-                <Link href="/services/old-house">
-                  구축
+                  주거공간
                 </Link>
 
                 <Link href="/services/commercial">
-                  상가
+                  상업공간
                 </Link>
 
                 <Link href="/services/school">
-                  학교
+                  교육기관
                 </Link>
 
                 <Link href="/contact">
@@ -376,18 +274,12 @@ export default function RootLayout({
             <div className="jg-footer-info">
               <div>
                 <span>COMPANY</span>
-
-                <strong>
-                  정감공간
-                </strong>
+                <strong>정감공간</strong>
               </div>
 
               <div>
                 <span>CEO</span>
-
-                <strong>
-                  정경훈
-                </strong>
+                <strong>정경훈</strong>
               </div>
 
               <div>
@@ -402,7 +294,7 @@ export default function RootLayout({
                 <span>AREA</span>
 
                 <strong>
-                  천안 전 지역
+                  천안 / 아산 전 지역
                 </strong>
               </div>
 
@@ -430,13 +322,11 @@ export default function RootLayout({
               </span>
 
               <span>
-                CHEONAN · INTERIOR · REMODELING
+                CHEONAN · ASAN · INTERIOR
               </span>
             </div>
           </div>
         </footer>
-
-        {/* MOBILE CALL */}
 
         <a
           href="tel:0414150410"
