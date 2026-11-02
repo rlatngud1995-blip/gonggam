@@ -1,96 +1,109 @@
-
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { regions, getRegion } from "../../../lib/regions";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://jeonggamspace.vercel.app";
+import { regions } from "@/lib/regions";
 
+const SITE_URL = "https://jeonggaminterior.com";
 const PHONE = "041-415-0410";
+const TEL = "tel:0414150410";
+
+type Params = {
+  slug: string;
+};
+
+type Props = {
+  params: Promise<Params>;
+};
 
 const services = [
+  {
+    slug: "apartment",
+    name: "아파트 인테리어",
+    description:
+      "신축·기존 아파트의 공간 구성과 생활 동선을 고려한 인테리어 시공",
+  },
   {
     slug: "old-house",
     name: "구축 인테리어",
     description:
-      "노후 주거공간의 상태와 생활 동선을 고려한 리모델링",
+      "오래된 주거공간의 구조와 상태를 확인해 진행하는 리모델링 및 인테리어",
   },
   {
     slug: "commercial",
     name: "상가 인테리어",
     description:
-      "매장과 상업공간의 목적을 고려한 인테리어",
-  },
-  {
-    slug: "apartment",
-    name: "아파트 인테리어",
-    description:
-      "생활방식에 맞춘 아파트 전체 및 부분 리모델링",
+      "매장과 업무공간의 목적과 동선을 고려한 상업공간 인테리어",
   },
   {
     slug: "school",
     name: "학교 리모델링",
     description:
-      "교육시설의 기능과 사용 환경을 고려한 공간 개선",
+      "학교와 교육시설의 사용 목적과 안전성을 고려한 공간 리모델링",
   },
 ];
 
-type Props = {
-  params: Promise<{ slug: string }>;
-};
+function getRegion(slug: string) {
+  return regions.find((region) => region.slug === slug);
+}
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return regions.map((region) => ({
     slug: region.slug,
   }));
 }
 
-export const dynamicParams = false;
-
 export async function generateMetadata({
   params,
 }: Props): Promise<Metadata> {
   const { slug } = await params;
+
   const region = getRegion(slug);
 
   if (!region) {
-    return {
-      title: "페이지를 찾을 수 없습니다",
-      robots: { index: false, follow: false },
-    };
+    return {};
   }
 
-  const title = `${region.name} 인테리어`;
-  const description =
-    `천안 ${region.district} ${region.name} 인테리어 상담. ` +
-    `정감공간은 구축 인테리어, 상가 인테리어, ` +
-    `아파트 인테리어, 학교 리모델링을 안내합니다. ` +
-    `실내건축공사업 면허 보유 청년창업기업. ` +
-    `대표 정경훈, ${PHONE}.`;
+  const canonical = `${SITE_URL}/regions/${region.slug}`;
 
   return {
-    title,
-    description,
+    title: `${region.name} 인테리어 업체 | 정감공간`,
+
+    description: `${region.name} 인테리어 업체 정감공간. 아파트·구축·상가·학교 인테리어 및 리모델링 상담. 천안·아산 지역 시공.`,
+
     keywords: [
       `${region.name} 인테리어`,
       `${region.name} 인테리어 업체`,
       `${region.name} 아파트 인테리어`,
-      `${region.name} 상가 인테리어`,
       `${region.name} 구축 인테리어`,
-      `천안 ${region.name} 리모델링`,
+      `${region.name} 상가 인테리어`,
+      `${region.name} 리모델링`,
+      "천안 인테리어",
+      "천안 인테리어 업체",
+      "천안 실내건축공사업",
+      "정감공간",
     ],
+
     alternates: {
-      canonical: `${SITE_URL}/regions/${slug}`,
+      canonical,
     },
+
     openGraph: {
-      title: `${title} | 정감공간`,
-      description,
-      url: `${SITE_URL}/regions/${slug}`,
-      siteName: "정감공간",
-      locale: "ko_KR",
       type: "website",
+      url: canonical,
+      siteName: "정감공간",
+      title: `${region.name} 인테리어 업체 | 정감공간`,
+      description: `${region.name} 아파트·구축·상가·학교 인테리어 및 리모델링 상담.`,
+      locale: "ko_KR",
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
     },
   };
 }
@@ -99,273 +112,311 @@ export default async function RegionPage({
   params,
 }: Props) {
   const { slug } = await params;
+
   const region = getRegion(slug);
 
-  if (!region) notFound();
+  if (!region) {
+    notFound();
+  }
 
-  const jsonLd = {
+  const canonical = `${SITE_URL}/regions/${region.slug}`;
+
+  const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: `${region.name} 인테리어 상담`,
-    serviceType: "인테리어 및 리모델링",
-    areaServed: {
-      "@type": "Place",
-      name: `충청남도 천안시 ${region.district} ${region.name}`,
-    },
-    provider: {
-      "@type": "GeneralContractor",
-      name: "정감공간",
-      telephone: PHONE,
-      url: SITE_URL,
-    },
+    "@type": "GeneralContractor",
+
+    name: "정감공간",
+
+    alternateName: "JEONGGAM SPACE",
+
+    url: SITE_URL,
+
+    telephone: PHONE,
+
+    description: `${region.name}을 포함한 천안·아산 지역에서 주거·상업·교육공간 인테리어와 리모델링을 진행하는 정감공간입니다.`,
+
+    areaServed: [
+      {
+        "@type": "AdministrativeArea",
+        name: region.name,
+      },
+      {
+        "@type": "City",
+        name: "천안시",
+      },
+      {
+        "@type": "City",
+        name: "아산시",
+      },
+    ],
+
+    knowsAbout: [
+      "아파트 인테리어",
+      "구축 인테리어",
+      "상가 인테리어",
+      "학교 리모델링",
+      "실내건축공사",
+      "실내건축공사업",
+    ],
   };
 
-  const nearbyRegions = regions
-    .filter(
-      (item) =>
-        item.district === region.district &&
-        item.slug !== region.slug
-    )
-    .slice(0, 12);
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "홈",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: region.name,
+        item: canonical,
+      },
+    ],
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(
+          __html: JSON.stringify(localBusinessSchema).replace(
             /</g,
             "\\u003c"
           ),
         }}
       />
 
-      <section
-        style={{
-          background: "#111",
-          color: "#fff",
-          padding: "110px 7% 100px",
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema).replace(
+            /</g,
+            "\\u003c"
+          ),
         }}
-      >
-        <div style={{ maxWidth: 1200, margin: "auto" }}>
-          <span className="section-label">
-            CHEONAN INTERIOR / {region.district}
-          </span>
+      />
 
-          <h1
-            style={{
-              fontSize: "clamp(38px, 6vw, 72px)",
-              letterSpacing: "-0.06em",
-              lineHeight: 1.3,
-              marginBottom: 24,
-            }}
-          >
-            {region.name}
-            <br />
-            인테리어
-          </h1>
+      {/* HERO */}
 
-          <p
-            style={{
-              color: "#ccc",
-              lineHeight: 2,
-              fontSize: 16,
-            }}
-          >
-            천안 {region.district} {region.name}
-            <br />
-            공간의 가치를 디자인하는 정감공간
-          </p>
+      <section className="region-hero">
+        <div className="region-container">
+          <div className="region-hero-top">
+            <span>JEONGGAM SPACE</span>
 
-          <a
-            href="tel:0414150410"
-            className="hero-button"
-            style={{ marginTop: 25 }}
-          >
-            인테리어 상담하기 ↗
-          </a>
-        </div>
-      </section>
+            <span>CHEONAN INTERIOR</span>
+          </div>
 
-      <section className="home-about section-padding">
-        <div className="about-heading">
-          <span className="section-label">
-            JEONGGAM SPACE
-          </span>
+          <div className="region-hero-content">
+            <p>{region.name} 인테리어 업체</p>
 
-          <h2>
-            {region.name}
-            <br />
-            인테리어 상담
-          </h2>
-        </div>
-
-        <div className="about-content">
-          <p className="about-lead">
-            공간의 특성을 이해하고
-            <br />
-            새로운 가치를 제안합니다.
-          </p>
-
-          <p>
-            정감공간은 천안 {region.district}{" "}
-            {region.name} 지역의 주거공간,
-            상업공간 및 교육시설 인테리어를
-            상담합니다.
-          </p>
-
-          <p>
-            구축 인테리어부터 아파트 리모델링,
-            상가 인테리어와 학교 리모델링까지
-            공간의 목적과 현장 조건에 따라
-            공사 방향을 검토합니다.
-          </p>
-
-          <p>
-            실내건축공사업 면허를 보유한
-            청년창업기업으로서 고객의 요청을
-            바탕으로 시공 범위와 일정을
-            상담합니다.
-          </p>
-        </div>
-      </section>
-
-      <section className="home-services section-padding">
-        <div className="section-heading">
-          <div>
-            <span className="section-label">
-              OUR SERVICES
-            </span>
-            <h2>
+            <h1>
               {region.name}
               <br />
-              인테리어 분야
-            </h2>
+              인테리어
+            </h1>
+
+            <p>
+              정감공간은 {region.name}을 포함한
+              천안·아산 지역에서 다양한 공간의
+              인테리어와 리모델링을 진행합니다.
+            </p>
           </div>
         </div>
+      </section>
 
-        <div className="trust-grid">
-          {services.map((service, index) => (
-            <Link
-              key={service.slug}
-              href={`/services/${service.slug}`}
-              className="trust-item"
-              style={{ display: "block" }}
-            >
-              <span className="trust-number">
-                0{index + 1}
-              </span>
+      {/* INTRO */}
 
-              <h3>{service.name} ↗</h3>
-              <p>{service.description}</p>
-            </Link>
-          ))}
+      <section className="region-intro">
+        <div className="region-container">
+          <div className="region-section-label">
+            <span>01</span>
+
+            <p>JEONGGAM SPACE</p>
+          </div>
+
+          <div className="region-intro-grid">
+            <h2>
+              공간의 목적에 맞는
+              <br />
+              인테리어를
+              <br />
+              제안합니다.
+            </h2>
+
+            <div>
+              <p>
+                {region.name} 인테리어 상담 시
+                공간의 현재 상태와 사용 목적,
+                필요한 공사 범위를 먼저 확인합니다.
+              </p>
+
+              <p>
+                주거공간부터 상업공간과 교육시설까지
+                현장의 특성을 고려해
+                시공 방향을 제안합니다.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="seo-intro section-padding">
-        <div className="seo-inner">
-          <span className="section-label">
-            LOCAL INTERIOR CONSULTING
-          </span>
+      {/* SERVICES */}
 
-          <h2>
-            {region.name} 인테리어,
-            <br />
-            무엇부터 확인해야 할까요?
-          </h2>
+      <section className="region-services">
+        <div className="region-container">
+          <div className="region-section-label">
+            <span>02</span>
 
-          <p>
-            인테리어를 계획할 때는 현재 공간의
-            상태와 원하는 공사 범위, 예산,
-            공사 가능 일정 등을 먼저 정리하는
-            것이 좋습니다.
-          </p>
+            <p>SERVICE</p>
+          </div>
 
-          <p>
-            주거공간은 생활 동선과 수납,
-            상업공간은 운영 목적과 고객 동선,
-            교육시설은 안전성과 유지관리
-            편의성을 함께 고려해야 합니다.
-          </p>
-
-          <p>
-            정감공간은 {region.name} 인테리어
-            상담 시 고객의 요청과 현장 조건을
-            바탕으로 적절한 시공 방향을
-            안내합니다.
-          </p>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div style={{ maxWidth: 1200, margin: "auto" }}>
-          <span className="section-label">
-            OTHER SERVICE AREAS
-          </span>
-
-          <h2
-            style={{
-              fontSize: "clamp(28px, 4vw, 46px)",
-              letterSpacing: "-0.05em",
-              marginBottom: 35,
-            }}
-          >
-            천안 {region.district} 다른 지역
-          </h2>
-
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 10,
-            }}
-          >
-            {nearbyRegions.map((item) => (
+          <div className="region-service-grid">
+            {services.map((service, index) => (
               <Link
-                key={item.slug}
-                href={`/regions/${item.slug}`}
-                style={{
-                  padding: "12px 18px",
-                  border: "1px solid #ddd",
-                  fontSize: 13,
-                }}
+                key={service.slug}
+                href={`/regions/${region.slug}/${service.slug}`}
+                className="region-service-card"
               >
-                {item.name} 인테리어 ↗
+                <div className="region-service-number">
+                  {String(index + 1).padStart(2, "0")}
+                </div>
+
+                <div className="region-service-content">
+                  <h2>
+                    {region.name}
+                    <br />
+                    {service.name}
+                  </h2>
+
+                  <p>{service.description}</p>
+                </div>
+
+                <span className="region-service-arrow">
+                  ↗
+                </span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="home-contact">
-        <span className="section-label">
-          PROJECT INQUIRY
-        </span>
+      {/* AREA INFO */}
 
-        <h2>
-          {region.name} 인테리어
-          <br />
-          견적 상담
-        </h2>
+      <section className="region-information">
+        <div className="region-container">
+          <div className="region-section-label">
+            <span>03</span>
 
-        <p>
-          정감공간 · 대표 정경훈
-        </p>
+            <p>AREA INFORMATION</p>
+          </div>
 
-        <a
-          href="tel:0414150410"
-          className="contact-phone"
-        >
-          {PHONE} ↗
-        </a>
+          <div className="region-information-grid">
+            <div>
+              <span>AREA</span>
 
-        <Link
-          href="/contact"
-          className="contact-more"
-        >
-          견적문의 안내
-        </Link>
+              <strong>{region.name}</strong>
+            </div>
+
+            <div>
+              <span>SERVICE AREA</span>
+
+              <strong>천안 / 아산 전 지역</strong>
+            </div>
+
+            <div>
+              <span>SERVICE</span>
+
+              <strong>
+                주거 · 상업 · 교육 · 공공공간
+              </strong>
+            </div>
+
+            <div>
+              <span>LICENSE</span>
+
+              <strong>
+                실내건축공사업
+              </strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SEO CONTENT */}
+
+      <section className="region-seo">
+        <div className="region-container">
+          <div className="region-section-label">
+            <span>04</span>
+
+            <p>{region.name.toUpperCase()} INTERIOR</p>
+          </div>
+
+          <div className="region-seo-grid">
+            <h2>
+              {region.name}
+              <br />
+              인테리어 상담
+            </h2>
+
+            <div>
+              <p>
+                {region.name}에서 아파트 인테리어,
+                구축 리모델링, 상가 인테리어,
+                학교 및 교육시설 리모델링을
+                계획하고 있다면 정감공간에 상담할 수 있습니다.
+              </p>
+
+              <p>
+                정감공간은 현장 조건과 공사 범위를 확인하고
+                공간의 목적과 사용 방식에 맞는
+                인테리어 방향을 제안합니다.
+              </p>
+
+              <p>
+                공사 상담 시 현장 위치와 공간 종류,
+                예상 공사 범위 등을 알려주시면
+                보다 원활한 상담이 가능합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+
+      <section className="region-contact">
+        <div className="region-container">
+          <p>CONTACT</p>
+
+          <h2>
+            {region.name} 인테리어
+            <br />
+            상담이 필요하신가요?
+          </h2>
+
+          <div className="region-contact-actions">
+            <a href={TEL}>
+              <span>전화 상담</span>
+
+              <strong>
+                041-415-0410
+              </strong>
+            </a>
+
+            <Link href="/contact">
+              <span>견적 문의</span>
+
+              <strong>↗</strong>
+            </Link>
+          </div>
+        </div>
       </section>
     </>
   );
