@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { regions } from "@/lib/regions";
 
 const SITE_URL = "https://jeonggaminterior.com";
+const BRAND = "정감공간";
 const PHONE = "041-415-0410";
 const TEL = "tel:0414150410";
 
@@ -27,86 +29,34 @@ type ServiceData = {
   name: string;
   shortName: string;
   english: string;
+  image: string;
+
   description: string;
   intro: string;
-  secondIntro: string;
+
   points: string[];
   checklist: string[];
-  keywords: string[];
+
   faqs: FAQ[];
 };
 
 const SERVICES: ServiceData[] = [
   {
-    slug: "apartment",
-    name: "아파트 인테리어",
-    shortName: "아파트",
-    english: "APARTMENT INTERIOR",
-
-    description:
-      "아파트의 구조와 생활 동선을 고려해 거실·주방·욕실·침실 등 공간별 인테리어와 리모델링을 진행합니다.",
-
-    intro:
-      "아파트 인테리어는 단순히 마감재를 교체하는 것보다 가족의 생활 동선, 수납, 조명, 주방과 욕실 사용 방식까지 함께 고려하는 것이 중요합니다.",
-
-    secondIntro:
-      "정감공간은 기존 구조와 현장 상태를 확인하고 필요한 공사 범위를 정리한 뒤 공간의 목적과 생활 방식에 맞는 시공 방향을 제안합니다.",
-
-    points: [
-      "거실·주방·침실 공간 구성",
-      "주방 및 욕실 리모델링",
-      "도배·바닥·필름·도장 마감",
-      "조명 및 전기 공사",
-      "수납 및 생활 동선 개선",
-    ],
-
-    checklist: [
-      "아파트 평형과 현재 내부 상태",
-      "전체 공사 또는 부분 공사 여부",
-      "주방·욕실 교체 여부",
-      "도배·바닥·필름 시공 범위",
-      "조명·전기 변경 여부",
-      "입주 전 공사 또는 거주 중 공사 여부",
-    ],
-
-    keywords: [
-      "아파트 인테리어",
-      "아파트 리모델링",
-      "천안 아파트 인테리어",
-      "천안 인테리어 업체",
-      "아산 아파트 인테리어",
-    ],
-
-    faqs: [
-      {
-        q: "아파트 인테리어 비용은 어떻게 결정되나요?",
-        a: "평형, 철거 범위, 주방과 욕실 공사 여부, 마감재 종류, 전기와 조명 변경 범위, 현장 상태 등에 따라 달라집니다.",
-      },
-      {
-        q: "부분 인테리어도 상담할 수 있나요?",
-        a: "가능합니다. 주방, 욕실, 바닥, 도배, 필름, 조명 등 필요한 공사 범위를 확인한 뒤 상담합니다.",
-      },
-      {
-        q: "상담 전에 무엇을 준비하면 좋나요?",
-        a: "현장 주소, 평형, 현재 내부 사진, 원하는 공사 범위와 참고 이미지를 준비하면 보다 원활하게 상담할 수 있습니다.",
-      },
-    ],
-  },
-
-  {
     slug: "old-house",
+
     name: "구축 인테리어",
+
     shortName: "구축",
+
     english: "OLD HOUSE INTERIOR",
 
+    image: "/IMG_2041.jpeg",
+
     description:
-      "오래된 주거공간의 기존 상태를 확인하고 철거·주방·욕실·바닥·도배·전기 등 필요한 공사 범위를 정리해 리모델링을 진행합니다.",
+      "오래된 주거공간의 현장 상태를 확인하고 철거·주방·욕실·바닥·도배·전기 등 필요한 공사 범위를 정리해 리모델링을 진행합니다.",
 
     intro:
       "구축 인테리어는 오래된 마감재뿐 아니라 배관, 전기, 창호, 바닥, 욕실과 주방 상태 등 기존 현장 조건을 먼저 확인하는 과정이 중요합니다.",
-
-    secondIntro:
-      "정감공간은 현장을 확인한 뒤 필요한 철거와 보수 범위를 정리하고 공간의 사용 목적에 맞춰 구축 리모델링 방향을 제안합니다.",
 
     points: [
       "기존 마감 철거 및 정리",
@@ -125,100 +75,144 @@ const SERVICES: ServiceData[] = [
       "창호·바닥·도배 상태",
     ],
 
-    keywords: [
-      "구축 인테리어",
-      "구축 리모델링",
-      "천안 구축 인테리어",
-      "천안 리모델링 업체",
-      "아산 구축 인테리어",
-    ],
-
     faqs: [
       {
         q: "구축 인테리어 비용은 어떻게 결정되나요?",
         a: "공사 면적, 철거 범위, 기존 현장 상태, 주방과 욕실 공사 여부, 마감재와 전기 공사 범위 등에 따라 달라집니다.",
       },
+
       {
         q: "오래된 아파트도 전체 리모델링이 가능한가요?",
         a: "현장 상태를 먼저 확인한 뒤 철거, 주방, 욕실, 바닥, 도배, 전기 등 필요한 공사 범위를 상담합니다.",
       },
+
       {
-        q: "상담 전에 어떤 정보를 준비해야 하나요?",
-        a: "현장 주소, 평형, 준공연도, 현재 사진, 원하는 공사 범위를 알려주시면 상담에 도움이 됩니다.",
+        q: "상담 전에 어떤 정보를 준비하면 좋나요?",
+        a: "현장 주소, 평형, 준공연도, 현재 사진과 원하는 공사 범위를 알려주시면 상담에 도움이 됩니다.",
+      },
+    ],
+  },
+
+  {
+    slug: "apartment",
+
+    name: "아파트 인테리어",
+
+    shortName: "아파트",
+
+    english: "APARTMENT INTERIOR",
+
+    image: "/IMG_2042.jpeg",
+
+    description:
+      "아파트의 구조와 생활 동선을 고려해 거실·주방·욕실·침실 등 공간별 인테리어와 리모델링을 진행합니다.",
+
+    intro:
+      "아파트 인테리어는 디자인뿐 아니라 가족의 생활 동선, 수납, 조명, 주방과 욕실 사용 방식까지 함께 고려하는 것이 중요합니다.",
+
+    points: [
+      "거실·주방·침실 공간 구성",
+      "주방 및 욕실 리모델링",
+      "도배·바닥·필름·도장",
+      "조명 및 전기 공사",
+      "수납 및 생활 동선 개선",
+    ],
+
+    checklist: [
+      "아파트 평형과 현재 내부 상태",
+      "전체 또는 부분 공사 여부",
+      "주방·욕실 교체 여부",
+      "도배·바닥·필름 시공 범위",
+      "조명·전기 변경 여부",
+      "입주 전 또는 거주 중 공사 여부",
+    ],
+
+    faqs: [
+      {
+        q: "아파트 인테리어 비용은 어떻게 결정되나요?",
+        a: "평형, 철거 범위, 주방과 욕실 공사 여부, 마감재 종류, 전기와 조명 변경 범위 등에 따라 달라집니다.",
+      },
+
+      {
+        q: "부분 인테리어도 가능한가요?",
+        a: "주방, 욕실, 바닥, 도배, 필름, 조명 등 필요한 부분만 상담할 수 있습니다.",
+      },
+
+      {
+        q: "상담 전에 무엇을 준비하면 좋나요?",
+        a: "현장 주소, 평형, 현재 사진, 원하는 공사 범위와 참고 이미지를 준비하면 상담에 도움이 됩니다.",
       },
     ],
   },
 
   {
     slug: "commercial",
+
     name: "상가 인테리어",
+
     shortName: "상가",
+
     english: "COMMERCIAL INTERIOR",
 
+    image: "/IMG_2040.jpeg",
+
     description:
-      "매장과 업무공간의 업종 특성, 고객 동선, 작업 동선과 운영 방식을 고려한 상업공간 인테리어를 진행합니다.",
+      "매장과 업무공간의 업종 특성, 고객 동선과 운영 방식을 고려한 상업공간 인테리어를 진행합니다.",
 
     intro:
-      "상가 인테리어는 외관 디자인뿐 아니라 고객 동선, 직원 작업 동선, 조명, 전기, 수납, 설비와 실제 매장 운영 방식까지 함께 고려해야 합니다.",
-
-    secondIntro:
-      "정감공간은 업종과 공간 목적을 확인하고 현장 조건에 맞춰 상업공간의 구성과 필요한 시공 범위를 정리합니다.",
+      "상가 인테리어는 디자인뿐 아니라 고객 동선, 직원 작업 동선, 조명, 전기, 설비와 실제 매장 운영 방식까지 함께 고려해야 합니다.",
 
     points: [
       "매장 및 상업공간 인테리어",
       "사무실 및 업무공간 시공",
       "고객·직원 동선 구성",
       "조명·전기·마감 공사",
-      "업종 특성에 맞는 공간 제안",
+      "업종에 맞는 공간 구성",
     ],
 
     checklist: [
       "매장 업종과 운영 방식",
-      "전체 면적과 현재 현장 상태",
+      "전체 면적과 현장 상태",
       "고객 및 직원 동선",
       "전기·조명·설비 공사 범위",
-      "간판 및 외부 디자인 여부",
+      "외부 및 간판 공사 여부",
       "예정된 오픈 일정",
-    ],
-
-    keywords: [
-      "상가 인테리어",
-      "상업공간 인테리어",
-      "천안 상가 인테리어",
-      "천안 상가 인테리어 업체",
-      "아산 상가 인테리어",
     ],
 
     faqs: [
       {
-        q: "상가 인테리어 비용은 어떻게 산정되나요?",
-        a: "공간 면적, 업종, 철거 범위, 전기·조명·설비 공사, 마감재와 제작 가구 등의 범위에 따라 달라집니다.",
+        q: "상가 인테리어 비용은 어떻게 정해지나요?",
+        a: "면적, 업종, 철거 범위, 전기·조명·설비 공사와 마감재 범위에 따라 달라집니다.",
       },
+
       {
         q: "기존 상가 철거부터 상담할 수 있나요?",
-        a: "현장 상태와 기존 시설물, 철거 범위를 확인한 뒤 필요한 공정을 함께 상담할 수 있습니다.",
+        a: "기존 시설물과 현장 상태를 확인한 뒤 철거부터 인테리어까지 필요한 범위를 상담할 수 있습니다.",
       },
+
       {
-        q: "상가 인테리어 상담 전에 무엇을 준비하면 좋나요?",
-        a: "현장 주소, 면적, 업종, 현재 사진, 원하는 분위기와 오픈 예정일을 알려주시면 상담에 도움이 됩니다.",
+        q: "상담 전에 무엇을 준비하면 좋나요?",
+        a: "현장 주소, 면적, 업종, 현재 사진, 원하는 분위기와 오픈 예정일을 알려주시면 도움이 됩니다.",
       },
     ],
   },
 
   {
     slug: "school",
+
     name: "학교 리모델링",
+
     shortName: "학교",
+
     english: "EDUCATION SPACE",
 
+    image: "/IMG_2043.jpeg",
+
     description:
-      "학교와 교육시설의 사용 목적, 학생과 교직원의 동선, 안전성과 내구성을 고려한 교육공간 리모델링을 진행합니다.",
+      "학교와 교육시설의 사용 목적, 학생과 교직원의 동선, 안전성과 내구성을 고려한 리모델링을 진행합니다.",
 
     intro:
-      "학교와 교육시설은 많은 사람이 반복적으로 사용하는 공간이기 때문에 디자인뿐 아니라 안전성, 내구성, 관리 편의성과 실제 사용 동선을 함께 고려하는 것이 중요합니다.",
-
-    secondIntro:
-      "정감공간은 교실, 공용공간, 교육시설의 목적과 현장 상태를 확인하고 필요한 리모델링 범위를 정리합니다.",
+      "학교와 교육시설은 많은 사람이 반복적으로 사용하는 공간이기 때문에 안전성, 내구성, 관리 편의성과 실제 사용 동선을 함께 고려하는 것이 중요합니다.",
 
     points: [
       "학교 및 교육시설 리모델링",
@@ -237,26 +231,20 @@ const SERVICES: ServiceData[] = [
       "공사 가능 일정과 기간",
     ],
 
-    keywords: [
-      "학교 리모델링",
-      "교육시설 인테리어",
-      "천안 학교 리모델링",
-      "천안 교육시설 인테리어",
-      "아산 학교 리모델링",
-    ],
-
     faqs: [
       {
         q: "학교 리모델링은 어떤 공간을 상담할 수 있나요?",
         a: "교실, 공용공간, 복도, 교육실 등 현장 조건과 사용 목적에 따라 필요한 공사 범위를 상담합니다.",
       },
+
       {
-        q: "방학 기간에 맞춰 공사를 진행할 수 있나요?",
-        a: "현장 범위와 공정에 따라 일정이 달라지므로 공사 가능 기간과 필요한 범위를 먼저 확인해 상담합니다.",
+        q: "방학 기간에 공사를 진행할 수 있나요?",
+        a: "공사 범위와 공정에 따라 일정이 달라지므로 공사 가능 기간을 먼저 확인해 상담합니다.",
       },
+
       {
-        q: "학교 리모델링 상담 전에 무엇을 준비해야 하나요?",
-        a: "시설 위치, 공사 대상 공간, 면적, 현재 사진, 필요한 공사 내용과 원하는 일정을 준비하면 상담에 도움이 됩니다.",
+        q: "상담 전에 무엇을 준비해야 하나요?",
+        a: "시설 위치, 대상 공간, 면적, 현재 사진, 필요한 공사 내용과 희망 일정을 준비하면 도움이 됩니다.",
       },
     ],
   },
@@ -291,30 +279,19 @@ export async function generateMetadata({
     return {};
   }
 
-  const canonical = `${SITE_URL}/regions/${region.slug}/${serviceData.slug}`;
+  const canonical =
+    `${SITE_URL}/regions/${region.slug}/${serviceData.slug}`;
 
-  const title = `${region.name} ${serviceData.name} 업체 | 정감공간`;
+  const title =
+    `${region.name} ${serviceData.name} 업체 | 정감공간`;
 
-  const description = `${region.name} ${serviceData.name} 상담. 현장 상태와 공사 범위를 확인해 천안·아산 인테리어 전문 정감공간이 상담합니다.`;
+  const description =
+    `${region.name} ${serviceData.name} 상담. 현장 상태와 공사 범위를 확인해 정감공간이 인테리어·리모델링을 상담합니다.`;
 
   return {
     title,
 
     description,
-
-    keywords: [
-      `${region.name} ${serviceData.name}`,
-      `${region.name} ${serviceData.shortName} 인테리어`,
-      `${region.name} 인테리어`,
-      `${region.name} 인테리어 업체`,
-      `${region.name} 리모델링`,
-      ...serviceData.keywords,
-      "천안 인테리어",
-      "천안 인테리어 업체",
-      "천안 실내건축공사업",
-      "아산 인테리어",
-      "정감공간",
-    ],
 
     alternates: {
       canonical,
@@ -322,11 +299,24 @@ export async function generateMetadata({
 
     openGraph: {
       type: "website",
+
       url: canonical,
-      siteName: "정감공간",
-      title,
-      description,
+
+      siteName: BRAND,
+
       locale: "ko_KR",
+
+      title,
+
+      description,
+
+      images: [
+        {
+          url: serviceData.image,
+
+          alt: `${BRAND} ${serviceData.name}`,
+        },
+      ],
     },
 
     robots: {
@@ -348,7 +338,8 @@ export default async function RegionServicePage({
     notFound();
   }
 
-  const canonical = `${SITE_URL}/regions/${region.slug}/${serviceData.slug}`;
+  const canonical =
+    `${SITE_URL}/regions/${region.slug}/${serviceData.slug}`;
 
   const otherServices = SERVICES.filter(
     (item) => item.slug !== serviceData.slug
@@ -359,22 +350,27 @@ export default async function RegionServicePage({
       title: "상담",
       text: "현장 위치와 공간 종류, 필요한 공사 범위를 확인합니다.",
     },
+
     {
       title: "현장 확인",
-      text: "실제 현장 상태와 구조, 기존 마감 상태를 확인합니다.",
+      text: "현장 구조와 기존 마감 상태를 확인합니다.",
     },
+
     {
       title: "공사 계획",
       text: "공간 목적과 현장 조건에 맞춰 공사 범위를 정리합니다.",
     },
+
     {
       title: "시공",
       text: "계획된 공정에 따라 인테리어 시공을 진행합니다.",
     },
+
     {
       title: "마감 확인",
       text: "주요 마감과 시공 상태를 확인합니다.",
     },
+
     {
       title: "완료",
       text: "최종 확인 후 공사를 마무리합니다.",
@@ -396,30 +392,27 @@ export default async function RegionServicePage({
 
         url: canonical,
 
-        description: `${region.name} 지역 ${serviceData.name} 및 리모델링 상담을 제공하는 정감공간입니다.`,
+        image: `${SITE_URL}${serviceData.image}`,
+
+        description: serviceData.description,
 
         provider: {
           "@type": "GeneralContractor",
+
           "@id": `${SITE_URL}/#business`,
-          name: "정감공간",
+
+          name: BRAND,
+
           url: SITE_URL,
+
           telephone: PHONE,
         },
 
-        areaServed: [
-          {
-            "@type": "AdministrativeArea",
-            name: region.name,
-          },
-          {
-            "@type": "City",
-            name: "천안시",
-          },
-          {
-            "@type": "City",
-            name: "아산시",
-          },
-        ],
+        areaServed: {
+          "@type": "AdministrativeArea",
+
+          name: region.name,
+        },
       },
 
       {
@@ -432,12 +425,14 @@ export default async function RegionServicePage({
             name: "홈",
             item: SITE_URL,
           },
+
           {
             "@type": "ListItem",
             position: 2,
             name: `${region.name} 인테리어`,
             item: `${SITE_URL}/regions/${region.slug}`,
           },
+
           {
             "@type": "ListItem",
             position: 3,
@@ -452,7 +447,8 @@ export default async function RegionServicePage({
 
         mainEntity: serviceData.faqs.map((faq) => ({
           "@type": "Question",
-          name: `${region.name} ${faq.q}`,
+
+          name: faq.q,
 
           acceptedAnswer: {
             "@type": "Answer",
@@ -477,16 +473,17 @@ export default async function RegionServicePage({
 
       {/* HERO */}
 
-      <section className="rs-hero">
-        <div className="rs-container">
-          <div className="rs-topline">
+      <section className="seo-hero">
+        <div className="seo-container">
+          <div className="seo-top">
             <span>JEONGGAM SPACE</span>
+
             <span>{serviceData.english}</span>
           </div>
 
-          <div className="rs-hero-content">
-            <p className="rs-eyebrow">
-              {region.name} {serviceData.name}
+          <div className="seo-hero-content">
+            <p className="seo-location">
+              천안 {region.name} 인테리어
             </p>
 
             <h1>
@@ -495,37 +492,74 @@ export default async function RegionServicePage({
               {serviceData.name}
             </h1>
 
-            <p className="rs-lead">
-              정감공간은 {region.name}을 포함한 천안·아산 지역에서{" "}
-              {serviceData.name} 상담과 시공을 진행합니다. 현장의 상태와
-              필요한 공사 범위를 확인한 뒤 공간의 목적에 맞는 인테리어
-              방향을 제안합니다.
+            <p className="seo-lead">
+              {region.name}에서 {serviceData.name}을 계획하고 있다면
+              현장의 상태와 필요한 공사 범위를 먼저 확인하는 것이
+              중요합니다. 정감공간은 천안·아산을 중심으로 현장에 맞는
+              인테리어와 리모델링을 상담합니다.
             </p>
           </div>
         </div>
       </section>
 
+      {/* IMAGE */}
+
+      <section className="seo-image-section">
+        <div className="seo-container">
+          <figure className="seo-main-image">
+            <Image
+              src={serviceData.image}
+              alt={`${region.name} ${serviceData.name} 정감공간 대표 이미지`}
+              width={1600}
+              height={1000}
+              priority
+              sizes="(max-width: 800px) 100vw, 1200px"
+            />
+
+            <figcaption>
+              <span>{serviceData.english}</span>
+
+              <strong>
+                {region.name} {serviceData.name}
+              </strong>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
       {/* ABOUT */}
 
-      <section className="rs-section">
-        <div className="rs-container">
-          <SectionLabel number="01" text="ABOUT SERVICE" />
+      <section className="seo-section">
+        <div className="seo-container">
+          <SectionTitle
+            number="01"
+            english="ABOUT SERVICE"
+          />
 
-          <div className="rs-two-column">
-            <h2>
-              {region.name}
-              <br />
-              {serviceData.name}
-            </h2>
+          <div className="seo-columns">
+            <div>
+              <p className="seo-mini">
+                {region.name} 인테리어 업체
+              </p>
 
-            <div className="rs-copy">
+              <h2>
+                현장 상태부터
+                <br />
+                확인합니다.
+              </h2>
+            </div>
+
+            <div className="seo-text">
               <p>{serviceData.intro}</p>
-              <p>{serviceData.secondIntro}</p>
 
               <p>
-                {region.name}에서 {serviceData.name}을 계획하고 있다면
-                먼저 현장의 상태와 실제 필요한 공사 범위를 확인하는 것이
-                중요합니다.
+                정감공간은 {region.name} 현장의 구조와 기존 마감 상태를
+                확인한 뒤 실제 필요한 공사 범위를 정리합니다.
+              </p>
+
+              <p>
+                불필요하게 공사 범위를 늘리기보다 공간의 사용 목적과
+                현장 조건을 기준으로 필요한 시공 방향을 상담합니다.
               </p>
             </div>
           </div>
@@ -534,46 +568,58 @@ export default async function RegionServicePage({
 
       {/* WORK SCOPE */}
 
-      <section className="rs-section rs-gray">
-        <div className="rs-container">
-          <SectionLabel number="02" text="WORK SCOPE" />
+      <section className="seo-section seo-gray">
+        <div className="seo-container">
+          <SectionTitle
+            number="02"
+            english="WORK SCOPE"
+          />
 
-          <div className="rs-list">
-            {serviceData.points.map((point, index) => (
-              <div className="rs-list-row" key={point}>
+          <div className="seo-list">
+            {serviceData.points.map((item, index) => (
+              <div
+                className="seo-list-row"
+                key={item}
+              >
                 <span>
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-                <strong>{point}</strong>
+                <strong>{item}</strong>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CHECKLIST */}
+      {/* CHECK */}
 
-      <section className="rs-section">
-        <div className="rs-container">
-          <SectionLabel number="03" text="BEFORE CONSULTATION" />
+      <section className="seo-section">
+        <div className="seo-container">
+          <SectionTitle
+            number="03"
+            english="BEFORE CONSULTATION"
+          />
 
-          <div className="rs-two-column">
+          <div className="seo-columns">
             <div>
-              <p className="rs-small">
-                {region.name} {serviceData.name}
+              <p className="seo-mini">
+                상담 전 확인사항
               </p>
 
               <h2>
-                상담 전에
+                미리 알려주시면
                 <br />
-                확인하면 좋은 내용
+                상담이 더 빠릅니다.
               </h2>
             </div>
 
-            <div className="rs-list">
+            <div className="seo-list">
               {serviceData.checklist.map((item, index) => (
-                <div className="rs-list-row" key={item}>
+                <div
+                  className="seo-list-row"
+                  key={item}
+                >
                   <span>
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -588,14 +634,20 @@ export default async function RegionServicePage({
 
       {/* PROCESS */}
 
-      <section className="rs-section rs-gray">
-        <div className="rs-container">
-          <SectionLabel number="04" text="PROCESS" />
+      <section className="seo-section seo-gray">
+        <div className="seo-container">
+          <SectionTitle
+            number="04"
+            english="PROCESS"
+          />
 
-          <div className="rs-process">
+          <div className="seo-process">
             {processItems.map((item, index) => (
-              <div className="rs-process-row" key={item.title}>
-                <div className="rs-process-title">
+              <div
+                className="seo-process-row"
+                key={item.title}
+              >
+                <div>
                   <span>
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -610,67 +662,81 @@ export default async function RegionServicePage({
         </div>
       </section>
 
-      {/* INFO */}
+      {/* AREA */}
 
-      <section className="rs-section">
-        <div className="rs-container">
-          <SectionLabel number="05" text="LOCAL INFORMATION" />
+      <section className="seo-section">
+        <div className="seo-container">
+          <SectionTitle
+            number="05"
+            english="SERVICE INFORMATION"
+          />
 
-          <div className="rs-info">
-            <InfoRow label="AREA" value={region.name} />
+          <div className="seo-info">
+            <Info
+              label="지역"
+              value={region.name}
+            />
 
-            <InfoRow
-              label="SERVICE"
+            <Info
+              label="서비스"
               value={serviceData.name}
             />
 
-            <InfoRow
-              label="SERVICE AREA"
+            <Info
+              label="시공지역"
               value="천안 / 아산 전 지역"
             />
 
-            <div className="rs-info-row">
-              <span>LICENSE</span>
+            <div className="seo-info-row">
+              <span>면허</span>
 
               <Link href="/company/license">
-                실내건축공사업
+                실내건축공사업 면허 보유
               </Link>
+            </div>
+
+            <div className="seo-info-row">
+              <span>상담</span>
+
+              <a href={TEL}>
+                {PHONE}
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* LOCAL SEO */}
+      {/* LOCAL CONTENT */}
 
-      <section className="rs-section rs-gray">
-        <div className="rs-container">
-          <SectionLabel number="06" text="LOCAL INTERIOR" />
+      <section className="seo-section seo-black">
+        <div className="seo-container">
+          <SectionTitle
+            number="06"
+            english="LOCAL INTERIOR"
+          />
 
-          <div className="rs-two-column">
+          <div className="seo-columns">
             <h2>
               {region.name}
-              <br />
-              {serviceData.shortName}
               <br />
               인테리어 상담
             </h2>
 
-            <div className="rs-copy">
+            <div className="seo-text">
               <p>
-                {region.name}에서 {serviceData.name}을 계획하고 있다면
-                현장의 구조와 현재 상태, 필요한 공사 범위를 먼저
-                확인하는 것이 중요합니다.
+                {region.name}에서 {serviceData.name}을 알아보고 있다면
+                가격만 비교하기보다 현재 공간의 상태와 필요한 공사 범위를
+                먼저 확인하는 것이 좋습니다.
               </p>
 
               <p>
-                정감공간은 {region.name}을 포함한 천안 지역과 아산
-                지역에서 인테리어 및 리모델링 상담을 진행하며 공간의
-                사용 목적과 현장 조건에 맞는 시공 방향을 제안합니다.
+                정감공간은 천안과 아산을 중심으로 주거공간, 상업공간,
+                교육공간의 인테리어와 리모델링을 진행합니다.
               </p>
 
               <p>
-                상담 시 현장 주소, 공간 종류, 면적, 현재 사진과 원하는
-                공사 범위를 알려주시면 보다 원활하게 상담할 수 있습니다.
+                현장 주소와 공간 종류, 면적, 현재 사진과 원하는 공사
+                내용을 알려주시면 상담에 도움이 됩니다.
               </p>
             </div>
           </div>
@@ -679,23 +745,24 @@ export default async function RegionServicePage({
 
       {/* FAQ */}
 
-      <section className="rs-section">
-        <div className="rs-container">
-          <SectionLabel number="07" text="FAQ" />
+      <section className="seo-section">
+        <div className="seo-container">
+          <SectionTitle
+            number="07"
+            english="FAQ"
+          />
 
-          <div className="rs-faq-title">
+          <div className="seo-faq-title">
             <p>
               {region.name} {serviceData.name}
             </p>
 
             <h2>
-              자주 묻는
-              <br />
-              질문
+              자주 묻는 질문
             </h2>
           </div>
 
-          <div className="rs-faq">
+          <div className="seo-faq">
             {serviceData.faqs.map((faq, index) => (
               <details key={faq.q}>
                 <summary>
@@ -703,14 +770,14 @@ export default async function RegionServicePage({
                     Q{String(index + 1).padStart(2, "0")}
                   </span>
 
-                  <strong>
-                    {region.name} {faq.q}
-                  </strong>
+                  <strong>{faq.q}</strong>
 
                   <i>+</i>
                 </summary>
 
-                <p>{faq.a}</p>
+                <div>
+                  <p>{faq.a}</p>
+                </div>
               </details>
             ))}
           </div>
@@ -719,17 +786,20 @@ export default async function RegionServicePage({
 
       {/* OTHER SERVICE */}
 
-      <section className="rs-section rs-gray">
-        <div className="rs-container">
-          <SectionLabel number="08" text="OTHER SERVICE" />
+      <section className="seo-section seo-gray">
+        <div className="seo-container">
+          <SectionTitle
+            number="08"
+            english="OTHER SERVICE"
+          />
 
-          <div className="rs-links">
+          <div className="seo-links">
             {otherServices.map((item) => (
               <Link
-                key={item.slug}
                 href={`/regions/${region.slug}/${item.slug}`}
+                key={item.slug}
               >
-                <div className="rs-link-text">
+                <div>
                   <span>{region.name}</span>
                   <strong>{item.name}</strong>
                 </div>
@@ -741,16 +811,20 @@ export default async function RegionServicePage({
         </div>
       </section>
 
-      {/* COMPANY */}
+      {/* TRUST */}
 
-      <section className="rs-section">
-        <div className="rs-container">
-          <SectionLabel number="09" text="COMPANY" />
+      <section className="seo-section">
+        <div className="seo-container">
+          <SectionTitle
+            number="09"
+            english="JEONGGAM SPACE"
+          />
 
-          <div className="rs-links">
+          <div className="seo-links">
             <Link href={`/regions/${region.slug}`}>
-              <div className="rs-link-text rs-link-stack">
+              <div>
                 <span>AREA</span>
+
                 <strong>
                   {region.name} 인테리어 전체보기
                 </strong>
@@ -760,8 +834,9 @@ export default async function RegionServicePage({
             </Link>
 
             <Link href="/company/license">
-              <div className="rs-link-text rs-link-stack">
+              <div>
                 <span>LICENSE</span>
+
                 <strong>
                   실내건축공사업 면허 확인
                 </strong>
@@ -771,9 +846,12 @@ export default async function RegionServicePage({
             </Link>
 
             <Link href="/company/youth">
-              <div className="rs-link-text rs-link-stack">
+              <div>
                 <span>COMPANY</span>
-                <strong>청년창업기업 확인</strong>
+
+                <strong>
+                  청년창업기업 확인
+                </strong>
               </div>
 
               <b>↗</b>
@@ -784,24 +862,26 @@ export default async function RegionServicePage({
 
       {/* CONTACT */}
 
-      <section className="rs-contact">
-        <div className="rs-container">
+      <section className="seo-contact">
+        <div className="seo-container">
           <p>CONTACT</p>
 
           <h2>
-            {region.name} {serviceData.name}
+            {region.name} 인테리어
             <br />
             상담이 필요하신가요?
           </h2>
 
-          <div className="rs-contact-actions">
+          <div className="seo-contact-links">
             <a href={TEL}>
               <span>전화 상담</span>
+
               <strong>{PHONE}</strong>
             </a>
 
             <Link href="/contact">
               <span>견적 문의</span>
+
               <strong>↗</strong>
             </Link>
           </div>
@@ -809,127 +889,169 @@ export default async function RegionServicePage({
       </section>
 
       <style>{`
-        .rs-container {
+        .seo-container {
           width: min(1180px, calc(100% - 80px));
           margin: 0 auto;
         }
 
-        .rs-hero {
-          padding: 90px 0 120px;
+        .seo-hero {
+          padding: 80px 0 110px;
           background: #fff;
           color: #111;
         }
 
-        .rs-topline {
+        .seo-top {
           display: flex;
-          align-items: center;
           justify-content: space-between;
+          align-items: center;
           gap: 30px;
           padding-bottom: 28px;
           border-bottom: 1px solid #111;
         }
 
-        .rs-topline span {
+        .seo-top span {
           font-size: 11px;
           letter-spacing: 0.16em;
           white-space: nowrap;
         }
 
-        .rs-hero-content {
-          margin-top: 100px;
-          max-width: 850px;
+        .seo-hero-content {
+          margin-top: 95px;
+          max-width: 860px;
         }
 
-        .rs-eyebrow {
-          margin: 0 0 32px;
+        .seo-location {
+          margin: 0 0 30px;
           font-size: 17px;
-          line-height: 1.6;
+          line-height: 1.5;
         }
 
-        .rs-hero h1 {
+        .seo-hero h1 {
           margin: 0;
-          font-size: clamp(54px, 7vw, 90px);
+          font-size: clamp(56px, 7vw, 92px);
           line-height: 1.04;
-          letter-spacing: -0.055em;
+          letter-spacing: -0.06em;
+          font-weight: 700;
         }
 
-        .rs-lead {
+        .seo-lead {
+          max-width: 800px;
           margin: 45px 0 0;
-          max-width: 780px;
           color: #555;
-          font-size: 19px;
-          line-height: 1.85;
+          font-size: 18px;
+          line-height: 1.9;
           word-break: keep-all;
         }
 
-        .rs-section {
+        .seo-image-section {
+          padding: 0 0 110px;
+          background: #fff;
+        }
+
+        .seo-main-image {
+          margin: 0;
+        }
+
+        .seo-main-image img {
+          display: block;
+          width: 100%;
+          height: auto;
+          max-height: 720px;
+          object-fit: cover;
+        }
+
+        .seo-main-image figcaption {
+          min-height: 70px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 30px;
+          border-bottom: 1px solid #111;
+        }
+
+        .seo-main-image figcaption span {
+          color: #888;
+          font-size: 10px;
+          letter-spacing: 0.14em;
+        }
+
+        .seo-main-image figcaption strong {
+          font-size: 15px;
+          font-weight: 600;
+        }
+
+        .seo-section {
           padding: 110px 0;
           background: #fff;
           color: #111;
         }
 
-        .rs-gray {
+        .seo-gray {
           background: #f5f5f5;
         }
 
-        .rs-label {
+        .seo-black {
+          background: #000;
+          color: #fff;
+        }
+
+        .seo-section-title {
           display: grid;
-          grid-template-columns: 42px 1fr;
+          grid-template-columns: 45px minmax(0, 1fr);
           gap: 20px;
           align-items: center;
         }
 
-        .rs-label span,
-        .rs-label p {
+        .seo-section-title span,
+        .seo-section-title p {
           margin: 0;
           color: #999;
           font-size: 10px;
           line-height: 1;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.15em;
         }
 
-        .rs-two-column {
-          margin-top: 60px;
+        .seo-columns {
+          margin-top: 58px;
           display: grid;
           grid-template-columns: 0.9fr 1.1fr;
           gap: 80px;
-          align-items: start;
         }
 
-        .rs-two-column h2 {
+        .seo-columns h2 {
           margin: 0;
-          font-size: 48px;
-          line-height: 1.12;
+          font-size: 46px;
+          line-height: 1.14;
           letter-spacing: -0.05em;
         }
 
-        .rs-copy p {
+        .seo-mini {
+          margin: 0 0 20px;
+          color: #888;
+          font-size: 13px;
+        }
+
+        .seo-text p {
           margin: 0;
           font-size: 17px;
           line-height: 1.9;
           word-break: keep-all;
         }
 
-        .rs-copy p + p {
+        .seo-text p + p {
           margin-top: 28px;
         }
 
-        .rs-small {
-          margin: 0 0 20px;
-          color: #888;
-          font-size: 13px;
+        .seo-list,
+        .seo-process,
+        .seo-info,
+        .seo-faq,
+        .seo-links {
+          margin-top: 52px;
+          border-top: 1px solid currentColor;
         }
 
-        .rs-list,
-        .rs-process,
-        .rs-info,
-        .rs-faq,
-        .rs-links {
-          margin-top: 55px;
-          border-top: 1px solid #111;
-        }
-
-        .rs-list-row {
+        .seo-list-row {
           min-height: 76px;
           display: grid;
           grid-template-columns: 55px minmax(0, 1fr);
@@ -938,19 +1060,18 @@ export default async function RegionServicePage({
           border-bottom: 1px solid #ccc;
         }
 
-        .rs-list-row span {
+        .seo-list-row span {
           color: #999;
           font-size: 10px;
         }
 
-        .rs-list-row strong {
+        .seo-list-row strong {
           font-size: 17px;
           line-height: 1.5;
           font-weight: 600;
-          word-break: keep-all;
         }
 
-        .rs-process-row {
+        .seo-process-row {
           min-height: 110px;
           display: grid;
           grid-template-columns: 0.75fr 1.25fr;
@@ -959,24 +1080,23 @@ export default async function RegionServicePage({
           border-bottom: 1px solid #ccc;
         }
 
-        .rs-process-title {
+        .seo-process-row > div {
           display: grid;
           grid-template-columns: 55px minmax(0, 1fr);
           gap: 18px;
           align-items: center;
         }
 
-        .rs-process-title span {
+        .seo-process-row span {
           color: #999;
           font-size: 10px;
         }
 
-        .rs-process-title strong {
-          font-size: 19px;
-          line-height: 1.4;
+        .seo-process-row strong {
+          font-size: 18px;
         }
 
-        .rs-process-row > p {
+        .seo-process-row p {
           margin: 0;
           color: #555;
           font-size: 15px;
@@ -984,384 +1104,368 @@ export default async function RegionServicePage({
           word-break: keep-all;
         }
 
-        .rs-info-row {
+        .seo-info-row {
           min-height: 76px;
           display: grid;
-          grid-template-columns: 180px minmax(0, 1fr);
+          grid-template-columns: 160px minmax(0, 1fr);
           gap: 30px;
           align-items: center;
           border-bottom: 1px solid #ccc;
         }
 
-        .rs-info-row > span {
+        .seo-info-row span {
           color: #999;
-          font-size: 10px;
-          letter-spacing: 0.12em;
+          font-size: 11px;
         }
 
-        .rs-info-row strong,
-        .rs-info-row a {
-          color: #111;
-          font-size: 17px;
+        .seo-info-row strong,
+        .seo-info-row a {
+          color: inherit;
+          font-size: 16px;
           line-height: 1.5;
           font-weight: 600;
           text-decoration: none;
-          word-break: keep-all;
         }
 
-        .rs-info-row a {
+        .seo-info-row a {
           text-decoration: underline;
           text-underline-offset: 4px;
         }
 
-        .rs-faq-title {
+        .seo-faq-title {
           margin-top: 55px;
         }
 
-        .rs-faq-title p {
-          margin: 0 0 18px;
+        .seo-faq-title p {
+          margin: 0 0 16px;
           color: #777;
           font-size: 13px;
         }
 
-        .rs-faq-title h2 {
+        .seo-faq-title h2 {
           margin: 0;
-          font-size: 46px;
-          line-height: 1.1;
+          font-size: 44px;
           letter-spacing: -0.05em;
         }
 
-        .rs-faq details {
+        .seo-faq details {
           border-bottom: 1px solid #ccc;
         }
 
-        .rs-faq summary {
-          min-height: 88px;
+        .seo-faq summary {
+          min-height: 86px;
           display: grid;
-          grid-template-columns: 55px minmax(0, 1fr) 30px;
+          grid-template-columns: 55px minmax(0, 1fr) 25px;
           gap: 18px;
           align-items: center;
           list-style: none;
           cursor: pointer;
         }
 
-        .rs-faq summary::-webkit-details-marker {
+        .seo-faq summary::-webkit-details-marker {
           display: none;
         }
 
-        .rs-faq summary span {
+        .seo-faq summary span {
           color: #999;
           font-size: 10px;
         }
 
-        .rs-faq summary strong {
+        .seo-faq summary strong {
           font-size: 16px;
-          line-height: 1.55;
-          word-break: keep-all;
+          line-height: 1.5;
         }
 
-        .rs-faq summary i {
+        .seo-faq summary i {
           font-style: normal;
-          font-size: 22px;
-          text-align: right;
+          font-size: 20px;
         }
 
-        .rs-faq details[open] summary i {
+        .seo-faq details[open] summary i {
           transform: rotate(45deg);
         }
 
-        .rs-faq details > p {
+        .seo-faq details > div {
+          padding: 0 40px 28px 73px;
+        }
+
+        .seo-faq details p {
           margin: 0;
-          padding: 0 45px 28px 73px;
           color: #666;
           font-size: 14px;
           line-height: 1.9;
-          word-break: keep-all;
         }
 
-        .rs-links > a {
-          min-height: 88px;
+        .seo-links > a {
+          min-height: 86px;
           display: grid;
-          grid-template-columns: minmax(0, 1fr) 36px;
-          gap: 25px;
+          grid-template-columns: minmax(0, 1fr) 30px;
+          gap: 20px;
           align-items: center;
           border-bottom: 1px solid #ccc;
-          color: #111;
+          color: inherit;
           text-decoration: none;
         }
 
-        .rs-link-text {
-          min-width: 0;
+        .seo-links > a > div {
           display: grid;
-          grid-template-columns: 90px minmax(0, 1fr);
+          grid-template-columns: 85px minmax(0, 1fr);
           gap: 20px;
           align-items: center;
         }
 
-        .rs-link-text > span {
+        .seo-links span {
           color: #999;
-          font-size: 11px;
+          font-size: 10px;
         }
 
-        .rs-link-text > strong {
-          font-size: 18px;
-          line-height: 1.45;
-          word-break: keep-all;
+        .seo-links strong {
+          font-size: 17px;
+          line-height: 1.5;
         }
 
-        .rs-link-stack {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 8px;
-        }
-
-        .rs-links b {
-          font-size: 20px;
-          font-weight: 400;
+        .seo-links b {
           text-align: right;
+          font-size: 18px;
+          font-weight: 400;
         }
 
-        .rs-contact {
-          padding: 110px 0 130px;
+        .seo-contact {
+          padding: 105px 0 130px;
           background: #000;
           color: #fff;
         }
 
-        .rs-contact > .rs-container > p {
-          margin: 0 0 30px;
-          color: #999;
+        .seo-contact > .seo-container > p {
+          margin: 0 0 25px;
+          color: #888;
           font-size: 10px;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.15em;
         }
 
-        .rs-contact h2 {
+        .seo-contact h2 {
           margin: 0;
-          font-size: 48px;
+          font-size: 46px;
           line-height: 1.15;
-          letter-spacing: -0.05em;
         }
 
-        .rs-contact-actions {
+        .seo-contact-links {
           margin-top: 55px;
           display: grid;
           grid-template-columns: 1fr 1fr;
           border-top: 1px solid #555;
         }
 
-        .rs-contact-actions > a {
-          min-height: 95px;
+        .seo-contact-links a {
+          min-height: 90px;
+          padding: 0 22px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 20px;
-          padding: 0 25px;
           color: #fff;
           text-decoration: none;
           border-bottom: 1px solid #555;
         }
 
-        .rs-contact-actions > a:first-child {
+        .seo-contact-links a:first-child {
           border-right: 1px solid #555;
         }
 
-        /*
-          이 페이지에서 모바일 하단 전화바가
-          본문을 덮지 않도록 강제 처리
-        */
         @media (max-width: 800px) {
-          .rs-container {
+          .seo-container {
             width: calc(100% - 48px);
           }
 
-          .rs-hero {
+          .seo-hero {
             padding: 65px 0 80px;
           }
 
-          .rs-topline {
-            gap: 12px;
+          .seo-top {
             padding-bottom: 20px;
+            gap: 12px;
           }
 
-          .rs-topline span {
+          .seo-top span {
             font-size: 8px;
             letter-spacing: 0.08em;
           }
 
-          .rs-topline span:last-child {
+          .seo-top span:last-child {
             text-align: right;
           }
 
-          .rs-hero-content {
+          .seo-hero-content {
             margin-top: 65px;
           }
 
-          .rs-eyebrow {
-            margin-bottom: 26px;
+          .seo-location {
+            margin-bottom: 25px;
             font-size: 15px;
           }
 
-          .rs-hero h1 {
+          .seo-hero h1 {
             font-size: 43px;
             line-height: 1.08;
           }
 
-          .rs-lead {
-            margin-top: 34px;
+          .seo-lead {
+            margin-top: 32px;
             font-size: 16px;
             line-height: 1.8;
           }
 
-          .rs-section {
-            padding: 78px 0;
+          .seo-image-section {
+            padding-bottom: 75px;
           }
 
-          .rs-label {
-            grid-template-columns: 40px 1fr;
-            gap: 20px;
+          .seo-main-image img {
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
           }
 
-          .rs-two-column {
-            margin-top: 46px;
+          .seo-main-image figcaption {
+            min-height: 62px;
+            gap: 15px;
+          }
+
+          .seo-main-image figcaption span {
+            font-size: 8px;
+          }
+
+          .seo-main-image figcaption strong {
+            font-size: 13px;
+            text-align: right;
+          }
+
+          .seo-section {
+            padding: 76px 0;
+          }
+
+          .seo-columns {
+            margin-top: 44px;
             grid-template-columns: 1fr;
             gap: 38px;
           }
 
-          .rs-two-column h2 {
-            font-size: 36px;
-            line-height: 1.14;
+          .seo-columns h2 {
+            font-size: 34px;
           }
 
-          .rs-copy p {
+          .seo-text p {
             font-size: 16px;
             line-height: 1.8;
           }
 
-          .rs-copy p + p {
-            margin-top: 24px;
+          .seo-list,
+          .seo-process,
+          .seo-info,
+          .seo-faq,
+          .seo-links {
+            margin-top: 38px;
           }
 
-          .rs-list,
-          .rs-process,
-          .rs-info,
-          .rs-faq,
-          .rs-links {
-            margin-top: 40px;
-          }
-
-          .rs-list-row {
-            min-height: 70px;
-            grid-template-columns: 42px minmax(0, 1fr);
+          .seo-list-row {
+            min-height: 68px;
+            grid-template-columns: 40px minmax(0, 1fr);
             gap: 14px;
           }
 
-          .rs-list-row strong {
+          .seo-list-row strong {
             font-size: 15px;
           }
 
-          .rs-process-row {
+          .seo-process-row {
             min-height: 0;
-            padding: 26px 0;
+            padding: 25px 0;
             grid-template-columns: 1fr;
-            gap: 16px;
+            gap: 15px;
           }
 
-          .rs-process-title {
-            grid-template-columns: 42px minmax(0, 1fr);
+          .seo-process-row > div {
+            grid-template-columns: 40px minmax(0, 1fr);
             gap: 14px;
           }
 
-          .rs-process-title strong {
-            font-size: 17px;
+          .seo-process-row strong {
+            font-size: 16px;
           }
 
-          .rs-process-row > p {
-            margin-left: 56px;
+          .seo-process-row p {
+            padding-left: 54px;
             font-size: 15px;
-            line-height: 1.75;
           }
 
-          .rs-info-row {
-            min-height: 72px;
-            grid-template-columns: 100px minmax(0, 1fr);
-            gap: 16px;
+          .seo-info-row {
+            min-height: 68px;
+            grid-template-columns: 95px minmax(0, 1fr);
+            gap: 15px;
           }
 
-          .rs-info-row > span {
+          .seo-info-row span {
             font-size: 9px;
           }
 
-          .rs-info-row strong,
-          .rs-info-row a {
-            font-size: 15px;
+          .seo-info-row strong,
+          .seo-info-row a {
+            font-size: 14px;
           }
 
-          .rs-faq-title {
-            margin-top: 45px;
+          .seo-faq-title {
+            margin-top: 42px;
           }
 
-          .rs-faq-title h2 {
-            font-size: 36px;
+          .seo-faq-title h2 {
+            font-size: 34px;
           }
 
-          .rs-faq summary {
-            min-height: 78px;
-            grid-template-columns: 42px minmax(0, 1fr) 20px;
+          .seo-faq summary {
+            min-height: 76px;
+            grid-template-columns: 40px minmax(0, 1fr) 20px;
             gap: 12px;
           }
 
-          .rs-faq summary strong {
+          .seo-faq summary strong {
             font-size: 14px;
           }
 
-          .rs-faq details > p {
-            padding: 0 10px 25px 54px;
-            font-size: 14px;
+          .seo-faq details > div {
+            padding: 0 10px 24px 52px;
           }
 
-          .rs-links > a {
-            min-height: 82px;
-            grid-template-columns: minmax(0, 1fr) 28px;
-            gap: 14px;
+          .seo-links > a {
+            min-height: 78px;
+            grid-template-columns: minmax(0, 1fr) 25px;
+            gap: 12px;
           }
 
-          .rs-link-text {
-            grid-template-columns: 62px minmax(0, 1fr);
-            gap: 14px;
+          .seo-links > a > div {
+            grid-template-columns: 60px minmax(0, 1fr);
+            gap: 12px;
           }
 
-          .rs-link-text > span {
-            font-size: 10px;
-          }
-
-          .rs-link-text > strong {
+          .seo-links strong {
             font-size: 15px;
           }
 
-          .rs-link-stack {
-            display: flex;
-            gap: 7px;
+          .seo-contact {
+            padding: 75px 0 90px;
           }
 
-          .rs-contact {
-            padding: 80px 0 90px;
+          .seo-contact h2 {
+            font-size: 34px;
           }
 
-          .rs-contact h2 {
-            font-size: 36px;
-          }
-
-          .rs-contact-actions {
-            grid-template-columns: 1fr;
+          .seo-contact-links {
             margin-top: 40px;
+            grid-template-columns: 1fr;
           }
 
-          .rs-contact-actions > a {
-            min-height: 76px;
+          .seo-contact-links a {
+            min-height: 74px;
             padding: 0;
           }
 
-          .rs-contact-actions > a:first-child {
+          .seo-contact-links a:first-child {
             border-right: 0;
           }
 
@@ -1372,33 +1476,25 @@ export default async function RegionServicePage({
             bottom: auto !important;
             width: 100% !important;
             min-height: 72px !important;
-            margin: 0 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
             z-index: 1 !important;
           }
         }
 
         @media (max-width: 420px) {
-          .rs-container {
+          .seo-container {
             width: calc(100% - 40px);
           }
 
-          .rs-hero h1 {
+          .seo-hero h1 {
             font-size: 40px;
           }
 
-          .rs-two-column h2 {
-            font-size: 33px;
+          .seo-columns h2 {
+            font-size: 31px;
           }
 
-          .rs-info-row {
-            grid-template-columns: 92px minmax(0, 1fr);
-          }
-
-          .rs-link-text {
-            grid-template-columns: 58px minmax(0, 1fr);
+          .seo-info-row {
+            grid-template-columns: 88px minmax(0, 1fr);
           }
         }
       `}</style>
@@ -1406,22 +1502,22 @@ export default async function RegionServicePage({
   );
 }
 
-function SectionLabel({
+function SectionTitle({
   number,
-  text,
+  english,
 }: {
   number: string;
-  text: string;
+  english: string;
 }) {
   return (
-    <div className="rs-label">
+    <div className="seo-section-title">
       <span>{number}</span>
-      <p>{text}</p>
+      <p>{english}</p>
     </div>
   );
 }
 
-function InfoRow({
+function Info({
   label,
   value,
 }: {
@@ -1429,7 +1525,7 @@ function InfoRow({
   value: string;
 }) {
   return (
-    <div className="rs-info-row">
+    <div className="seo-info-row">
       <span>{label}</span>
       <strong>{value}</strong>
     </div>
