@@ -54,7 +54,6 @@ const SERVICES: ServiceData[] = [
       "천안 인테리어 업체",
     ],
   },
-
   {
     slug: "old-house",
     name: "구축 인테리어",
@@ -79,7 +78,6 @@ const SERVICES: ServiceData[] = [
       "천안 리모델링 업체",
     ],
   },
-
   {
     slug: "commercial",
     name: "상가 인테리어",
@@ -104,7 +102,6 @@ const SERVICES: ServiceData[] = [
       "천안 상가 인테리어 업체",
     ],
   },
-
   {
     slug: "school",
     name: "학교 리모델링",
@@ -168,7 +165,6 @@ export async function generateMetadata({
 
   return {
     title,
-
     description,
 
     keywords: [
@@ -189,15 +185,10 @@ export async function generateMetadata({
 
     openGraph: {
       type: "website",
-
       url: canonical,
-
       siteName: "정감공간",
-
       title,
-
       description,
-
       locale: "ko_KR",
     },
 
@@ -229,7 +220,6 @@ export default async function RegionServicePage({
 
   const serviceSchema = {
     "@context": "https://schema.org",
-
     "@type": "Service",
 
     name: `${region.name} ${serviceData.name}`,
@@ -339,12 +329,11 @@ export default async function RegionServicePage({
         <div className="local-service-container">
           <div className="local-service-hero-top">
             <span>JEONGGAM SPACE</span>
-
             <span>{serviceData.english}</span>
           </div>
 
           <div className="local-service-hero-content">
-            <p>
+            <p className="local-service-eyebrow">
               {region.name} {serviceData.name}
             </p>
 
@@ -354,22 +343,21 @@ export default async function RegionServicePage({
               {serviceData.name}
             </h1>
 
-            <p>
-              정감공간은 {region.name}을 포함한 천안·아산 지역에서
-              {serviceData.name}과 관련된 인테리어 및
-              리모델링 상담을 진행합니다.
+            <p className="local-service-description">
+              정감공간은 {region.name}을 포함한 천안·아산 지역에서{" "}
+              {serviceData.name}과 관련된 인테리어 및 리모델링 상담을
+              진행합니다.
             </p>
           </div>
         </div>
       </section>
 
-      {/* INTRO */}
+      {/* ABOUT */}
 
       <section className="local-service-intro">
         <div className="local-service-container">
           <div className="local-service-label">
             <span>01</span>
-
             <p>ABOUT SERVICE</p>
           </div>
 
@@ -384,9 +372,9 @@ export default async function RegionServicePage({
               <p>{serviceData.intro}</p>
 
               <p>
-                정감공간은 현장의 현재 상태와 필요한 공사 범위를
-                확인한 뒤 공간의 목적과 사용 방식에 맞는
-                시공 방향을 제안합니다.
+                정감공간은 현장의 현재 상태와 필요한 공사 범위를 확인한
+                뒤 공간의 목적과 사용 방식에 맞는 시공 방향을
+                제안합니다.
               </p>
             </div>
           </div>
@@ -399,7 +387,6 @@ export default async function RegionServicePage({
         <div className="local-service-container">
           <div className="local-service-label">
             <span>02</span>
-
             <p>WORK SCOPE</p>
           </div>
 
@@ -423,7 +410,6 @@ export default async function RegionServicePage({
         <div className="local-service-container">
           <div className="local-service-label">
             <span>03</span>
-
             <p>PROCESS</p>
           </div>
 
@@ -432,8 +418,7 @@ export default async function RegionServicePage({
               <span>01</span>
               <strong>상담</strong>
               <p>
-                현장 위치와 공간 종류,
-                필요한 공사 범위를 확인합니다.
+                현장 위치와 공간 종류, 필요한 공사 범위를 확인합니다.
               </p>
             </div>
 
@@ -441,8 +426,7 @@ export default async function RegionServicePage({
               <span>02</span>
               <strong>현장 확인</strong>
               <p>
-                실제 현장 상태와 구조,
-                시공 조건을 확인합니다.
+                실제 현장 상태와 구조, 시공 조건을 확인합니다.
               </p>
             </div>
 
@@ -450,8 +434,7 @@ export default async function RegionServicePage({
               <span>03</span>
               <strong>공사 계획</strong>
               <p>
-                공간 목적과 예산에 맞춰
-                공사 범위를 정리합니다.
+                공간 목적과 예산에 맞춰 공사 범위를 정리합니다.
               </p>
             </div>
 
@@ -459,8 +442,7 @@ export default async function RegionServicePage({
               <span>04</span>
               <strong>시공</strong>
               <p>
-                계획된 공정에 따라
-                인테리어 시공을 진행합니다.
+                계획된 공정에 따라 인테리어 시공을 진행합니다.
               </p>
             </div>
 
@@ -468,8 +450,7 @@ export default async function RegionServicePage({
               <span>05</span>
               <strong>마감 확인</strong>
               <p>
-                주요 마감과 시공 상태를
-                확인합니다.
+                주요 마감과 시공 상태를 확인합니다.
               </p>
             </div>
 
@@ -477,46 +458,40 @@ export default async function RegionServicePage({
               <span>06</span>
               <strong>완료</strong>
               <p>
-                최종 확인 후
-                공사를 마무리합니다.
+                최종 확인 후 공사를 마무리합니다.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* LOCAL INFORMATION */}
+      {/* INFORMATION */}
 
       <section className="local-service-information">
         <div className="local-service-container">
           <div className="local-service-label">
             <span>04</span>
-
             <p>LOCAL INFORMATION</p>
           </div>
 
           <div className="local-service-information-grid">
             <div>
               <span>AREA</span>
-
               <strong>{region.name}</strong>
             </div>
 
             <div>
               <span>SERVICE</span>
-
               <strong>{serviceData.name}</strong>
             </div>
 
             <div>
               <span>SERVICE AREA</span>
-
               <strong>천안 / 아산 전 지역</strong>
             </div>
 
             <div>
               <span>LICENSE</span>
-
               <strong>실내건축공사업</strong>
             </div>
           </div>
@@ -529,7 +504,6 @@ export default async function RegionServicePage({
         <div className="local-service-container">
           <div className="local-service-label">
             <span>05</span>
-
             <p>LOCAL INTERIOR</p>
           </div>
 
@@ -537,41 +511,36 @@ export default async function RegionServicePage({
             <h2>
               {region.name}
               <br />
-              {serviceData.shortName}
-              <br />
-              인테리어 상담
+              {serviceData.shortName} 인테리어 상담
             </h2>
 
             <div>
               <p>
-                {region.name}에서 {serviceData.name}을
-                계획하고 있다면 현장의 구조와 현재 상태,
-                필요한 공사 범위를 먼저 확인하는 것이 중요합니다.
+                {region.name}에서 {serviceData.name}을 계획하고 있다면
+                현장의 구조와 현재 상태, 필요한 공사 범위를 먼저
+                확인하는 것이 중요합니다.
               </p>
 
               <p>
-                정감공간은 공간의 사용 목적과 동선,
-                마감 상태 등을 확인해
-                현장에 맞는 인테리어 방향을 제안합니다.
+                정감공간은 공간의 사용 목적과 동선, 마감 상태 등을
+                확인해 현장에 맞는 인테리어 방향을 제안합니다.
               </p>
 
               <p>
-                상담 시 현장 위치와 공간 종류,
-                원하는 공사 범위와 참고 사진 등을
-                알려주시면 보다 원활하게 상담할 수 있습니다.
+                상담 시 현장 위치와 공간 종류, 원하는 공사 범위와 참고
+                사진 등을 알려주시면 보다 원활하게 상담할 수 있습니다.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* OTHER SERVICES */}
+      {/* OTHER */}
 
       <section className="local-service-other">
         <div className="local-service-container">
           <div className="local-service-label">
             <span>06</span>
-
             <p>OTHER SERVICE</p>
           </div>
 
@@ -582,13 +551,8 @@ export default async function RegionServicePage({
                 href={`/regions/${region.slug}/${item.slug}`}
               >
                 <div>
-                  <span>
-                    {region.name}
-                  </span>
-
-                  <strong>
-                    {item.name}
-                  </strong>
+                  <span>{region.name}</span>
+                  <strong>{item.name}</strong>
                 </div>
 
                 <span>↗</span>
@@ -598,7 +562,7 @@ export default async function RegionServicePage({
         </div>
       </section>
 
-      {/* REGION */}
+      {/* REGION LINK */}
 
       <section className="local-service-region-link">
         <div className="local-service-container">
@@ -631,20 +595,169 @@ export default async function RegionServicePage({
           <div className="local-service-contact-actions">
             <a href={TEL}>
               <span>전화 상담</span>
-
-              <strong>
-                041-415-0410
-              </strong>
+              <strong>041-415-0410</strong>
             </a>
 
             <Link href="/contact">
               <span>견적 문의</span>
-
               <strong>↗</strong>
             </Link>
           </div>
         </div>
       </section>
+
+      {/* MOBILE / PAGE STYLE */}
+
+      <style>{`
+        .local-service-hero-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 30px;
+          width: 100%;
+        }
+
+        .local-service-hero-top span {
+          display: block;
+          font-size: 12px;
+          letter-spacing: 0.14em;
+          white-space: nowrap;
+        }
+
+        .local-service-hero-content {
+          margin-top: 95px;
+          max-width: 850px;
+        }
+
+        .local-service-eyebrow {
+          margin: 0 0 35px;
+          font-size: 18px;
+          line-height: 1.5;
+        }
+
+        .local-service-hero-content h1 {
+          margin: 0;
+          font-size: clamp(48px, 7vw, 88px);
+          line-height: 1.06;
+          letter-spacing: -0.055em;
+          font-weight: 700;
+        }
+
+        .local-service-description {
+          margin: 42px 0 0;
+          max-width: 760px;
+          font-size: 20px;
+          line-height: 1.75;
+          word-break: keep-all;
+        }
+
+        .local-service-intro-grid p,
+        .local-service-seo-grid p {
+          word-break: keep-all;
+        }
+
+        @media (max-width: 800px) {
+          .local-service-hero {
+            padding-top: 72px;
+            padding-bottom: 90px;
+          }
+
+          .local-service-hero-top {
+            gap: 16px;
+          }
+
+          .local-service-hero-top span {
+            font-size: 9px;
+            letter-spacing: 0.11em;
+          }
+
+          .local-service-hero-top span:last-child {
+            text-align: right;
+          }
+
+          .local-service-hero-content {
+            margin-top: 70px;
+          }
+
+          .local-service-eyebrow {
+            margin-bottom: 28px;
+            font-size: 15px;
+            line-height: 1.5;
+          }
+
+          .local-service-hero-content h1 {
+            font-size: 46px;
+            line-height: 1.08;
+            letter-spacing: -0.055em;
+          }
+
+          .local-service-description {
+            margin-top: 34px;
+            font-size: 17px;
+            line-height: 1.75;
+          }
+
+          .local-service-label {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+          }
+
+          .local-service-intro-grid {
+            margin-top: 48px;
+          }
+
+          .local-service-intro-grid h2 {
+            font-size: 38px;
+            line-height: 1.15;
+          }
+
+          .local-service-intro-grid p {
+            font-size: 16px;
+            line-height: 1.8;
+          }
+
+          .local-service-intro-grid p + p {
+            margin-top: 25px;
+          }
+
+          .local-service-scope-list strong {
+            word-break: keep-all;
+          }
+
+          .local-service-process-grid p {
+            word-break: keep-all;
+          }
+
+          .local-service-seo-grid h2 {
+            word-break: keep-all;
+          }
+
+          .local-service-seo-grid p {
+            font-size: 16px;
+            line-height: 1.8;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .local-service-hero-top span {
+            font-size: 8px;
+            letter-spacing: 0.08em;
+          }
+
+          .local-service-hero-content h1 {
+            font-size: 42px;
+          }
+
+          .local-service-description {
+            font-size: 16px;
+          }
+
+          .local-service-intro-grid h2 {
+            font-size: 34px;
+          }
+        }
+      `}</style>
     </>
   );
 }
