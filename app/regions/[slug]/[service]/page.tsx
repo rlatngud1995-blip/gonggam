@@ -27,7 +27,6 @@ type ServiceData = {
   name: string;
   shortName: string;
   english: string;
-  title: string;
   description: string;
   intro: string;
   secondIntro: string;
@@ -43,7 +42,6 @@ const SERVICES: ServiceData[] = [
     name: "아파트 인테리어",
     shortName: "아파트",
     english: "APARTMENT INTERIOR",
-    title: "아파트 인테리어",
 
     description:
       "아파트의 구조와 생활 동선을 고려해 거실·주방·욕실·침실 등 공간별 인테리어와 리모델링을 진행합니다.",
@@ -100,7 +98,6 @@ const SERVICES: ServiceData[] = [
     name: "구축 인테리어",
     shortName: "구축",
     english: "OLD HOUSE INTERIOR",
-    title: "구축 인테리어",
 
     description:
       "오래된 주거공간의 기존 상태를 확인하고 철거·주방·욕실·바닥·도배·전기 등 필요한 공사 범위를 정리해 리모델링을 진행합니다.",
@@ -157,7 +154,6 @@ const SERVICES: ServiceData[] = [
     name: "상가 인테리어",
     shortName: "상가",
     english: "COMMERCIAL INTERIOR",
-    title: "상가 인테리어",
 
     description:
       "매장과 업무공간의 업종 특성, 고객 동선, 작업 동선과 운영 방식을 고려한 상업공간 인테리어를 진행합니다.",
@@ -214,7 +210,6 @@ const SERVICES: ServiceData[] = [
     name: "학교 리모델링",
     shortName: "학교",
     english: "EDUCATION SPACE",
-    title: "학교 리모델링",
 
     description:
       "학교와 교육시설의 사용 목적, 학생과 교직원의 동선, 안전성과 내구성을 고려한 교육공간 리모델링을 진행합니다.",
@@ -300,11 +295,10 @@ export async function generateMetadata({
 
   const title = `${region.name} ${serviceData.name} 업체 | 정감공간`;
 
-  const description = `${region.name} ${serviceData.name} 상담. ${serviceData.shortName} 공사 범위와 현장 상태를 확인해 천안·아산 인테리어 전문 정감공간이 상담합니다.`;
+  const description = `${region.name} ${serviceData.name} 상담. 현장 상태와 공사 범위를 확인해 천안·아산 인테리어 전문 정감공간이 상담합니다.`;
 
   return {
     title,
-
     description,
 
     keywords: [
@@ -381,15 +375,9 @@ export default async function RegionServicePage({
 
     provider: {
       "@type": "GeneralContractor",
-
       "@id": `${SITE_URL}/#business`,
-
       name: "정감공간",
-
-      alternateName: "JEONGGAM SPACE",
-
       url: SITE_URL,
-
       telephone: PHONE,
     },
 
@@ -450,11 +438,37 @@ export default async function RegionServicePage({
 
       acceptedAnswer: {
         "@type": "Answer",
-
         text: faq.a,
       },
     })),
   };
+
+  const processItems = [
+    {
+      title: "상담",
+      text: "현장 위치와 공간 종류, 필요한 공사 범위를 확인합니다.",
+    },
+    {
+      title: "현장 확인",
+      text: "실제 현장 상태와 구조, 기존 마감 상태를 확인합니다.",
+    },
+    {
+      title: "공사 계획",
+      text: "공간 목적과 현장 조건에 맞춰 공사 범위를 정리합니다.",
+    },
+    {
+      title: "시공",
+      text: "계획된 공정에 따라 인테리어 시공을 진행합니다.",
+    },
+    {
+      title: "마감 확인",
+      text: "주요 마감과 시공 상태를 확인합니다.",
+    },
+    {
+      title: "완료",
+      text: "최종 확인 후 공사를 마무리합니다.",
+    },
+  ];
 
   return (
     <>
@@ -531,7 +545,7 @@ export default async function RegionServicePage({
             <h2>
               {region.name}
               <br />
-              {serviceData.title}
+              {serviceData.name}
             </h2>
 
             <div>
@@ -558,10 +572,10 @@ export default async function RegionServicePage({
             <p>WORK SCOPE</p>
           </div>
 
-          <div className="local-service-scope-list">
+          <div className="fixed-scope-list">
             {serviceData.points.map((point, index) => (
-              <div key={point}>
-                <span>
+              <div className="fixed-scope-row" key={point}>
+                <span className="fixed-number">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
@@ -574,16 +588,16 @@ export default async function RegionServicePage({
 
       {/* CHECKLIST */}
 
-      <section className="local-service-checklist">
+      <section className="fixed-check-section">
         <div className="local-service-container">
           <div className="local-service-label">
             <span>03</span>
             <p>BEFORE CONSULTATION</p>
           </div>
 
-          <div className="local-service-checklist-grid">
-            <div>
-              <p className="local-service-small-title">
+          <div className="fixed-check-grid">
+            <div className="fixed-check-heading">
+              <p>
                 {region.name} {serviceData.name}
               </p>
 
@@ -594,9 +608,9 @@ export default async function RegionServicePage({
               </h2>
             </div>
 
-            <div className="local-service-checklist-list">
+            <div className="fixed-check-list">
               {serviceData.checklist.map((item, index) => (
-                <div key={item}>
+                <div className="fixed-check-row" key={item}>
                   <span>
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -611,92 +625,59 @@ export default async function RegionServicePage({
 
       {/* PROCESS */}
 
-      <section className="local-service-process">
+      <section className="fixed-process-section">
         <div className="local-service-container">
           <div className="local-service-label">
             <span>04</span>
             <p>PROCESS</p>
           </div>
 
-          <div className="local-service-process-grid">
-            <div>
-              <span>01</span>
-              <strong>상담</strong>
-              <p>
-                현장 위치와 공간 종류, 필요한 공사 범위를 확인합니다.
-              </p>
-            </div>
+          <div className="fixed-process-list">
+            {processItems.map((item, index) => (
+              <div className="fixed-process-row" key={item.title}>
+                <div className="fixed-process-title">
+                  <span>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
 
-            <div>
-              <span>02</span>
-              <strong>현장 확인</strong>
-              <p>
-                실제 현장 상태와 구조, 기존 마감 상태를 확인합니다.
-              </p>
-            </div>
+                  <strong>{item.title}</strong>
+                </div>
 
-            <div>
-              <span>03</span>
-              <strong>공사 계획</strong>
-              <p>
-                공간 목적과 현장 조건에 맞춰 공사 범위를 정리합니다.
-              </p>
-            </div>
-
-            <div>
-              <span>04</span>
-              <strong>시공</strong>
-              <p>
-                계획된 공정에 따라 인테리어 시공을 진행합니다.
-              </p>
-            </div>
-
-            <div>
-              <span>05</span>
-              <strong>마감 확인</strong>
-              <p>
-                주요 마감과 시공 상태를 확인합니다.
-              </p>
-            </div>
-
-            <div>
-              <span>06</span>
-              <strong>완료</strong>
-              <p>
-                최종 확인 후 공사를 마무리합니다.
-              </p>
-            </div>
+                <p>{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* LOCAL INFORMATION */}
+      {/* INFORMATION */}
 
-      <section className="local-service-information">
+      <section className="fixed-info-section">
         <div className="local-service-container">
           <div className="local-service-label">
             <span>05</span>
             <p>LOCAL INFORMATION</p>
           </div>
 
-          <div className="local-service-information-grid">
-            <div>
+          <div className="fixed-info-list">
+            <div className="fixed-info-row">
               <span>AREA</span>
               <strong>{region.name}</strong>
             </div>
 
-            <div>
+            <div className="fixed-info-row">
               <span>SERVICE</span>
               <strong>{serviceData.name}</strong>
             </div>
 
-            <div>
+            <div className="fixed-info-row">
               <span>SERVICE AREA</span>
               <strong>천안 / 아산 전 지역</strong>
             </div>
 
-            <div>
+            <div className="fixed-info-row">
               <span>LICENSE</span>
+
               <Link href="/company/license">
                 실내건축공사업
               </Link>
@@ -705,7 +686,7 @@ export default async function RegionServicePage({
         </div>
       </section>
 
-      {/* LOCAL SEO CONTENT */}
+      {/* SEO CONTENT */}
 
       <section className="local-service-seo">
         <div className="local-service-container">
@@ -747,15 +728,17 @@ export default async function RegionServicePage({
 
       {/* FAQ */}
 
-      <section className="local-service-faq">
+      <section className="fixed-faq-section">
         <div className="local-service-container">
           <div className="local-service-label">
             <span>07</span>
             <p>FAQ</p>
           </div>
 
-          <div className="local-service-faq-heading">
-            <p>{region.name} {serviceData.name}</p>
+          <div className="fixed-faq-heading">
+            <p>
+              {region.name} {serviceData.name}
+            </p>
 
             <h2>
               자주 묻는
@@ -764,7 +747,7 @@ export default async function RegionServicePage({
             </h2>
           </div>
 
-          <div className="local-service-faq-list">
+          <div className="fixed-faq-list">
             {serviceData.faqs.map((faq, index) => (
               <details key={faq.q}>
                 <summary>
@@ -788,75 +771,87 @@ export default async function RegionServicePage({
         </div>
       </section>
 
-      {/* OTHER SERVICES */}
+      {/* OTHER SERVICE */}
 
-      <section className="local-service-other">
+      <section className="fixed-other-section">
         <div className="local-service-container">
           <div className="local-service-label">
             <span>08</span>
             <p>OTHER SERVICE</p>
           </div>
 
-          <div className="local-service-other-list">
+          <div className="fixed-other-list">
             {otherServices.map((item) => (
               <Link
                 key={item.slug}
                 href={`/regions/${region.slug}/${item.slug}`}
+                className="fixed-other-row"
               >
                 <div>
                   <span>{region.name}</span>
-
                   <strong>{item.name}</strong>
                 </div>
 
-                <span>↗</span>
+                <b>↗</b>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TRUST LINKS */}
+      {/* COMPANY LINKS */}
 
-      <section className="local-service-trust">
+      <section className="fixed-company-section">
         <div className="local-service-container">
           <div className="local-service-label">
             <span>09</span>
             <p>COMPANY</p>
           </div>
 
-          <div className="local-service-trust-list">
-            <Link href={`/regions/${region.slug}`}>
+          <div className="fixed-company-list">
+            <Link
+              href={`/regions/${region.slug}`}
+              className="fixed-company-row"
+            >
               <div>
                 <span>AREA</span>
+
                 <strong>
                   {region.name} 인테리어 전체보기
                 </strong>
               </div>
 
-              <span>↗</span>
+              <b>↗</b>
             </Link>
 
-            <Link href="/company/license">
+            <Link
+              href="/company/license"
+              className="fixed-company-row"
+            >
               <div>
                 <span>LICENSE</span>
+
                 <strong>
                   실내건축공사업 면허 확인
                 </strong>
               </div>
 
-              <span>↗</span>
+              <b>↗</b>
             </Link>
 
-            <Link href="/company/youth">
+            <Link
+              href="/company/youth"
+              className="fixed-company-row"
+            >
               <div>
                 <span>COMPANY</span>
+
                 <strong>
                   청년창업기업 확인
                 </strong>
               </div>
 
-              <span>↗</span>
+              <b>↗</b>
             </Link>
           </div>
         </div>
@@ -877,7 +872,6 @@ export default async function RegionServicePage({
           <div className="local-service-contact-actions">
             <a href={TEL}>
               <span>전화 상담</span>
-
               <strong>{PHONE}</strong>
             </a>
 
@@ -889,344 +883,806 @@ export default async function RegionServicePage({
         </div>
       </section>
 
-      {/* PAGE STYLE */}
-
       <style>{`
+        /* =========================
+           COMMON
+        ========================= */
+
         .local-service-hero-top {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 30px;
-          width: 100%;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: space-between !important;
+          gap: 30px !important;
+          width: 100% !important;
         }
 
         .local-service-hero-top span {
-          display: block;
-          font-size: 12px;
-          letter-spacing: 0.14em;
-          white-space: nowrap;
+          display: block !important;
+          font-size: 12px !important;
+          letter-spacing: 0.14em !important;
+          white-space: nowrap !important;
         }
 
-        .local-service-hero-content {
-          margin-top: 95px;
-          max-width: 850px;
-        }
-
-        .local-service-eyebrow {
-          margin: 0 0 35px;
-          font-size: 18px;
-          line-height: 1.5;
-        }
-
-        .local-service-hero-content h1 {
-          margin: 0;
-          font-size: clamp(48px, 7vw, 88px);
-          line-height: 1.06;
-          letter-spacing: -0.055em;
-          font-weight: 700;
-        }
-
-        .local-service-description {
-          margin: 42px 0 0;
-          max-width: 800px;
-          font-size: 20px;
-          line-height: 1.75;
-          word-break: keep-all;
-        }
-
+        .local-service-description,
         .local-service-intro-grid p,
         .local-service-seo-grid p {
-          word-break: keep-all;
+          word-break: keep-all !important;
         }
 
-        .local-service-checklist {
-          padding: 110px 0;
-          background: #f5f5f5;
+        /* =========================
+           WORK SCOPE
+        ========================= */
+
+        .fixed-scope-list {
+          margin-top: 50px !important;
+          border-top: 1px solid #111 !important;
         }
 
-        .local-service-checklist-grid {
-          margin-top: 55px;
-          display: grid;
-          grid-template-columns: 0.8fr 1.2fr;
-          gap: 70px;
+        .fixed-scope-row {
+          min-height: 74px !important;
+
+          display: grid !important;
+          grid-template-columns: 54px minmax(0, 1fr) !important;
+
+          align-items: center !important;
+
+          column-gap: 22px !important;
+
+          border-bottom: 1px solid #d0d0d0 !important;
         }
 
-        .local-service-small-title {
-          margin: 0 0 20px;
-          color: #777;
-          font-size: 12px;
+        .fixed-scope-row .fixed-number {
+          margin: 0 !important;
+          padding: 0 !important;
+
+          display: block !important;
+
+          color: #999 !important;
+
+          font-size: 11px !important;
+          line-height: 1 !important;
+
+          font-weight: 400 !important;
         }
 
-        .local-service-checklist-grid h2 {
-          margin: 0;
-          font-size: 42px;
-          line-height: 1.15;
-          letter-spacing: -0.05em;
+        .fixed-scope-row strong {
+          margin: 0 !important;
+          padding: 0 !important;
+
+          display: block !important;
+
+          color: #111 !important;
+
+          font-size: 18px !important;
+          line-height: 1.45 !important;
+
+          font-weight: 600 !important;
+
+          word-break: keep-all !important;
         }
 
-        .local-service-checklist-list {
-          border-top: 1px solid #111;
+        /* =========================
+           CHECKLIST
+        ========================= */
+
+        .fixed-check-section {
+          padding: 110px 0 !important;
+          background: #f5f5f5 !important;
         }
 
-        .local-service-checklist-list > div {
-          min-height: 68px;
-          display: grid;
-          grid-template-columns: 55px 1fr;
-          align-items: center;
-          gap: 10px;
-          border-bottom: 1px solid #ccc;
+        .fixed-check-grid {
+          margin-top: 55px !important;
+
+          display: grid !important;
+          grid-template-columns: 0.8fr 1.2fr !important;
+
+          gap: 70px !important;
         }
 
-        .local-service-checklist-list span {
-          color: #999;
-          font-size: 10px;
+        .fixed-check-heading > p {
+          margin: 0 0 22px !important;
+
+          color: #888 !important;
+
+          font-size: 13px !important;
+          line-height: 1.5 !important;
         }
 
-        .local-service-checklist-list p {
-          margin: 0;
-          font-size: 15px;
-          line-height: 1.6;
-          word-break: keep-all;
+        .fixed-check-heading h2 {
+          margin: 0 !important;
+
+          font-size: 44px !important;
+          line-height: 1.15 !important;
+
+          font-weight: 700 !important;
+
+          letter-spacing: -0.05em !important;
+
+          word-break: keep-all !important;
         }
 
-        .local-service-faq {
-          padding: 110px 0;
-          background: #fff;
+        .fixed-check-list {
+          border-top: 1px solid #111 !important;
         }
 
-        .local-service-faq-heading {
-          margin-top: 55px;
+        .fixed-check-row {
+          min-height: 76px !important;
+
+          display: grid !important;
+          grid-template-columns: 55px minmax(0, 1fr) !important;
+
+          align-items: center !important;
+
+          column-gap: 20px !important;
+
+          border-bottom: 1px solid #ccc !important;
         }
 
-        .local-service-faq-heading > p {
-          margin: 0 0 18px;
-          color: #777;
-          font-size: 13px;
+        .fixed-check-row > span {
+          color: #999 !important;
+          font-size: 11px !important;
         }
 
-        .local-service-faq-heading h2 {
-          margin: 0;
-          font-size: 48px;
-          line-height: 1.08;
-          letter-spacing: -0.05em;
+        .fixed-check-row > p {
+          margin: 0 !important;
+
+          font-size: 16px !important;
+          line-height: 1.55 !important;
+
+          word-break: keep-all !important;
         }
 
-        .local-service-faq-list {
-          margin-top: 55px;
-          border-top: 1px solid #111;
+        /* =========================
+           PROCESS
+        ========================= */
+
+        .fixed-process-section {
+          padding: 110px 0 !important;
+          background: #fff !important;
         }
 
-        .local-service-faq-list details {
-          border-bottom: 1px solid #ccc;
+        .fixed-process-list {
+          margin-top: 55px !important;
+          border-top: 1px solid #111 !important;
         }
 
-        .local-service-faq-list summary {
-          min-height: 88px;
-          display: grid;
-          grid-template-columns: 60px 1fr 30px;
-          align-items: center;
-          gap: 15px;
-          cursor: pointer;
-          list-style: none;
+        .fixed-process-row {
+          min-height: 115px !important;
+
+          display: grid !important;
+          grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr) !important;
+
+          align-items: center !important;
+
+          gap: 40px !important;
+
+          border-bottom: 1px solid #ccc !important;
         }
 
-        .local-service-faq-list summary::-webkit-details-marker {
-          display: none;
+        .fixed-process-title {
+          display: grid !important;
+          grid-template-columns: 55px minmax(0, 1fr) !important;
+
+          align-items: center !important;
+
+          gap: 18px !important;
         }
 
-        .local-service-faq-list summary > span {
-          color: #999;
-          font-size: 10px;
+        .fixed-process-title > span {
+          display: block !important;
+
+          color: #999 !important;
+
+          font-size: 11px !important;
+          line-height: 1 !important;
         }
 
-        .local-service-faq-list summary strong {
-          font-size: 16px;
-          line-height: 1.5;
-          font-weight: 600;
-          word-break: keep-all;
+        .fixed-process-title > strong {
+          display: block !important;
+
+          font-size: 20px !important;
+          line-height: 1.4 !important;
+
+          font-weight: 650 !important;
         }
 
-        .local-service-faq-list summary i {
-          font-style: normal;
-          font-size: 22px;
-          font-weight: 300;
+        .fixed-process-row > p {
+          margin: 0 !important;
+
+          color: #444 !important;
+
+          font-size: 16px !important;
+          line-height: 1.75 !important;
+
+          word-break: keep-all !important;
         }
 
-        .local-service-faq-list details[open] summary i {
-          transform: rotate(45deg);
+        /* =========================
+           INFORMATION
+        ========================= */
+
+        .fixed-info-section {
+          padding: 100px 0 !important;
+          background: #f5f5f5 !important;
         }
 
-        .local-service-faq-list details > div {
-          padding: 0 45px 28px 75px;
+        .fixed-info-list {
+          margin-top: 50px !important;
+          border-top: 1px solid #111 !important;
         }
 
-        .local-service-faq-list details > div p {
-          margin: 0;
-          color: #666;
-          font-size: 14px;
-          line-height: 1.9;
-          word-break: keep-all;
+        .fixed-info-row {
+          min-height: 76px !important;
+
+          display: grid !important;
+          grid-template-columns: 180px minmax(0, 1fr) !important;
+
+          align-items: center !important;
+
+          column-gap: 40px !important;
+
+          border-bottom: 1px solid #ccc !important;
         }
 
-        .local-service-trust {
-          padding: 100px 0;
-          background: #f5f5f5;
+        .fixed-info-row > span {
+          display: block !important;
+
+          color: #999 !important;
+
+          font-size: 10px !important;
+
+          letter-spacing: 0.12em !important;
         }
 
-        .local-service-trust-list {
-          margin-top: 50px;
-          border-top: 1px solid #111;
+        .fixed-info-row > strong,
+        .fixed-info-row > a {
+          display: block !important;
+
+          margin: 0 !important;
+
+          color: #111 !important;
+
+          font-size: 17px !important;
+          line-height: 1.5 !important;
+
+          font-weight: 600 !important;
+
+          text-decoration: none !important;
+
+          word-break: keep-all !important;
         }
 
-        .local-service-trust-list > a {
-          min-height: 82px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 20px;
-          border-bottom: 1px solid #bbb;
-          color: #000;
-          text-decoration: none;
+        .fixed-info-row > a {
+          text-decoration: underline !important;
+          text-underline-offset: 4px !important;
         }
 
-        .local-service-trust-list > a > div {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
+        /* =========================
+           FAQ
+        ========================= */
+
+        .fixed-faq-section {
+          padding: 110px 0 !important;
+          background: #fff !important;
         }
 
-        .local-service-trust-list > a > div span {
-          color: #999;
-          font-size: 9px;
-          letter-spacing: 0.14em;
+        .fixed-faq-heading {
+          margin-top: 55px !important;
         }
 
-        .local-service-trust-list > a > div strong {
-          font-size: 17px;
-          font-weight: 600;
+        .fixed-faq-heading > p {
+          margin: 0 0 18px !important;
+
+          color: #777 !important;
+
+          font-size: 13px !important;
         }
+
+        .fixed-faq-heading h2 {
+          margin: 0 !important;
+
+          font-size: 46px !important;
+          line-height: 1.08 !important;
+
+          letter-spacing: -0.05em !important;
+        }
+
+        .fixed-faq-list {
+          margin-top: 50px !important;
+
+          border-top: 1px solid #111 !important;
+        }
+
+        .fixed-faq-list details {
+          border-bottom: 1px solid #ccc !important;
+        }
+
+        .fixed-faq-list summary {
+          min-height: 88px !important;
+
+          display: grid !important;
+
+          grid-template-columns:
+            55px
+            minmax(0, 1fr)
+            25px !important;
+
+          align-items: center !important;
+
+          gap: 18px !important;
+
+          list-style: none !important;
+
+          cursor: pointer !important;
+        }
+
+        .fixed-faq-list summary::-webkit-details-marker {
+          display: none !important;
+        }
+
+        .fixed-faq-list summary > span {
+          color: #999 !important;
+
+          font-size: 10px !important;
+        }
+
+        .fixed-faq-list summary > strong {
+          font-size: 16px !important;
+          line-height: 1.55 !important;
+
+          font-weight: 600 !important;
+
+          word-break: keep-all !important;
+        }
+
+        .fixed-faq-list summary > i {
+          font-style: normal !important;
+
+          font-size: 22px !important;
+
+          text-align: right !important;
+        }
+
+        .fixed-faq-list details[open] summary > i {
+          transform: rotate(45deg) !important;
+        }
+
+        .fixed-faq-list details > div {
+          padding:
+            0
+            40px
+            28px
+            73px !important;
+        }
+
+        .fixed-faq-list details > div p {
+          margin: 0 !important;
+
+          color: #666 !important;
+
+          font-size: 14px !important;
+          line-height: 1.85 !important;
+
+          word-break: keep-all !important;
+        }
+
+        /* =========================
+           OTHER SERVICE
+        ========================= */
+
+        .fixed-other-section {
+          padding: 105px 0 !important;
+          background: #fff !important;
+        }
+
+        .fixed-other-list {
+          margin-top: 50px !important;
+
+          border-top: 1px solid #111 !important;
+        }
+
+        .fixed-other-row {
+          min-height: 88px !important;
+
+          display: grid !important;
+
+          grid-template-columns:
+            minmax(0, 1fr)
+            40px !important;
+
+          align-items: center !important;
+
+          gap: 25px !important;
+
+          border-bottom: 1px solid #ccc !important;
+
+          color: #111 !important;
+
+          text-decoration: none !important;
+        }
+
+        .fixed-other-row > div {
+          min-width: 0 !important;
+
+          display: flex !important;
+          align-items: baseline !important;
+
+          gap: 22px !important;
+        }
+
+        .fixed-other-row > div > span {
+          flex: 0 0 auto !important;
+
+          color: #999 !important;
+
+          font-size: 12px !important;
+        }
+
+        .fixed-other-row > div > strong {
+          min-width: 0 !important;
+
+          font-size: 19px !important;
+          line-height: 1.45 !important;
+
+          font-weight: 600 !important;
+
+          word-break: keep-all !important;
+        }
+
+        .fixed-other-row > b {
+          display: block !important;
+
+          text-align: right !important;
+
+          font-size: 20px !important;
+          line-height: 1 !important;
+
+          font-weight: 400 !important;
+        }
+
+        /* =========================
+           COMPANY
+        ========================= */
+
+        .fixed-company-section {
+          padding: 100px 0 !important;
+          background: #f5f5f5 !important;
+        }
+
+        .fixed-company-list {
+          margin-top: 50px !important;
+
+          border-top: 1px solid #111 !important;
+        }
+
+        .fixed-company-row {
+          min-height: 92px !important;
+
+          display: grid !important;
+
+          grid-template-columns:
+            minmax(0, 1fr)
+            40px !important;
+
+          align-items: center !important;
+
+          gap: 25px !important;
+
+          border-bottom: 1px solid #bbb !important;
+
+          color: #111 !important;
+
+          text-decoration: none !important;
+        }
+
+        .fixed-company-row > div {
+          min-width: 0 !important;
+
+          display: flex !important;
+          flex-direction: column !important;
+
+          gap: 9px !important;
+        }
+
+        .fixed-company-row > div > span {
+          color: #999 !important;
+
+          font-size: 10px !important;
+
+          letter-spacing: 0.14em !important;
+        }
+
+        .fixed-company-row > div > strong {
+          font-size: 18px !important;
+          line-height: 1.45 !important;
+
+          font-weight: 600 !important;
+
+          word-break: keep-all !important;
+        }
+
+        .fixed-company-row > b {
+          display: block !important;
+
+          text-align: right !important;
+
+          font-size: 20px !important;
+
+          font-weight: 400 !important;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
 
         @media (max-width: 800px) {
-          .local-service-hero {
-            padding-top: 72px;
-            padding-bottom: 90px;
-          }
-
           .local-service-hero-top {
-            gap: 16px;
+            gap: 15px !important;
           }
 
           .local-service-hero-top span {
-            font-size: 9px;
-            letter-spacing: 0.11em;
+            font-size: 8px !important;
+            letter-spacing: 0.08em !important;
           }
 
-          .local-service-hero-top span:last-child {
-            text-align: right;
+          /* WORK SCOPE */
+
+          .fixed-scope-list {
+            margin-top: 35px !important;
           }
 
-          .local-service-hero-content {
-            margin-top: 70px;
+          .fixed-scope-row {
+            min-height: 68px !important;
+
+            grid-template-columns:
+              40px
+              minmax(0, 1fr) !important;
+
+            column-gap: 15px !important;
           }
 
-          .local-service-eyebrow {
-            margin-bottom: 28px;
-            font-size: 15px;
+          .fixed-scope-row .fixed-number {
+            font-size: 10px !important;
           }
 
-          .local-service-hero-content h1 {
-            font-size: 44px;
-            line-height: 1.08;
+          .fixed-scope-row strong {
+            font-size: 16px !important;
           }
 
-          .local-service-description {
-            margin-top: 34px;
-            font-size: 16px;
-            line-height: 1.8;
+          /* CHECK */
+
+          .fixed-check-section {
+            padding: 75px 0 !important;
           }
 
-          .local-service-intro-grid h2 {
-            font-size: 36px;
+          .fixed-check-grid {
+            margin-top: 45px !important;
+
+            grid-template-columns: 1fr !important;
+
+            gap: 42px !important;
           }
 
-          .local-service-intro-grid p,
-          .local-service-seo-grid p {
-            font-size: 16px;
-            line-height: 1.8;
+          .fixed-check-heading h2 {
+            font-size: 36px !important;
+            line-height: 1.15 !important;
           }
 
-          .local-service-checklist {
-            padding: 75px 0;
+          .fixed-check-row {
+            min-height: 72px !important;
+
+            grid-template-columns:
+              42px
+              minmax(0, 1fr) !important;
+
+            column-gap: 14px !important;
           }
 
-          .local-service-checklist-grid {
-            margin-top: 45px;
-            grid-template-columns: 1fr;
-            gap: 40px;
+          .fixed-check-row > p {
+            font-size: 15px !important;
           }
 
-          .local-service-checklist-grid h2 {
-            font-size: 34px;
+          /* PROCESS */
+
+          .fixed-process-section {
+            padding: 75px 0 !important;
           }
 
-          .local-service-checklist-list > div {
-            grid-template-columns: 40px 1fr;
+          .fixed-process-list {
+            margin-top: 42px !important;
           }
 
-          .local-service-faq {
-            padding: 75px 0;
+          .fixed-process-row {
+            min-height: auto !important;
+
+            padding: 27px 0 !important;
+
+            grid-template-columns: 1fr !important;
+
+            gap: 18px !important;
           }
 
-          .local-service-faq-heading {
-            margin-top: 45px;
+          .fixed-process-title {
+            grid-template-columns:
+              42px
+              minmax(0, 1fr) !important;
+
+            gap: 14px !important;
           }
 
-          .local-service-faq-heading h2 {
-            font-size: 38px;
+          .fixed-process-title > span {
+            font-size: 10px !important;
           }
 
-          .local-service-faq-list {
-            margin-top: 40px;
+          .fixed-process-title > strong {
+            font-size: 17px !important;
           }
 
-          .local-service-faq-list summary {
-            min-height: 80px;
-            grid-template-columns: 42px 1fr 20px;
-            gap: 10px;
+          .fixed-process-row > p {
+            padding-left: 56px !important;
+
+            font-size: 15px !important;
+            line-height: 1.75 !important;
           }
 
-          .local-service-faq-list summary strong {
-            font-size: 14px;
+          /* INFO */
+
+          .fixed-info-section {
+            padding: 75px 0 !important;
           }
 
-          .local-service-faq-list details > div {
-            padding: 0 20px 25px 52px;
+          .fixed-info-list {
+            margin-top: 40px !important;
           }
 
-          .local-service-trust {
-            padding: 75px 0;
+          .fixed-info-row {
+            min-height: 70px !important;
+
+            grid-template-columns:
+              105px
+              minmax(0, 1fr) !important;
+
+            column-gap: 18px !important;
           }
 
-          .local-service-trust-list {
-            margin-top: 40px;
+          .fixed-info-row > span {
+            font-size: 9px !important;
           }
 
-          .local-service-trust-list > a > div strong {
-            font-size: 15px;
+          .fixed-info-row > strong,
+          .fixed-info-row > a {
+            font-size: 15px !important;
+          }
+
+          /* FAQ */
+
+          .fixed-faq-section {
+            padding: 75px 0 !important;
+          }
+
+          .fixed-faq-heading {
+            margin-top: 42px !important;
+          }
+
+          .fixed-faq-heading h2 {
+            font-size: 36px !important;
+          }
+
+          .fixed-faq-list {
+            margin-top: 38px !important;
+          }
+
+          .fixed-faq-list summary {
+            min-height: 78px !important;
+
+            grid-template-columns:
+              42px
+              minmax(0, 1fr)
+              20px !important;
+
+            gap: 12px !important;
+          }
+
+          .fixed-faq-list summary > strong {
+            font-size: 14px !important;
+          }
+
+          .fixed-faq-list details > div {
+            padding:
+              0
+              10px
+              25px
+              54px !important;
+          }
+
+          /* OTHER */
+
+          .fixed-other-section {
+            padding: 75px 0 !important;
+          }
+
+          .fixed-other-list {
+            margin-top: 40px !important;
+          }
+
+          .fixed-other-row {
+            min-height: 78px !important;
+
+            grid-template-columns:
+              minmax(0, 1fr)
+              28px !important;
+
+            gap: 14px !important;
+          }
+
+          .fixed-other-row > div {
+            display: grid !important;
+
+            grid-template-columns:
+              65px
+              minmax(0, 1fr) !important;
+
+            align-items: center !important;
+
+            gap: 14px !important;
+          }
+
+          .fixed-other-row > div > span {
+            font-size: 11px !important;
+          }
+
+          .fixed-other-row > div > strong {
+            font-size: 16px !important;
+          }
+
+          .fixed-other-row > b {
+            font-size: 18px !important;
+          }
+
+          /* COMPANY */
+
+          .fixed-company-section {
+            padding: 75px 0 !important;
+          }
+
+          .fixed-company-list {
+            margin-top: 40px !important;
+          }
+
+          .fixed-company-row {
+            min-height: 82px !important;
+
+            grid-template-columns:
+              minmax(0, 1fr)
+              28px !important;
+
+            gap: 14px !important;
+          }
+
+          .fixed-company-row > div > strong {
+            font-size: 16px !important;
+          }
+
+          .fixed-company-row > b {
+            font-size: 18px !important;
           }
         }
 
         @media (max-width: 420px) {
-          .local-service-hero-content h1 {
-            font-size: 40px;
+          .fixed-check-heading h2 {
+            font-size: 33px !important;
           }
 
-          .local-service-checklist-grid h2 {
-            font-size: 31px;
+          .fixed-info-row {
+            grid-template-columns:
+              95px
+              minmax(0, 1fr) !important;
           }
 
-          .local-service-faq-heading h2 {
-            font-size: 34px;
+          .fixed-other-row > div {
+            grid-template-columns:
+              60px
+              minmax(0, 1fr) !important;
           }
         }
       `}</style>
