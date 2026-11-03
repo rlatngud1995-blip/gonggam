@@ -1,3 +1,4 @@
+
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import "./globals.css";
@@ -19,7 +20,13 @@ export const metadata: Metadata = {
   },
 
   description:
-    "천안·아산 인테리어 전문 정감공간. 주거·상업·교육·공공공간 인테리어와 리모델링을 진행합니다.",
+    "천안·아산 인테리어 전문 정감공간. 아파트 인테리어, 구축 리모델링, 상가 인테리어, 학교 리모델링 등 주거·상업·교육공간의 인테리어를 진행합니다.",
+
+  applicationName: BRAND,
+
+  alternates: {
+    canonical: "/",
+  },
 
   verification: {
     other: {
@@ -35,26 +42,18 @@ export const metadata: Metadata = {
         type: "image/png",
       },
     ],
-
     shortcut: LOGO_IMAGE,
-
     apple: LOGO_IMAGE,
   },
 
   openGraph: {
     type: "website",
-
     locale: "ko_KR",
-
     url: SITE_URL,
-
     siteName: BRAND,
-
     title: "정감공간 | 천안·아산 인테리어·리모델링",
-
     description:
-      "천안·아산 주거·상업·교육·공공공간 인테리어 전문 정감공간.",
-
+      "천안·아산 인테리어 전문 정감공간. 아파트, 상가, 학교 및 다양한 공간의 인테리어와 리모델링을 진행합니다.",
     images: [
       {
         url: LOGO_IMAGE,
@@ -67,23 +66,18 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-
     title: "정감공간 | 천안·아산 인테리어·리모델링",
-
     description:
-      "천안·아산 주거·상업·교육·공공공간 인테리어 전문 정감공간.",
-
+      "천안·아산 주거·상업·교육공간 인테리어 전문 정감공간.",
     images: [LOGO_IMAGE],
   },
 
   robots: {
     index: true,
     follow: true,
-
     googleBot: {
       index: true,
       follow: true,
-
       "max-image-preview": "large",
       "max-snippet": -1,
       "max-video-preview": -1,
@@ -110,17 +104,11 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "GeneralContractor",
-
         "@id": `${SITE_URL}/#business`,
-
         name: BRAND,
-
         alternateName: "JEONGGAM SPACE",
-
         url: SITE_URL,
-
         telephone: PHONE,
-
         logo: `${SITE_URL}${LOGO_IMAGE}`,
 
         image: [
@@ -150,6 +138,7 @@ export default function RootLayout({
           "주거공간 인테리어",
           "아파트 인테리어",
           "빌라 인테리어",
+          "구축 아파트 리모델링",
           "상가 인테리어",
           "상업공간 인테리어",
           "학교 리모델링",
@@ -169,15 +158,10 @@ export default function RootLayout({
 
       {
         "@type": "Organization",
-
         "@id": `${SITE_URL}/#organization`,
-
         name: BRAND,
-
         alternateName: "JEONGGAM SPACE",
-
         url: SITE_URL,
-
         telephone: PHONE,
 
         logo: {
@@ -196,15 +180,10 @@ export default function RootLayout({
 
       {
         "@type": "WebSite",
-
         "@id": `${SITE_URL}/#website`,
-
         url: SITE_URL,
-
         name: BRAND,
-
         alternateName: "JEONGGAM SPACE",
-
         inLanguage: "ko-KR",
 
         publisher: {
@@ -248,16 +227,11 @@ export default function RootLayout({
           <div className="jg-footer-inner">
             <div className="jg-footer-top">
               <div>
-                <Link
-                  href="/"
-                  className="jg-footer-logo"
-                >
+                <Link href="/" className="jg-footer-logo">
                   정감공간
                 </Link>
 
-                <p>
-                  공간에 정감을 더하다.
-                </p>
+                <p>공간에 정감을 더하다.</p>
               </div>
 
               <nav
@@ -299,7 +273,6 @@ export default function RootLayout({
 
               <div>
                 <span>CONTACT</span>
-
                 <a href="tel:0414150410">
                   041-415-0410
                 </a>
@@ -307,15 +280,11 @@ export default function RootLayout({
 
               <div>
                 <span>AREA</span>
-
-                <strong>
-                  천안 / 아산 전 지역
-                </strong>
+                <strong>천안 / 아산 전 지역</strong>
               </div>
 
               <div>
                 <span>LICENSE</span>
-
                 <Link href="/company/license">
                   실내건축공사업 면허 보유
                 </Link>
@@ -323,7 +292,6 @@ export default function RootLayout({
 
               <div>
                 <span>COMPANY TYPE</span>
-
                 <Link href="/company/youth">
                   청년창업기업
                 </Link>
