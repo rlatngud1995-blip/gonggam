@@ -299,6 +299,7 @@ export async function generateMetadata({
 
   return {
     title,
+
     description,
 
     keywords: [
@@ -331,11 +332,6 @@ export async function generateMetadata({
     robots: {
       index: true,
       follow: true,
-
-      googleBot: {
-        index: true,
-        follow: true,
-      },
     },
   };
 }
@@ -357,91 +353,6 @@ export default async function RegionServicePage({
   const otherServices = SERVICES.filter(
     (item) => item.slug !== serviceData.slug
   );
-
-  const serviceSchema = {
-    "@context": "https://schema.org",
-
-    "@type": "Service",
-
-    "@id": `${canonical}#service`,
-
-    name: `${region.name} ${serviceData.name}`,
-
-    serviceType: serviceData.name,
-
-    url: canonical,
-
-    description: `${region.name} 지역 ${serviceData.name} 및 리모델링 상담을 제공하는 정감공간입니다.`,
-
-    provider: {
-      "@type": "GeneralContractor",
-      "@id": `${SITE_URL}/#business`,
-      name: "정감공간",
-      url: SITE_URL,
-      telephone: PHONE,
-    },
-
-    areaServed: [
-      {
-        "@type": "AdministrativeArea",
-        name: region.name,
-      },
-      {
-        "@type": "City",
-        name: "천안시",
-      },
-      {
-        "@type": "City",
-        name: "아산시",
-      },
-    ],
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-
-    "@type": "BreadcrumbList",
-
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "홈",
-        item: SITE_URL,
-      },
-
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: `${region.name} 인테리어`,
-        item: `${SITE_URL}/regions/${region.slug}`,
-      },
-
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: `${region.name} ${serviceData.name}`,
-        item: canonical,
-      },
-    ],
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-
-    "@type": "FAQPage",
-
-    mainEntity: serviceData.faqs.map((faq) => ({
-      "@type": "Question",
-
-      name: `${region.name} ${faq.q}`,
-
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    })),
-  };
 
   const processItems = [
     {
@@ -470,32 +381,94 @@ export default async function RegionServicePage({
     },
   ];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+
+    "@graph": [
+      {
+        "@type": "Service",
+
+        "@id": `${canonical}#service`,
+
+        name: `${region.name} ${serviceData.name}`,
+
+        serviceType: serviceData.name,
+
+        url: canonical,
+
+        description: `${region.name} 지역 ${serviceData.name} 및 리모델링 상담을 제공하는 정감공간입니다.`,
+
+        provider: {
+          "@type": "GeneralContractor",
+          "@id": `${SITE_URL}/#business`,
+          name: "정감공간",
+          url: SITE_URL,
+          telephone: PHONE,
+        },
+
+        areaServed: [
+          {
+            "@type": "AdministrativeArea",
+            name: region.name,
+          },
+          {
+            "@type": "City",
+            name: "천안시",
+          },
+          {
+            "@type": "City",
+            name: "아산시",
+          },
+        ],
+      },
+
+      {
+        "@type": "BreadcrumbList",
+
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "홈",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: `${region.name} 인테리어`,
+            item: `${SITE_URL}/regions/${region.slug}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: `${region.name} ${serviceData.name}`,
+            item: canonical,
+          },
+        ],
+      },
+
+      {
+        "@type": "FAQPage",
+
+        mainEntity: serviceData.faqs.map((faq) => ({
+          "@type": "Question",
+          name: `${region.name} ${faq.q}`,
+
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.a,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema).replace(
-            /</g,
-            "\\u003c"
-          ),
-        }}
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema).replace(
-            /</g,
-            "\\u003c"
-          ),
-        }}
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema).replace(
+          __html: JSON.stringify(structuredData).replace(
             /</g,
             "\\u003c"
           ),
@@ -504,15 +477,15 @@ export default async function RegionServicePage({
 
       {/* HERO */}
 
-      <section className="local-service-hero">
-        <div className="local-service-container">
-          <div className="local-service-hero-top">
+      <section className="rs-hero">
+        <div className="rs-container">
+          <div className="rs-topline">
             <span>JEONGGAM SPACE</span>
             <span>{serviceData.english}</span>
           </div>
 
-          <div className="local-service-hero-content">
-            <p className="local-service-eyebrow">
+          <div className="rs-hero-content">
+            <p className="rs-eyebrow">
               {region.name} {serviceData.name}
             </p>
 
@@ -522,7 +495,7 @@ export default async function RegionServicePage({
               {serviceData.name}
             </h1>
 
-            <p className="local-service-description">
+            <p className="rs-lead">
               정감공간은 {region.name}을 포함한 천안·아산 지역에서{" "}
               {serviceData.name} 상담과 시공을 진행합니다. 현장의 상태와
               필요한 공사 범위를 확인한 뒤 공간의 목적에 맞는 인테리어
@@ -534,23 +507,19 @@ export default async function RegionServicePage({
 
       {/* ABOUT */}
 
-      <section className="local-service-intro">
-        <div className="local-service-container">
-          <div className="local-service-label">
-            <span>01</span>
-            <p>ABOUT SERVICE</p>
-          </div>
+      <section className="rs-section">
+        <div className="rs-container">
+          <SectionLabel number="01" text="ABOUT SERVICE" />
 
-          <div className="local-service-intro-grid">
+          <div className="rs-two-column">
             <h2>
               {region.name}
               <br />
               {serviceData.name}
             </h2>
 
-            <div>
+            <div className="rs-copy">
               <p>{serviceData.intro}</p>
-
               <p>{serviceData.secondIntro}</p>
 
               <p>
@@ -565,17 +534,14 @@ export default async function RegionServicePage({
 
       {/* WORK SCOPE */}
 
-      <section className="local-service-scope">
-        <div className="local-service-container">
-          <div className="local-service-label">
-            <span>02</span>
-            <p>WORK SCOPE</p>
-          </div>
+      <section className="rs-section rs-gray">
+        <div className="rs-container">
+          <SectionLabel number="02" text="WORK SCOPE" />
 
-          <div className="fixed-scope-list">
+          <div className="rs-list">
             {serviceData.points.map((point, index) => (
-              <div className="fixed-scope-row" key={point}>
-                <span className="fixed-number">
+              <div className="rs-list-row" key={point}>
+                <span>
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
@@ -588,16 +554,13 @@ export default async function RegionServicePage({
 
       {/* CHECKLIST */}
 
-      <section className="fixed-check-section">
-        <div className="local-service-container">
-          <div className="local-service-label">
-            <span>03</span>
-            <p>BEFORE CONSULTATION</p>
-          </div>
+      <section className="rs-section">
+        <div className="rs-container">
+          <SectionLabel number="03" text="BEFORE CONSULTATION" />
 
-          <div className="fixed-check-grid">
-            <div className="fixed-check-heading">
-              <p>
+          <div className="rs-two-column">
+            <div>
+              <p className="rs-small">
                 {region.name} {serviceData.name}
               </p>
 
@@ -608,14 +571,14 @@ export default async function RegionServicePage({
               </h2>
             </div>
 
-            <div className="fixed-check-list">
+            <div className="rs-list">
               {serviceData.checklist.map((item, index) => (
-                <div className="fixed-check-row" key={item}>
+                <div className="rs-list-row" key={item}>
                   <span>
                     {String(index + 1).padStart(2, "0")}
                   </span>
 
-                  <p>{item}</p>
+                  <strong>{item}</strong>
                 </div>
               ))}
             </div>
@@ -625,17 +588,14 @@ export default async function RegionServicePage({
 
       {/* PROCESS */}
 
-      <section className="fixed-process-section">
-        <div className="local-service-container">
-          <div className="local-service-label">
-            <span>04</span>
-            <p>PROCESS</p>
-          </div>
+      <section className="rs-section rs-gray">
+        <div className="rs-container">
+          <SectionLabel number="04" text="PROCESS" />
 
-          <div className="fixed-process-list">
+          <div className="rs-process">
             {processItems.map((item, index) => (
-              <div className="fixed-process-row" key={item.title}>
-                <div className="fixed-process-title">
+              <div className="rs-process-row" key={item.title}>
+                <div className="rs-process-title">
                   <span>
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -650,32 +610,26 @@ export default async function RegionServicePage({
         </div>
       </section>
 
-      {/* INFORMATION */}
+      {/* INFO */}
 
-      <section className="fixed-info-section">
-        <div className="local-service-container">
-          <div className="local-service-label">
-            <span>05</span>
-            <p>LOCAL INFORMATION</p>
-          </div>
+      <section className="rs-section">
+        <div className="rs-container">
+          <SectionLabel number="05" text="LOCAL INFORMATION" />
 
-          <div className="fixed-info-list">
-            <div className="fixed-info-row">
-              <span>AREA</span>
-              <strong>{region.name}</strong>
-            </div>
+          <div className="rs-info">
+            <InfoRow label="AREA" value={region.name} />
 
-            <div className="fixed-info-row">
-              <span>SERVICE</span>
-              <strong>{serviceData.name}</strong>
-            </div>
+            <InfoRow
+              label="SERVICE"
+              value={serviceData.name}
+            />
 
-            <div className="fixed-info-row">
-              <span>SERVICE AREA</span>
-              <strong>천안 / 아산 전 지역</strong>
-            </div>
+            <InfoRow
+              label="SERVICE AREA"
+              value="천안 / 아산 전 지역"
+            />
 
-            <div className="fixed-info-row">
+            <div className="rs-info-row">
               <span>LICENSE</span>
 
               <Link href="/company/license">
@@ -686,16 +640,13 @@ export default async function RegionServicePage({
         </div>
       </section>
 
-      {/* SEO CONTENT */}
+      {/* LOCAL SEO */}
 
-      <section className="local-service-seo">
-        <div className="local-service-container">
-          <div className="local-service-label">
-            <span>06</span>
-            <p>LOCAL INTERIOR</p>
-          </div>
+      <section className="rs-section rs-gray">
+        <div className="rs-container">
+          <SectionLabel number="06" text="LOCAL INTERIOR" />
 
-          <div className="local-service-seo-grid">
+          <div className="rs-two-column">
             <h2>
               {region.name}
               <br />
@@ -704,7 +655,7 @@ export default async function RegionServicePage({
               인테리어 상담
             </h2>
 
-            <div>
+            <div className="rs-copy">
               <p>
                 {region.name}에서 {serviceData.name}을 계획하고 있다면
                 현장의 구조와 현재 상태, 필요한 공사 범위를 먼저
@@ -728,14 +679,11 @@ export default async function RegionServicePage({
 
       {/* FAQ */}
 
-      <section className="fixed-faq-section">
-        <div className="local-service-container">
-          <div className="local-service-label">
-            <span>07</span>
-            <p>FAQ</p>
-          </div>
+      <section className="rs-section">
+        <div className="rs-container">
+          <SectionLabel number="07" text="FAQ" />
 
-          <div className="fixed-faq-heading">
+          <div className="rs-faq-title">
             <p>
               {region.name} {serviceData.name}
             </p>
@@ -747,7 +695,7 @@ export default async function RegionServicePage({
             </h2>
           </div>
 
-          <div className="fixed-faq-list">
+          <div className="rs-faq">
             {serviceData.faqs.map((faq, index) => (
               <details key={faq.q}>
                 <summary>
@@ -762,9 +710,7 @@ export default async function RegionServicePage({
                   <i>+</i>
                 </summary>
 
-                <div>
-                  <p>{faq.a}</p>
-                </div>
+                <p>{faq.a}</p>
               </details>
             ))}
           </div>
@@ -773,21 +719,17 @@ export default async function RegionServicePage({
 
       {/* OTHER SERVICE */}
 
-      <section className="fixed-other-section">
-        <div className="local-service-container">
-          <div className="local-service-label">
-            <span>08</span>
-            <p>OTHER SERVICE</p>
-          </div>
+      <section className="rs-section rs-gray">
+        <div className="rs-container">
+          <SectionLabel number="08" text="OTHER SERVICE" />
 
-          <div className="fixed-other-list">
+          <div className="rs-links">
             {otherServices.map((item) => (
               <Link
                 key={item.slug}
                 href={`/regions/${region.slug}/${item.slug}`}
-                className="fixed-other-row"
               >
-                <div>
+                <div className="rs-link-text">
                   <span>{region.name}</span>
                   <strong>{item.name}</strong>
                 </div>
@@ -799,23 +741,16 @@ export default async function RegionServicePage({
         </div>
       </section>
 
-      {/* COMPANY LINKS */}
+      {/* COMPANY */}
 
-      <section className="fixed-company-section">
-        <div className="local-service-container">
-          <div className="local-service-label">
-            <span>09</span>
-            <p>COMPANY</p>
-          </div>
+      <section className="rs-section">
+        <div className="rs-container">
+          <SectionLabel number="09" text="COMPANY" />
 
-          <div className="fixed-company-list">
-            <Link
-              href={`/regions/${region.slug}`}
-              className="fixed-company-row"
-            >
-              <div>
+          <div className="rs-links">
+            <Link href={`/regions/${region.slug}`}>
+              <div className="rs-link-text rs-link-stack">
                 <span>AREA</span>
-
                 <strong>
                   {region.name} 인테리어 전체보기
                 </strong>
@@ -824,13 +759,9 @@ export default async function RegionServicePage({
               <b>↗</b>
             </Link>
 
-            <Link
-              href="/company/license"
-              className="fixed-company-row"
-            >
-              <div>
+            <Link href="/company/license">
+              <div className="rs-link-text rs-link-stack">
                 <span>LICENSE</span>
-
                 <strong>
                   실내건축공사업 면허 확인
                 </strong>
@@ -839,16 +770,10 @@ export default async function RegionServicePage({
               <b>↗</b>
             </Link>
 
-            <Link
-              href="/company/youth"
-              className="fixed-company-row"
-            >
-              <div>
+            <Link href="/company/youth">
+              <div className="rs-link-text rs-link-stack">
                 <span>COMPANY</span>
-
-                <strong>
-                  청년창업기업 확인
-                </strong>
+                <strong>청년창업기업 확인</strong>
               </div>
 
               <b>↗</b>
@@ -859,8 +784,8 @@ export default async function RegionServicePage({
 
       {/* CONTACT */}
 
-      <section className="local-service-contact">
-        <div className="local-service-container">
+      <section className="rs-contact">
+        <div className="rs-container">
           <p>CONTACT</p>
 
           <h2>
@@ -869,7 +794,7 @@ export default async function RegionServicePage({
             상담이 필요하신가요?
           </h2>
 
-          <div className="local-service-contact-actions">
+          <div className="rs-contact-actions">
             <a href={TEL}>
               <span>전화 상담</span>
               <strong>{PHONE}</strong>
@@ -884,808 +809,629 @@ export default async function RegionServicePage({
       </section>
 
       <style>{`
-        /* =========================
-           COMMON
-        ========================= */
-
-        .local-service-hero-top {
-          display: flex !important;
-          align-items: center !important;
-          justify-content: space-between !important;
-          gap: 30px !important;
-          width: 100% !important;
+        .rs-container {
+          width: min(1180px, calc(100% - 80px));
+          margin: 0 auto;
         }
 
-        .local-service-hero-top span {
-          display: block !important;
-          font-size: 12px !important;
-          letter-spacing: 0.14em !important;
-          white-space: nowrap !important;
+        .rs-hero {
+          padding: 90px 0 120px;
+          background: #fff;
+          color: #111;
         }
 
-        .local-service-description,
-        .local-service-intro-grid p,
-        .local-service-seo-grid p {
-          word-break: keep-all !important;
+        .rs-topline {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 30px;
+          padding-bottom: 28px;
+          border-bottom: 1px solid #111;
         }
 
-        /* =========================
-           WORK SCOPE
-        ========================= */
-
-        .fixed-scope-list {
-          margin-top: 50px !important;
-          border-top: 1px solid #111 !important;
+        .rs-topline span {
+          font-size: 11px;
+          letter-spacing: 0.16em;
+          white-space: nowrap;
         }
 
-        .fixed-scope-row {
-          min-height: 74px !important;
-
-          display: grid !important;
-          grid-template-columns: 54px minmax(0, 1fr) !important;
-
-          align-items: center !important;
-
-          column-gap: 22px !important;
-
-          border-bottom: 1px solid #d0d0d0 !important;
+        .rs-hero-content {
+          margin-top: 100px;
+          max-width: 850px;
         }
 
-        .fixed-scope-row .fixed-number {
-          margin: 0 !important;
-          padding: 0 !important;
-
-          display: block !important;
-
-          color: #999 !important;
-
-          font-size: 11px !important;
-          line-height: 1 !important;
-
-          font-weight: 400 !important;
+        .rs-eyebrow {
+          margin: 0 0 32px;
+          font-size: 17px;
+          line-height: 1.6;
         }
 
-        .fixed-scope-row strong {
-          margin: 0 !important;
-          padding: 0 !important;
-
-          display: block !important;
-
-          color: #111 !important;
-
-          font-size: 18px !important;
-          line-height: 1.45 !important;
-
-          font-weight: 600 !important;
-
-          word-break: keep-all !important;
+        .rs-hero h1 {
+          margin: 0;
+          font-size: clamp(54px, 7vw, 90px);
+          line-height: 1.04;
+          letter-spacing: -0.055em;
         }
 
-        /* =========================
-           CHECKLIST
-        ========================= */
-
-        .fixed-check-section {
-          padding: 110px 0 !important;
-          background: #f5f5f5 !important;
+        .rs-lead {
+          margin: 45px 0 0;
+          max-width: 780px;
+          color: #555;
+          font-size: 19px;
+          line-height: 1.85;
+          word-break: keep-all;
         }
 
-        .fixed-check-grid {
-          margin-top: 55px !important;
-
-          display: grid !important;
-          grid-template-columns: 0.8fr 1.2fr !important;
-
-          gap: 70px !important;
+        .rs-section {
+          padding: 110px 0;
+          background: #fff;
+          color: #111;
         }
 
-        .fixed-check-heading > p {
-          margin: 0 0 22px !important;
-
-          color: #888 !important;
-
-          font-size: 13px !important;
-          line-height: 1.5 !important;
+        .rs-gray {
+          background: #f5f5f5;
         }
 
-        .fixed-check-heading h2 {
-          margin: 0 !important;
-
-          font-size: 44px !important;
-          line-height: 1.15 !important;
-
-          font-weight: 700 !important;
-
-          letter-spacing: -0.05em !important;
-
-          word-break: keep-all !important;
+        .rs-label {
+          display: grid;
+          grid-template-columns: 42px 1fr;
+          gap: 20px;
+          align-items: center;
         }
 
-        .fixed-check-list {
-          border-top: 1px solid #111 !important;
+        .rs-label span,
+        .rs-label p {
+          margin: 0;
+          color: #999;
+          font-size: 10px;
+          line-height: 1;
+          letter-spacing: 0.16em;
         }
 
-        .fixed-check-row {
-          min-height: 76px !important;
-
-          display: grid !important;
-          grid-template-columns: 55px minmax(0, 1fr) !important;
-
-          align-items: center !important;
-
-          column-gap: 20px !important;
-
-          border-bottom: 1px solid #ccc !important;
+        .rs-two-column {
+          margin-top: 60px;
+          display: grid;
+          grid-template-columns: 0.9fr 1.1fr;
+          gap: 80px;
+          align-items: start;
         }
 
-        .fixed-check-row > span {
-          color: #999 !important;
-          font-size: 11px !important;
+        .rs-two-column h2 {
+          margin: 0;
+          font-size: 48px;
+          line-height: 1.12;
+          letter-spacing: -0.05em;
         }
 
-        .fixed-check-row > p {
-          margin: 0 !important;
-
-          font-size: 16px !important;
-          line-height: 1.55 !important;
-
-          word-break: keep-all !important;
+        .rs-copy p {
+          margin: 0;
+          font-size: 17px;
+          line-height: 1.9;
+          word-break: keep-all;
         }
 
-        /* =========================
-           PROCESS
-        ========================= */
-
-        .fixed-process-section {
-          padding: 110px 0 !important;
-          background: #fff !important;
+        .rs-copy p + p {
+          margin-top: 28px;
         }
 
-        .fixed-process-list {
-          margin-top: 55px !important;
-          border-top: 1px solid #111 !important;
+        .rs-small {
+          margin: 0 0 20px;
+          color: #888;
+          font-size: 13px;
         }
 
-        .fixed-process-row {
-          min-height: 115px !important;
-
-          display: grid !important;
-          grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr) !important;
-
-          align-items: center !important;
-
-          gap: 40px !important;
-
-          border-bottom: 1px solid #ccc !important;
+        .rs-list,
+        .rs-process,
+        .rs-info,
+        .rs-faq,
+        .rs-links {
+          margin-top: 55px;
+          border-top: 1px solid #111;
         }
 
-        .fixed-process-title {
-          display: grid !important;
-          grid-template-columns: 55px minmax(0, 1fr) !important;
-
-          align-items: center !important;
-
-          gap: 18px !important;
+        .rs-list-row {
+          min-height: 76px;
+          display: grid;
+          grid-template-columns: 55px minmax(0, 1fr);
+          gap: 18px;
+          align-items: center;
+          border-bottom: 1px solid #ccc;
         }
 
-        .fixed-process-title > span {
-          display: block !important;
-
-          color: #999 !important;
-
-          font-size: 11px !important;
-          line-height: 1 !important;
+        .rs-list-row span {
+          color: #999;
+          font-size: 10px;
         }
 
-        .fixed-process-title > strong {
-          display: block !important;
-
-          font-size: 20px !important;
-          line-height: 1.4 !important;
-
-          font-weight: 650 !important;
+        .rs-list-row strong {
+          font-size: 17px;
+          line-height: 1.5;
+          font-weight: 600;
+          word-break: keep-all;
         }
 
-        .fixed-process-row > p {
-          margin: 0 !important;
-
-          color: #444 !important;
-
-          font-size: 16px !important;
-          line-height: 1.75 !important;
-
-          word-break: keep-all !important;
+        .rs-process-row {
+          min-height: 110px;
+          display: grid;
+          grid-template-columns: 0.75fr 1.25fr;
+          gap: 50px;
+          align-items: center;
+          border-bottom: 1px solid #ccc;
         }
 
-        /* =========================
-           INFORMATION
-        ========================= */
-
-        .fixed-info-section {
-          padding: 100px 0 !important;
-          background: #f5f5f5 !important;
+        .rs-process-title {
+          display: grid;
+          grid-template-columns: 55px minmax(0, 1fr);
+          gap: 18px;
+          align-items: center;
         }
 
-        .fixed-info-list {
-          margin-top: 50px !important;
-          border-top: 1px solid #111 !important;
+        .rs-process-title span {
+          color: #999;
+          font-size: 10px;
         }
 
-        .fixed-info-row {
-          min-height: 76px !important;
-
-          display: grid !important;
-          grid-template-columns: 180px minmax(0, 1fr) !important;
-
-          align-items: center !important;
-
-          column-gap: 40px !important;
-
-          border-bottom: 1px solid #ccc !important;
+        .rs-process-title strong {
+          font-size: 19px;
+          line-height: 1.4;
         }
 
-        .fixed-info-row > span {
-          display: block !important;
-
-          color: #999 !important;
-
-          font-size: 10px !important;
-
-          letter-spacing: 0.12em !important;
+        .rs-process-row > p {
+          margin: 0;
+          color: #555;
+          font-size: 15px;
+          line-height: 1.8;
+          word-break: keep-all;
         }
 
-        .fixed-info-row > strong,
-        .fixed-info-row > a {
-          display: block !important;
-
-          margin: 0 !important;
-
-          color: #111 !important;
-
-          font-size: 17px !important;
-          line-height: 1.5 !important;
-
-          font-weight: 600 !important;
-
-          text-decoration: none !important;
-
-          word-break: keep-all !important;
+        .rs-info-row {
+          min-height: 76px;
+          display: grid;
+          grid-template-columns: 180px minmax(0, 1fr);
+          gap: 30px;
+          align-items: center;
+          border-bottom: 1px solid #ccc;
         }
 
-        .fixed-info-row > a {
-          text-decoration: underline !important;
-          text-underline-offset: 4px !important;
+        .rs-info-row > span {
+          color: #999;
+          font-size: 10px;
+          letter-spacing: 0.12em;
         }
 
-        /* =========================
-           FAQ
-        ========================= */
-
-        .fixed-faq-section {
-          padding: 110px 0 !important;
-          background: #fff !important;
+        .rs-info-row strong,
+        .rs-info-row a {
+          color: #111;
+          font-size: 17px;
+          line-height: 1.5;
+          font-weight: 600;
+          text-decoration: none;
+          word-break: keep-all;
         }
 
-        .fixed-faq-heading {
-          margin-top: 55px !important;
+        .rs-info-row a {
+          text-decoration: underline;
+          text-underline-offset: 4px;
         }
 
-        .fixed-faq-heading > p {
-          margin: 0 0 18px !important;
-
-          color: #777 !important;
-
-          font-size: 13px !important;
+        .rs-faq-title {
+          margin-top: 55px;
         }
 
-        .fixed-faq-heading h2 {
-          margin: 0 !important;
-
-          font-size: 46px !important;
-          line-height: 1.08 !important;
-
-          letter-spacing: -0.05em !important;
+        .rs-faq-title p {
+          margin: 0 0 18px;
+          color: #777;
+          font-size: 13px;
         }
 
-        .fixed-faq-list {
-          margin-top: 50px !important;
-
-          border-top: 1px solid #111 !important;
+        .rs-faq-title h2 {
+          margin: 0;
+          font-size: 46px;
+          line-height: 1.1;
+          letter-spacing: -0.05em;
         }
 
-        .fixed-faq-list details {
-          border-bottom: 1px solid #ccc !important;
+        .rs-faq details {
+          border-bottom: 1px solid #ccc;
         }
 
-        .fixed-faq-list summary {
-          min-height: 88px !important;
-
-          display: grid !important;
-
-          grid-template-columns:
-            55px
-            minmax(0, 1fr)
-            25px !important;
-
-          align-items: center !important;
-
-          gap: 18px !important;
-
-          list-style: none !important;
-
-          cursor: pointer !important;
+        .rs-faq summary {
+          min-height: 88px;
+          display: grid;
+          grid-template-columns: 55px minmax(0, 1fr) 30px;
+          gap: 18px;
+          align-items: center;
+          list-style: none;
+          cursor: pointer;
         }
 
-        .fixed-faq-list summary::-webkit-details-marker {
-          display: none !important;
+        .rs-faq summary::-webkit-details-marker {
+          display: none;
         }
 
-        .fixed-faq-list summary > span {
-          color: #999 !important;
-
-          font-size: 10px !important;
+        .rs-faq summary span {
+          color: #999;
+          font-size: 10px;
         }
 
-        .fixed-faq-list summary > strong {
-          font-size: 16px !important;
-          line-height: 1.55 !important;
-
-          font-weight: 600 !important;
-
-          word-break: keep-all !important;
+        .rs-faq summary strong {
+          font-size: 16px;
+          line-height: 1.55;
+          word-break: keep-all;
         }
 
-        .fixed-faq-list summary > i {
-          font-style: normal !important;
-
-          font-size: 22px !important;
-
-          text-align: right !important;
+        .rs-faq summary i {
+          font-style: normal;
+          font-size: 22px;
+          text-align: right;
         }
 
-        .fixed-faq-list details[open] summary > i {
-          transform: rotate(45deg) !important;
+        .rs-faq details[open] summary i {
+          transform: rotate(45deg);
         }
 
-        .fixed-faq-list details > div {
-          padding:
-            0
-            40px
-            28px
-            73px !important;
+        .rs-faq details > p {
+          margin: 0;
+          padding: 0 45px 28px 73px;
+          color: #666;
+          font-size: 14px;
+          line-height: 1.9;
+          word-break: keep-all;
         }
 
-        .fixed-faq-list details > div p {
-          margin: 0 !important;
-
-          color: #666 !important;
-
-          font-size: 14px !important;
-          line-height: 1.85 !important;
-
-          word-break: keep-all !important;
+        .rs-links > a {
+          min-height: 88px;
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) 36px;
+          gap: 25px;
+          align-items: center;
+          border-bottom: 1px solid #ccc;
+          color: #111;
+          text-decoration: none;
         }
 
-        /* =========================
-           OTHER SERVICE
-        ========================= */
-
-        .fixed-other-section {
-          padding: 105px 0 !important;
-          background: #fff !important;
+        .rs-link-text {
+          min-width: 0;
+          display: grid;
+          grid-template-columns: 90px minmax(0, 1fr);
+          gap: 20px;
+          align-items: center;
         }
 
-        .fixed-other-list {
-          margin-top: 50px !important;
-
-          border-top: 1px solid #111 !important;
+        .rs-link-text > span {
+          color: #999;
+          font-size: 11px;
         }
 
-        .fixed-other-row {
-          min-height: 88px !important;
-
-          display: grid !important;
-
-          grid-template-columns:
-            minmax(0, 1fr)
-            40px !important;
-
-          align-items: center !important;
-
-          gap: 25px !important;
-
-          border-bottom: 1px solid #ccc !important;
-
-          color: #111 !important;
-
-          text-decoration: none !important;
+        .rs-link-text > strong {
+          font-size: 18px;
+          line-height: 1.45;
+          word-break: keep-all;
         }
 
-        .fixed-other-row > div {
-          min-width: 0 !important;
-
-          display: flex !important;
-          align-items: baseline !important;
-
-          gap: 22px !important;
+        .rs-link-stack {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
         }
 
-        .fixed-other-row > div > span {
-          flex: 0 0 auto !important;
-
-          color: #999 !important;
-
-          font-size: 12px !important;
+        .rs-links b {
+          font-size: 20px;
+          font-weight: 400;
+          text-align: right;
         }
 
-        .fixed-other-row > div > strong {
-          min-width: 0 !important;
-
-          font-size: 19px !important;
-          line-height: 1.45 !important;
-
-          font-weight: 600 !important;
-
-          word-break: keep-all !important;
+        .rs-contact {
+          padding: 110px 0 130px;
+          background: #000;
+          color: #fff;
         }
 
-        .fixed-other-row > b {
-          display: block !important;
-
-          text-align: right !important;
-
-          font-size: 20px !important;
-          line-height: 1 !important;
-
-          font-weight: 400 !important;
+        .rs-contact > .rs-container > p {
+          margin: 0 0 30px;
+          color: #999;
+          font-size: 10px;
+          letter-spacing: 0.16em;
         }
 
-        /* =========================
-           COMPANY
-        ========================= */
-
-        .fixed-company-section {
-          padding: 100px 0 !important;
-          background: #f5f5f5 !important;
+        .rs-contact h2 {
+          margin: 0;
+          font-size: 48px;
+          line-height: 1.15;
+          letter-spacing: -0.05em;
         }
 
-        .fixed-company-list {
-          margin-top: 50px !important;
-
-          border-top: 1px solid #111 !important;
+        .rs-contact-actions {
+          margin-top: 55px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          border-top: 1px solid #555;
         }
 
-        .fixed-company-row {
-          min-height: 92px !important;
-
-          display: grid !important;
-
-          grid-template-columns:
-            minmax(0, 1fr)
-            40px !important;
-
-          align-items: center !important;
-
-          gap: 25px !important;
-
-          border-bottom: 1px solid #bbb !important;
-
-          color: #111 !important;
-
-          text-decoration: none !important;
+        .rs-contact-actions > a {
+          min-height: 95px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+          padding: 0 25px;
+          color: #fff;
+          text-decoration: none;
+          border-bottom: 1px solid #555;
         }
 
-        .fixed-company-row > div {
-          min-width: 0 !important;
-
-          display: flex !important;
-          flex-direction: column !important;
-
-          gap: 9px !important;
+        .rs-contact-actions > a:first-child {
+          border-right: 1px solid #555;
         }
 
-        .fixed-company-row > div > span {
-          color: #999 !important;
-
-          font-size: 10px !important;
-
-          letter-spacing: 0.14em !important;
-        }
-
-        .fixed-company-row > div > strong {
-          font-size: 18px !important;
-          line-height: 1.45 !important;
-
-          font-weight: 600 !important;
-
-          word-break: keep-all !important;
-        }
-
-        .fixed-company-row > b {
-          display: block !important;
-
-          text-align: right !important;
-
-          font-size: 20px !important;
-
-          font-weight: 400 !important;
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
+        /*
+          이 페이지에서 모바일 하단 전화바가
+          본문을 덮지 않도록 강제 처리
+        */
         @media (max-width: 800px) {
-          .local-service-hero-top {
-            gap: 15px !important;
+          .rs-container {
+            width: calc(100% - 48px);
           }
 
-          .local-service-hero-top span {
-            font-size: 8px !important;
-            letter-spacing: 0.08em !important;
+          .rs-hero {
+            padding: 65px 0 80px;
           }
 
-          /* WORK SCOPE */
-
-          .fixed-scope-list {
-            margin-top: 35px !important;
+          .rs-topline {
+            gap: 12px;
+            padding-bottom: 20px;
           }
 
-          .fixed-scope-row {
-            min-height: 68px !important;
-
-            grid-template-columns:
-              40px
-              minmax(0, 1fr) !important;
-
-            column-gap: 15px !important;
+          .rs-topline span {
+            font-size: 8px;
+            letter-spacing: 0.08em;
           }
 
-          .fixed-scope-row .fixed-number {
-            font-size: 10px !important;
+          .rs-topline span:last-child {
+            text-align: right;
           }
 
-          .fixed-scope-row strong {
-            font-size: 16px !important;
+          .rs-hero-content {
+            margin-top: 65px;
           }
 
-          /* CHECK */
-
-          .fixed-check-section {
-            padding: 75px 0 !important;
+          .rs-eyebrow {
+            margin-bottom: 26px;
+            font-size: 15px;
           }
 
-          .fixed-check-grid {
-            margin-top: 45px !important;
-
-            grid-template-columns: 1fr !important;
-
-            gap: 42px !important;
+          .rs-hero h1 {
+            font-size: 43px;
+            line-height: 1.08;
           }
 
-          .fixed-check-heading h2 {
-            font-size: 36px !important;
-            line-height: 1.15 !important;
+          .rs-lead {
+            margin-top: 34px;
+            font-size: 16px;
+            line-height: 1.8;
           }
 
-          .fixed-check-row {
+          .rs-section {
+            padding: 78px 0;
+          }
+
+          .rs-label {
+            grid-template-columns: 40px 1fr;
+            gap: 20px;
+          }
+
+          .rs-two-column {
+            margin-top: 46px;
+            grid-template-columns: 1fr;
+            gap: 38px;
+          }
+
+          .rs-two-column h2 {
+            font-size: 36px;
+            line-height: 1.14;
+          }
+
+          .rs-copy p {
+            font-size: 16px;
+            line-height: 1.8;
+          }
+
+          .rs-copy p + p {
+            margin-top: 24px;
+          }
+
+          .rs-list,
+          .rs-process,
+          .rs-info,
+          .rs-faq,
+          .rs-links {
+            margin-top: 40px;
+          }
+
+          .rs-list-row {
+            min-height: 70px;
+            grid-template-columns: 42px minmax(0, 1fr);
+            gap: 14px;
+          }
+
+          .rs-list-row strong {
+            font-size: 15px;
+          }
+
+          .rs-process-row {
+            min-height: 0;
+            padding: 26px 0;
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+
+          .rs-process-title {
+            grid-template-columns: 42px minmax(0, 1fr);
+            gap: 14px;
+          }
+
+          .rs-process-title strong {
+            font-size: 17px;
+          }
+
+          .rs-process-row > p {
+            margin-left: 56px;
+            font-size: 15px;
+            line-height: 1.75;
+          }
+
+          .rs-info-row {
+            min-height: 72px;
+            grid-template-columns: 100px minmax(0, 1fr);
+            gap: 16px;
+          }
+
+          .rs-info-row > span {
+            font-size: 9px;
+          }
+
+          .rs-info-row strong,
+          .rs-info-row a {
+            font-size: 15px;
+          }
+
+          .rs-faq-title {
+            margin-top: 45px;
+          }
+
+          .rs-faq-title h2 {
+            font-size: 36px;
+          }
+
+          .rs-faq summary {
+            min-height: 78px;
+            grid-template-columns: 42px minmax(0, 1fr) 20px;
+            gap: 12px;
+          }
+
+          .rs-faq summary strong {
+            font-size: 14px;
+          }
+
+          .rs-faq details > p {
+            padding: 0 10px 25px 54px;
+            font-size: 14px;
+          }
+
+          .rs-links > a {
+            min-height: 82px;
+            grid-template-columns: minmax(0, 1fr) 28px;
+            gap: 14px;
+          }
+
+          .rs-link-text {
+            grid-template-columns: 62px minmax(0, 1fr);
+            gap: 14px;
+          }
+
+          .rs-link-text > span {
+            font-size: 10px;
+          }
+
+          .rs-link-text > strong {
+            font-size: 15px;
+          }
+
+          .rs-link-stack {
+            display: flex;
+            gap: 7px;
+          }
+
+          .rs-contact {
+            padding: 80px 0 90px;
+          }
+
+          .rs-contact h2 {
+            font-size: 36px;
+          }
+
+          .rs-contact-actions {
+            grid-template-columns: 1fr;
+            margin-top: 40px;
+          }
+
+          .rs-contact-actions > a {
+            min-height: 76px;
+            padding: 0;
+          }
+
+          .rs-contact-actions > a:first-child {
+            border-right: 0;
+          }
+
+          .jg-mobile-call {
+            position: relative !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            width: 100% !important;
             min-height: 72px !important;
-
-            grid-template-columns:
-              42px
-              minmax(0, 1fr) !important;
-
-            column-gap: 14px !important;
-          }
-
-          .fixed-check-row > p {
-            font-size: 15px !important;
-          }
-
-          /* PROCESS */
-
-          .fixed-process-section {
-            padding: 75px 0 !important;
-          }
-
-          .fixed-process-list {
-            margin-top: 42px !important;
-          }
-
-          .fixed-process-row {
-            min-height: auto !important;
-
-            padding: 27px 0 !important;
-
-            grid-template-columns: 1fr !important;
-
-            gap: 18px !important;
-          }
-
-          .fixed-process-title {
-            grid-template-columns:
-              42px
-              minmax(0, 1fr) !important;
-
-            gap: 14px !important;
-          }
-
-          .fixed-process-title > span {
-            font-size: 10px !important;
-          }
-
-          .fixed-process-title > strong {
-            font-size: 17px !important;
-          }
-
-          .fixed-process-row > p {
-            padding-left: 56px !important;
-
-            font-size: 15px !important;
-            line-height: 1.75 !important;
-          }
-
-          /* INFO */
-
-          .fixed-info-section {
-            padding: 75px 0 !important;
-          }
-
-          .fixed-info-list {
-            margin-top: 40px !important;
-          }
-
-          .fixed-info-row {
-            min-height: 70px !important;
-
-            grid-template-columns:
-              105px
-              minmax(0, 1fr) !important;
-
-            column-gap: 18px !important;
-          }
-
-          .fixed-info-row > span {
-            font-size: 9px !important;
-          }
-
-          .fixed-info-row > strong,
-          .fixed-info-row > a {
-            font-size: 15px !important;
-          }
-
-          /* FAQ */
-
-          .fixed-faq-section {
-            padding: 75px 0 !important;
-          }
-
-          .fixed-faq-heading {
-            margin-top: 42px !important;
-          }
-
-          .fixed-faq-heading h2 {
-            font-size: 36px !important;
-          }
-
-          .fixed-faq-list {
-            margin-top: 38px !important;
-          }
-
-          .fixed-faq-list summary {
-            min-height: 78px !important;
-
-            grid-template-columns:
-              42px
-              minmax(0, 1fr)
-              20px !important;
-
-            gap: 12px !important;
-          }
-
-          .fixed-faq-list summary > strong {
-            font-size: 14px !important;
-          }
-
-          .fixed-faq-list details > div {
-            padding:
-              0
-              10px
-              25px
-              54px !important;
-          }
-
-          /* OTHER */
-
-          .fixed-other-section {
-            padding: 75px 0 !important;
-          }
-
-          .fixed-other-list {
-            margin-top: 40px !important;
-          }
-
-          .fixed-other-row {
-            min-height: 78px !important;
-
-            grid-template-columns:
-              minmax(0, 1fr)
-              28px !important;
-
-            gap: 14px !important;
-          }
-
-          .fixed-other-row > div {
-            display: grid !important;
-
-            grid-template-columns:
-              65px
-              minmax(0, 1fr) !important;
-
+            margin: 0 !important;
+            display: flex !important;
             align-items: center !important;
-
-            gap: 14px !important;
-          }
-
-          .fixed-other-row > div > span {
-            font-size: 11px !important;
-          }
-
-          .fixed-other-row > div > strong {
-            font-size: 16px !important;
-          }
-
-          .fixed-other-row > b {
-            font-size: 18px !important;
-          }
-
-          /* COMPANY */
-
-          .fixed-company-section {
-            padding: 75px 0 !important;
-          }
-
-          .fixed-company-list {
-            margin-top: 40px !important;
-          }
-
-          .fixed-company-row {
-            min-height: 82px !important;
-
-            grid-template-columns:
-              minmax(0, 1fr)
-              28px !important;
-
-            gap: 14px !important;
-          }
-
-          .fixed-company-row > div > strong {
-            font-size: 16px !important;
-          }
-
-          .fixed-company-row > b {
-            font-size: 18px !important;
+            justify-content: center !important;
+            z-index: 1 !important;
           }
         }
 
         @media (max-width: 420px) {
-          .fixed-check-heading h2 {
-            font-size: 33px !important;
+          .rs-container {
+            width: calc(100% - 40px);
           }
 
-          .fixed-info-row {
-            grid-template-columns:
-              95px
-              minmax(0, 1fr) !important;
+          .rs-hero h1 {
+            font-size: 40px;
           }
 
-          .fixed-other-row > div {
-            grid-template-columns:
-              60px
-              minmax(0, 1fr) !important;
+          .rs-two-column h2 {
+            font-size: 33px;
+          }
+
+          .rs-info-row {
+            grid-template-columns: 92px minmax(0, 1fr);
+          }
+
+          .rs-link-text {
+            grid-template-columns: 58px minmax(0, 1fr);
           }
         }
       `}</style>
     </>
+  );
+}
+
+function SectionLabel({
+  number,
+  text,
+}: {
+  number: string;
+  text: string;
+}) {
+  return (
+    <div className="rs-label">
+      <span>{number}</span>
+      <p>{text}</p>
+    </div>
+  );
+}
+
+function InfoRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="rs-info-row">
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
   );
 }
