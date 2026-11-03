@@ -1,5 +1,5 @@
-import type { MetadataRoute } from "next";
 
+import type { MetadataRoute } from "next";
 import { regions } from "@/lib/regions";
 
 const SITE_URL = "https://jeonggaminterior.com";
@@ -9,92 +9,40 @@ const SERVICE_SLUGS = [
   "old-house",
   "commercial",
   "school",
-];
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // 실제 콘텐츠 수정일을 확인할 수 없는 경우
+  // lastModified를 생략해 부정확한 날짜 제출 방지
 
-  const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: `${SITE_URL}/`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-
-    {
-      url: `${SITE_URL}/company`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-
-    {
-      url: `${SITE_URL}/company/youth`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-
-    {
-      url: `${SITE_URL}/company/license`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-
-    {
-      url: `${SITE_URL}/contact`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-
-    {
-      url: `${SITE_URL}/services/apartment`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-
-    {
-      url: `${SITE_URL}/services/old-house`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-
-    {
-      url: `${SITE_URL}/services/commercial`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-
-    {
-      url: `${SITE_URL}/services/school`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
+  const staticPaths = [
+    "/",
+    "/company",
+    "/company/youth",
+    "/company/license",
+    "/contact",
+    "/services/apartment",
+    "/services/old-house",
+    "/services/commercial",
+    "/services/school",
   ];
 
-  const regionPages: MetadataRoute.Sitemap = regions.map((region) => ({
-    url: `${SITE_URL}/regions/${region.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
+  const staticPages: MetadataRoute.Sitemap =
+    staticPaths.map((path) => ({
+      url: `${SITE_URL}${path}`,
+    }));
 
-  const regionServicePages: MetadataRoute.Sitemap = regions.flatMap(
-    (region) =>
+  const regionPages: MetadataRoute.Sitemap =
+    regions.map((region) => ({
+      url: `${SITE_URL}/regions/${region.slug}`,
+    }));
+
+  const regionServicePages: MetadataRoute.Sitemap =
+    regions.flatMap((region) =>
       SERVICE_SLUGS.map((service) => ({
         url: `${SITE_URL}/regions/${region.slug}/${service}`,
-        lastModified: now,
-        changeFrequency: "monthly" as const,
-        priority: 0.7,
       }))
-  );
+    );
 
   return [
     ...staticPages,
